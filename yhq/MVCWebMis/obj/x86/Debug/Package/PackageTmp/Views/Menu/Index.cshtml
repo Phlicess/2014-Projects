@@ -1,0 +1,936 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>功能菜单</title>
+    @*添加Jquery EasyUI的样式*@
+    <link href="~/Content/JqueryEasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/JqueryEasyUI/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/themes/Default/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/themes/Default/default.css" rel="stylesheet" type="text/css" />
+
+    @*添加Jquery，EasyUI和easyUI的语言包的JS文件*@
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    @*日期格式的引用*@
+    <script src="~/Content/datapattern.js"></script>
+    <link href="~/Content/JQueryTools/JQueryTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/JQueryTools/JQueryTree/js/jquery.ztree.core-3.5.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	 <!--
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: onClick,
+            onDblClick: onDblClick
+        }
+    }
+
+    //重新加载树形结构（异步）
+    function reloadTree() {
+        $("#loading").show();
+
+        $.getJSON("/Menu/GetAllTreeJson?r=" + Math.random(), function (json) {
+            $.fn.zTree.init($("#treeDemo"), setting, json);
+            $.fn.zTree.getZTreeObj("treeDemo").expandAll(true);
+
+            var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+            var treeNodes = treeObj.getNodes();
+            if (treeNodes != null) {
+                loadData(treeNodes[0].id);
+            }
+        });
+        $("#loading").fadeOut(500);
+    }
+
+    var clickMenuId = "";
+    //树单击节点操作
+    function onClick(event, treeId, treeNode, clickFlag) {
+        var id = treeNode.id;
+        loadData(id);
+    }
+    //树双击节点操作
+    function onDblClick(event, treeId, treeNode) {
+        var id = treeNode.id;
+        loadData(id);
+        //ShowDictType('edit');
+    }
+    //加载指定的对象数据
+    function loadData(id) {
+        $("#loading").show();
+        $.getJSON("/Menu/FindById?r=" + Math.random() + "&id=" + id, function (json) {
+            //$("#type_ID1").val(json.ID);
+            //$("#type_PID1").combobox('setValue', json.PID);
+            if (json != 'undefined') {
+                var queryParams = $('#grid').datagrid('options').queryParams;
+                queryParams.WHC_PID = json.ID;    //设置值
+                $("#grid").datagrid("reload");
+                $('#grid').datagrid('uncheckAll');
+            }
+        });
+        clickMenuId = id;
+
+        $("#loading").fadeOut(500);
+    }
+
+    //展开节点操作	
+    function expandNode(e) {
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+        type = e.data.type,
+        nodes = zTree.getSelectedNodes();
+        if (type.indexOf("All") < 0 && nodes.length == 0) {
+            $.messager.alert("提示", "请先选择一个父节点");
+        }
+
+        if (type == "expandAll") {
+            zTree.expandAll(true);
+        } else if (type == "collapseAll") {
+            zTree.expandAll(false);
+        } else {
+            var callbackFlag = $("#callbackTrigger").attr("checked");
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                zTree.setting.view.fontCss = {};
+                if (type == "expand") {
+                    zTree.expandNode(nodes[i], true, null, null, callbackFlag);
+                } else if (type == "collapse") {
+                    zTree.expandNode(nodes[i], false, null, null, callbackFlag);
+                } else if (type == "toggle") {
+                    zTree.expandNode(nodes[i], null, null, null, callbackFlag);
+                } else if (type == "expandSon") {
+                    zTree.expandNode(nodes[i], true, true, null, callbackFlag);
+                } else if (type == "collapseSon") {
+                    zTree.expandNode(nodes[i], false, true, null, callbackFlag);
+                }
+            }
+        }
+    }
+
+    //对象居中的函数，调用例子：$("#loading").center();
+    jQuery.fn.center = function () {
+        this.css("position", "absolute");
+        this.css("top", Math.max(0, (($(window).height() - this.outerHeight()) / 2) +
+                                            $(window).scrollTop()) + "px");
+        this.css("left", Math.max(0, (($(window).width() - this.outerWidth()) / 2) +
+                                            $(window).scrollLeft()) + "px");
+        return this;
+    }
+
+    //初始化对象
+    $(document).ready(function () {
+        reloadTree();
+        $("#expandAllBtn").bind("click", { type: "expandAll" }, expandNode);
+        $("#collapseAllBtn").bind("click", { type: "collapseAll" }, expandNode);
+
+        $("#loading").center();//loading的图片显示居中
+    });
+    //-->
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            InitGrid();       //初始化Datagrid表格数据
+            InitDictItem();   //初始化字典信息
+
+            BindSearchEvent();//绑定查询按钮事件
+            BindAddEvent();   //绑定添加按钮的事件
+            BindEditEvent();  //绑定修改按钮的事件
+        });
+
+        //初始化字典信息
+        function InitDictItem() {
+            $('#PID').combobox({
+                url: '/Menu/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+
+            $('#PID1').combobox({
+                url: '/Menu/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+
+            $('#SystemType_ID').combobox({
+                url: '/SystemType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+
+            $('#SystemType_ID1').combobox({
+                url: '/SystemType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });            
+        }
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid(queryData) {
+            $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
+                url: '/Menu/FindWithPager',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                title: '功能菜单',
+                //下面的这些属性如果谁不太清楚的话我建议去官方网站去学习
+                iconCls: 'icon-view',
+                height: 650,
+                width: function () { return document.body.clientWidth * 0.9 },
+                nowrap: true,
+                autoRowHeight: true,
+                striped: true,
+                collapsible: true,
+                pagination: true,
+                pageSize: 100,
+                pageList: [50,100,200],
+                rownumbers: true,
+                //sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                queryParams: queryData,  //异步查询的参数
+                columns: [[
+	                { field: 'ck', checkbox: true },   //选择
+                     { title: '显示名称', field: 'Name', width: 200},
+                     { title: '图标', field: 'Icon', width: 150 },
+                     { title: '排序', field: 'Seq', width: 80 },
+                     { title: '功能ID', field: 'FunctionId', width: 80 },
+                     {
+                         title: '菜单可见', field: 'Visible', width: 80, formatter: function (val, rowdata, index) {
+                             if (val) {
+                                 return '<a class="grid_visible" href="javascript:void(0)" >' + val + '</a>';
+                             } else {
+                                 return '<a class="grid_unvisible" href="javascript:void(0)" >' + val + '</a>';
+                             }
+                         }
+                     },
+                     { title: 'Winform窗体类型', field: 'WinformType', width: 400 },
+                     { title: 'Web界面Url地址', field: 'Url', width: 200 },
+                     { title: 'Web界面的菜单图标', field: 'WebIcon', width: 120 },
+                     { title: '系统编号', field: 'SystemType_ID', width: 80 }
+                ]],
+                onLoadSuccess: function () {
+                    $(".grid_visible").linkbutton({ text: '可见', plain: true, iconCls: 'icon-ok' });
+                    $(".grid_unvisible").linkbutton({ text: '不可见', plain: true, iconCls: 'icon-stop' });
+                },
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        ShowAddDialog();//实现添加记录的页面
+                    }
+                }, '-', {
+                    id: 'btnEdit',
+                    text: '修改',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        ShowEditOrViewDialog();//实现修改记录的方法
+                    }
+                }, '-', {
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        Delete();//实现直接删除数据的方法
+                    }
+                }, '-', {
+                    id: 'btnView',
+                    text: '查看',
+                    iconCls: 'icon-table',
+                    handler: function () {
+                        ShowEditOrViewDialog("view");//实现查看记录详细信息的方法
+                    }
+                }, '-', {
+                    id: 'btnReload',
+                    text: '刷新',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        //实现刷新栏目中的数据
+                        $("#grid").datagrid("reload");
+                    }
+                }],
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#grid').datagrid('uncheckAll');
+                    $('#grid').datagrid('checkRow', rowIndex);
+                    ShowEditOrViewDialog();
+                }
+            })
+        };
+
+        //绑定搜索按钮的的点击事件
+        function BindSearchEvent() {
+            //按条件进行查询数据，首先我们得到数据的值
+            $("#btnSearch").click(function () {
+                //得到用户输入的参数
+                //取值有几种方式：$("#id").combobox('getValue'), $("#id").datebox('getValue'), $("#id").val()
+                //字段增加WHC_前缀字符，避免传递如URL这样的Request关键字冲突
+                var queryData = {
+                    WHC_ID: $("#txtID").val(),
+                    //WHC_PID: $("#txtPID").combobox('getValue'),
+                    WHC_Name: $("#txtName").val(),
+                    WHC_Icon: $("#txtIcon").val(),
+                    WHC_Seq: $("#txtSeq").val(),
+                    WHC_FunctionId: $("#txtFunctionId").val(),
+                    WHC_Visible: $("#txtVisible").val(),
+                    WHC_WinformType: $("#txtWinformType").val(),
+                    WHC_Url: $("#txtUrl").val(),
+                    WHC_WebIcon: $("#txtWebIcon").val()
+                    //,WHC_SystemType_ID: $("#txtSystemType_ID").val()
+                }
+                //将值传递给
+                InitGrid(queryData);
+                return false;
+            });
+        }
+
+        //实现删除数据的方法
+        function Delete() {
+            //得到用户选择的数据的ID
+            var rows = $("#grid").datagrid("getSelections");
+            if (rows.length >= 1) {
+                //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                var ids = "";   //1,2,3,4,5
+                for (var i = 0; i < rows.length; i++) {
+                    ids += rows[i].ID + ",";
+                }
+                //最后去掉最后的那一个,
+                ids = ids.substring(0, ids.length - 1);
+                var postData = { Ids: ids };
+
+                //然后确认发送异步请求的信息到后台删除数据
+                $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function (deleteAction) {
+                    if (deleteAction) {
+                        $.get("/Menu/DeletebyIds", postData, function (data) {
+                            if (data == "true") {
+                                $.messager.alert("提示", "删除选定的记录成功");
+                                $("#grid").datagrid("reload");
+
+                                //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息                                
+                                rows.length = "";//第一种方法                                
+                                $("#grid").datagrid("clearSelections");//第二种方法
+                            }
+                            else {
+                                $.messager.alert("提示", data);
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                $.messager.alert("提示", "请选择你要删除的数据");
+            }
+        }
+
+        //弹出新增对话框
+        function ShowAddDialog() {
+            $("#PID").combobox('setValue', clickMenuId);//当前选中的ID作为父ID
+            $("#DivAdd").dialog('open').dialog('setTitle', '添加信息');
+        }
+
+        //绑定添加按钮的事件
+        function BindAddEvent() {
+            $("#btnAddOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffAdd").form('validate');
+                if (validate == false) {
+                    return false;
+                }
+
+                var postData = $("#ffAdd").serializeArray();
+                $.post("/Menu/Insert", postData, function (data) {
+                    if (data = "true") {
+                        //添加成功  1.关闭弹出层，2.刷新DataGird
+                        $.messager.alert("提示", "添加成功");
+                        $("#DivAdd").dialog("close");
+                        $("#grid").datagrid("reload");
+                        $("#ffAdd").form("clear");
+                    }
+                    else {
+                        $.messager.alert("提示", "添加失败，请您检查");
+                    }
+                });
+            });
+        }
+
+        //修改或查看明细信息（绑定显示数据）
+        function ShowEditOrViewDialog(view) {
+            //首先取出来用户选择的数据的ID
+            var rows = $("#grid").datagrid("getSelections");
+            //首先取出来值判断用户只能选择一个
+            if (rows.length == 0) {
+                $.messager.alert("提示", "请选择一条记录", "error");
+                return;
+            }
+            else if (rows.length > 1) {
+                $.messager.alert("提示", "每次只能修改/查看一条记录，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>条", "error");
+                return;
+            }
+            if (view == null) {
+                //处理修改的信息
+                $("#DivEdit").dialog('open').dialog('setTitle', '修改信息');
+                //绑定修改详细信息的方法
+                BindEditInfo();
+            }
+            else {
+                //处理查看详细
+                $("#DivView").dialog('open').dialog('setTitle', '查看详细信息');
+                //绑定查看详细信息方法
+                BindViewInfo();
+            }
+        }
+
+        //绑定编辑详细信息的方法
+        function BindEditInfo() {
+            //首先用户发送一个异步请求去后台实现方法
+            var ID = $("#grid").datagrid("getSelections")[0].ID;  //获取到了用用户选择的ID
+            $.getJSON("/Menu/FindByID?r=" + Math.random() + "&id=" + ID, function (info) {
+                //赋值有几种方式：.datebox('setValue', info.Birthday);.combobox('setValue', info.Status);.val(info.Name);
+                $("#ID1").val(info.ID);
+                $("#PID1").combobox('setValue', info.PID);
+                $("#Name1").val(info.Name);
+                $("#Icon1").val(info.Icon);
+                $("#Seq1").val(info.Seq);
+                $("#FunctionId1").val(info.FunctionId);
+                $("#Visible1").prop('checked', info.Visible);
+                $("#WinformType1").val(info.WinformType);
+                $("#Url1").val(info.Url);
+                $("#WebIcon1").val(info.WebIcon);
+                $("#SystemType_ID1").combobox('setValue', info.SystemType_ID);
+
+                $('#imgIcon1').attr('class', $('#WebIcon1').val());
+            });
+        }
+
+        //绑定查看详细信息的方法
+        function BindViewInfo() {
+            var ID = $("#grid").datagrid('getSelections')[0].ID;
+            //发送请求
+            $.getJSON("/Menu/FindByID?r=" + Math.random() + "&id=" + ID, function (info) {
+                $("#ID2").text(info.ID);
+                $("#Name2").text(info.Name);
+                $("#Icon2").text(info.Icon);
+                $("#Seq2").text(info.Seq);
+                $("#FunctionId2").text(info.FunctionId);
+                $("#Visible2").text(info.Visible);
+                $("#WinformType2").text(info.WinformType);
+                $("#Url2").text(info.Url);                
+                $("#SystemType_ID2").text(info.SystemType_ID);
+                $("#WebIcon2").text(info.WebIcon);
+                $('#imgIcon2').attr('class', info.WebIcon);
+
+                $.getJSON("/Menu/FindByID?r=" + Math.random() + "&id=" + info.PID, function (newinfo) {
+                    if (newinfo != 'undefined') {
+                        $("#PID2").text(newinfo.Name);
+                    }
+                });
+            });            
+        }
+
+        //绑定修改按钮的事件
+        function BindEditEvent() {
+            $("#btnEditOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffEdit").form("validate");
+                if (validate == false) {
+                    return false;
+                }
+
+                //构造参数发送给后台
+                var ID = $("#ID1").val();
+                var postData = $("#ffEdit").serializeArray();
+
+                $.post("/Menu/Update?ID=" + ID, postData, function (date) {
+                    if (date == "true") {
+                        //修改成功，关闭弹出层，刷新DataGird
+                        $.messager.alert("提示", "修改成功");
+                        $("#DivEdit").dialog('close');
+                        $("#grid").datagrid("reload");
+                    }
+                    else {
+                        $.messager.alert("提示", "修改失败，请您检查");
+                    }
+                })
+            });
+        }
+    </script>
+
+    <script>
+        function changeIcon() {
+            $('#imgIcon').attr('class', $('#WebIcon').val());
+            $('#imgIcon1').attr('class', $('#WebIcon1').val());
+        }
+    </script>
+    <style>
+        table.view {border:1px solid #A8CFEB;border-collapse: collapse;margin-bottom:5px;}
+        .view th{ padding-left:10px;padding-right:5px;padding-top:5px;padding-bottom:5px;height:23px;width: 150px;border: 1px solid silver;background-color:#F1F6FF;}
+        .view td{ padding-left:10px;padding-right:5px;padding-top:5px;padding-bottom:5px;height:23px;width: 150px;border: 1px solid silver;background-color:#FAFCFF;}
+    </style>
+    </head>
+<body>
+    <div id="loading" style="display: none;"><img alt="数据正在加载中..." src="~/Content/images/loading02.gif" /></div>
+    <div class="easyui-layout" style="width:700px;height:700px;" fit="true">
+        <div data-options="region:'west',split:true,title:'菜单管理',iconCls:'icon-book'" style="width: 250px; padding: 1px;">
+            <div style="padding: 1px; border: 1px solid #ddd;">                
+                <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="A4" onclick="reloadTree()">刷新</a>
+                <a id="expandAllBtn" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-expand'" id="A5" onclick="return false;">展开</a>
+                <a id="collapseAllBtn" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-collapse'" id="A6" onclick="return false;">折叠</a>
+            </div>
+            <div>
+                <ul id="treeDemo" class="ztree">
+                </ul>
+            </div>
+        </div>
+        <div id="tb" data-options="region:'center',title:'',iconCls:'icon-book'" style="padding:5px;height:auto">       
+            <!-------------------------------搜索框----------------------------------->
+            <fieldset>
+                <legend>信息查询</legend>
+                <form id="ffSearch" method="post">
+		            <div style="margin-bottom:5px">	                     
+                        <label for="txtName">显示名称：</label>
+                        <input type="text" ID="txtName" name="txtName" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                        <label for="txtIcon">Winform图标：</label>
+                        <input type="text" ID="txtIcon" name="txtIcon" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                        <label for="txtSeq">排序：</label>
+                        <input type="text" ID="txtSeq" name="txtSeq" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                        <label for="txtFunctionId">功能ID：</label>
+                        <input type="text" ID="txtFunctionId" name="txtFunctionId" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>                    
+                        <label for="txtWinformType">Winform窗体：</label>
+                        <input type="text" ID="txtWinformType" name="txtWinformType" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                        <label for="txtUrl">Web界面Url：</label>
+                        <input type="text" ID="txtUrl" name="txtUrl" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                        <label for="txtWebIcon">Web界面图标：</label>
+                        <input type="text" ID="txtWebIcon" name="txtWebIcon" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                        
+                         <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">查询</a>
+                    </div>
+
+                </form>
+            </fieldset>
+                
+            <!-------------------------------详细信息展示表格----------------------------------->
+            <table id="grid" style="width: 1024px" title="用户操作" iconcls="icon-view">            
+            </table>
+        </div>
+   </div>
+
+    <!--------------------------添加信息的弹出层---------------------------->
+    <div id="DivAdd" class="easyui-dialog" style="width:780px;height:300px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+        <form id="ffAdd" method="post" novalidate="novalidate">
+                <table id="tblAdd" class="view">
+                    <tr>
+                        <th>
+                            <label for="PID">父菜单：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="PID" style="width:200px" name="PID" data-options="required:true,validType:'length[1,50]'" />
+                        </td>
+                        <th>
+                            <label for="SystemType_ID">系统编号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="SystemType_ID" name="SystemType_ID" data-options="required:true,validType:'length[1,50]'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Name">显示名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Name" name="Name" data-options="required:true,validType:'length[1,50]'" />
+                        </td>
+
+                        <th>
+                            <label for="Icon">Winform菜单图标：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Icon" name="Icon" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Seq">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Seq" name="Seq" />
+                        </td>
+
+                        <th>
+                            <label for="FunctionId">功能ID：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="FunctionId" name="FunctionId" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Visible">菜单可见：</label>
+                        </th>
+                        <td>
+                            <select  id="Visible" name="Visible">
+                                <option value="true" selected>正常</option>
+                                <option value="false">不可见</option>
+                            </select>
+                        </td>
+
+                        <th>
+                            <label for="WinformType">Winform窗体类型：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="WinformType" name="WinformType" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Url">Web界面Url地址：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Url" name="Url" />
+                        </td>
+
+                        <th>
+                            <label for="WebIcon">Web界面的菜单图标：</label>
+                        </th>
+                        <td>
+                            @*<input class="easyui-validatebox" type="text" id="WebIcon" name="WebIcon" />*@
+                            <table>
+                                <tr>
+                                    <td>
+                                        <select id="WebIcon" name="WebIcon"  onchange="javascript:changeIcon()">
+                                            <option>icon-blank</option>
+                                            <option>icon-add</option>
+                                            <option>icon-edit</option>
+                                            <option>icon-remove</option>
+                                            <option>icon-save</option>
+                                            <option>icon-cut</option>
+                                            <option>icon-ok</option>
+                                            <option>icon-no</option>
+                                            <option>icon-cancel</option>
+                                            <option>icon-reload</option>
+                                            <option>icon-search</option>
+                                            <option>icon-print</option>
+                                            <option>icon-help</option>
+                                            <option>icon-undo</option>
+                                            <option>icon-redo</option>
+                                            <option>icon-back</option>
+                                            <option>icon-sum</option>
+                                            <option>icon-tip</option>
+                                            <option>icon-mini-add</option>
+                                            <option>icon-mini-edit</option>
+                                            <option>icon-mini-refresh</option>
+                                            <option>icon-excel</option>
+                                            <option>icon-word</option>
+                                            <option>icon-organ</option>
+                                            <option>icon-lock</option>
+                                            <option>icon-alarm</option> 
+                                            <option>icon-view</option>
+                                            <option>icon-pie</option>
+                                            <option>icon-bar</option>
+                                            <option>icon-curve</option>
+                                            <option>icon-computer</option>
+                                            <option>icon-house</option>
+                                            <option>icon-key</option>
+                                            <option>icon-photo</option>
+                                            <option>icon-user</option>
+                                            <option>icon-group</option>
+                                            <option>icon-group-key</option>
+                                            <option>icon-telephone</option>
+                                            <option>icon-phone</option>
+                                            <option>icon-table</option>
+                                            <option>icon-book</option>
+                                            <option>icon-comment</option>
+                                            <option>icon-date'</option>
+                                            <option>icon-email</option>
+                                            <option>icon-first</option>
+                                            <option>icon-last</option>
+                                            <option>icon-next</option>
+                                            <option>icon-previous</option>
+                                            <option>icon-stop</option>
+                                            <option>icon-setting</option>
+                                        </select>
+                                    </td>
+                                    <td><div id="imgIcon" class="icon-blank" style="width:24px;height:24px"/></td>
+                                </tr>
+                            </table>  
+                        </td>
+
+                    </tr>
+ 
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnAddOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivAdd').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------编辑信息的弹出层---------------------------->
+    <div id="DivEdit" class="easyui-dialog" style="width:780px;height:300px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-edit',buttons: '#dlg-buttons'">
+        <form id="ffEdit" method="post" novalidate="novalidate">
+                <table id="tblEdit" class="view">
+                    <tr>
+                        <th>
+                            <label for="PID1">父ID：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" style="width:200px" id="PID1" name="PID" data-options="required:true,validType:'length[1,50]'"/>
+                        </td>
+                        <th>
+                            <label for="SystemType_ID1">系统编号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="SystemType_ID1" name="SystemType_ID" data-options="required:true,validType:'length[1,50]'"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Name1">显示名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Name1" name="Name" data-options="required:true,validType:'length[1,50]'"/>
+                        </td>
+
+                        <th>
+                            <label for="Icon1">Winform菜单图标：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Icon1" name="Icon" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Seq1">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Seq1" name="Seq" />
+                        </td>
+
+                        <th>
+                            <label for="FunctionId1">功能ID：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="FunctionId1" name="FunctionId" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Visible1">菜单可见：</label>
+                        </th>
+                        <td>
+                            <select  id="Visible1" name="Visible">
+                                <option value="true" selected>正常</option>
+                                <option value="false">不可见</option>
+                            </select>
+                        </td>
+
+                        <th>
+                            <label for="WinformType1">Winform窗体类型：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="WinformType1" name="WinformType" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Url1">Web界面Url地址：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Url1" name="Url" />
+                        </td>
+
+                        <th>
+                            <label for="WebIcon1">Web界面的菜单图标：</label>
+                        </th>
+                        <td>
+                            @*<input class="easyui-validatebox" type="text" id="WebIcon1" name="WebIcon" />*@
+                            <table>
+                                <tr>
+                                    <td>
+                                        <select id="WebIcon1" name="WebIcon" onchange="javascript:changeIcon()">
+                                            <option>icon-blank</option>
+                                            <option>icon-add</option>
+                                            <option>icon-edit</option>
+                                            <option>icon-remove</option>
+                                            <option>icon-save</option>
+                                            <option>icon-cut</option>
+                                            <option>icon-ok</option>
+                                            <option>icon-no</option>
+                                            <option>icon-cancel</option>
+                                            <option>icon-reload</option>
+                                            <option>icon-search</option>
+                                            <option>icon-print</option>
+                                            <option>icon-help</option>
+                                            <option>icon-undo</option>
+                                            <option>icon-redo</option>
+                                            <option>icon-back</option>
+                                            <option>icon-sum</option>
+                                            <option>icon-tip</option>
+                                            <option>icon-mini-add</option>
+                                            <option>icon-mini-edit</option>
+                                            <option>icon-mini-refresh</option>
+                                            <option>icon-excel</option>
+                                            <option>icon-word</option>
+                                            <option>icon-organ</option>
+                                            <option>icon-lock</option>
+                                            <option>icon-alarm</option> 
+                                            <option>icon-view</option>
+                                            <option>icon-pie</option>
+                                            <option>icon-bar</option>
+                                            <option>icon-curve</option>
+                                            <option>icon-computer</option>
+                                            <option>icon-house</option>
+                                            <option>icon-key</option>
+                                            <option>icon-photo</option>
+                                            <option>icon-user</option>
+                                            <option>icon-group</option>
+                                            <option>icon-group-key</option>
+                                            <option>icon-telephone</option>
+                                            <option>icon-phone</option>
+                                            <option>icon-table</option>
+                                            <option>icon-book</option>
+                                            <option>icon-comment</option>
+                                            <option>icon-date'</option>
+                                            <option>icon-email</option>
+                                            <option>icon-first</option>
+                                            <option>icon-last</option>
+                                            <option>icon-next</option>
+                                            <option>icon-previous</option>
+                                            <option>icon-stop</option>
+                                            <option>icon-setting</option>
+                                        </select>
+                                    </td>
+                                    <td><div id="imgIcon1" class="icon-blank" style="width:24px;height:24px"/></td>
+                                </tr>
+                            </table>  
+                        </td>
+
+                    </tr>
+ 
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input type="hidden" id="ID1" name="ID" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnEditOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivEdit').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+
+        </form>
+    </div>
+
+    <!--------------------------查看详细信息的弹出层---------------------------->
+    <div id="DivView" class="easyui-dialog" style="width:800px;height:300px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-view',buttons: '#dlg-buttons'">
+        <form id="ffView" method="post" novalidate="novalidate">
+                <table id="tblView" class="view">
+                    <tr>        
+                        <th width="20%">
+                            <label for="PID2">父菜单：</label>
+                        </th>
+                        <td width="30%">
+                            <label id="PID2" />
+                        </td>
+                        <th width="20%">
+                            <label for="SystemType_ID2">系统编号：</label>
+                        </th>
+                        <td width="30%">
+                            <label id="SystemType_ID2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Name2">显示名称：</label>
+                        </th>
+                        <td>
+                            <label id="Name2" />
+                        </td>
+
+                        <th>
+                            <label for="Icon2">Winform菜单图标：</label>
+                        </th>
+                        <td>
+                            <label id="Icon2" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Seq2">排序：</label>
+                        </th>
+                        <td>
+                            <label id="Seq2" />
+                        </td>
+
+                        <th>
+                            <label for="FunctionId2">功能ID：</label>
+                        </th>
+                        <td>
+                            <label id="FunctionId2" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Visible2">菜单可见：</label>
+                        </th>
+                        <td>
+                            <label id="Visible2" />
+                        </td>
+
+                        <th>
+                            <label for="WinformType2">Winform窗体类型：</label>
+                        </th>
+                        <td>
+                            <label id="WinformType2" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Url2">Web界面Url地址：</label>
+                        </th>
+                        <td>
+                            <label id="Url2" />
+                        </td>
+
+                        <th>
+                            <label for="WebIcon2">Web界面的菜单图标：</label>
+                        </th>
+                        <td>
+                            <label id="WebIcon2" />
+                            <div id="imgIcon2" class="icon-blank" style="width:24px;height:24px"/>
+                        </td>
+
+                    </tr>
+ 
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input type="hidden" id="ID2" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivView').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+</body>
+</html>

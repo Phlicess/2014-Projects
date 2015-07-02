@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WJModelStoreContainer" CdmEntityContainer="WJEntities">
+    <EntitySetMapping Name="GuanLiYuans">
+      <EntityTypeMapping TypeName="WJModel.GuanLiYuan">
+        <MappingFragment StoreEntitySet="GuanLiYuan">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QunZus">
+      <EntityTypeMapping TypeName="WJModel.QunZu">
+        <MappingFragment StoreEntitySet="QunZu">
+          <ScalarProperty Name="PublicGroup" ColumnName="PublicGroup" />
+          <ScalarProperty Name="GroupExplain" ColumnName="GroupExplain" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="YongHu_ID" ColumnName="YongHu_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RenWus">
+      <EntityTypeMapping TypeName="WJModel.RenWu">
+        <MappingFragment StoreEntitySet="RenWu">
+          <ScalarProperty Name="TaskDetails" ColumnName="TaskDetails" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+          <ScalarProperty Name="YongHu_ID" ColumnName="YongHu_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WenJians">
+      <EntityTypeMapping TypeName="WJModel.WenJian">
+        <MappingFragment StoreEntitySet="WenJian">
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Uploader" ColumnName="Uploader" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="RenWu_ID" ColumnName="RenWu_ID" />
+          <ScalarProperty Name="YongHu_ID" ColumnName="YongHu_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YongHus">
+      <EntityTypeMapping TypeName="WJModel.YongHu">
+        <MappingFragment StoreEntitySet="YongHu">
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YongHu_RenWu">
+      <EntityTypeMapping TypeName="WJModel.YongHu_RenWu">
+        <MappingFragment StoreEntitySet="YongHu_RenWu">
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="FinishOrNo" ColumnName="FinishOrNo" />
+          <ScalarProperty Name="ReadOrNo" ColumnName="ReadOrNo" />
+          <ScalarProperty Name="RenWu_ID" ColumnName="RenWu_ID" />
+          <ScalarProperty Name="YongHu_ID" ColumnName="YongHu_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="YongHu_QunZu" TypeName="WJModel.YongHu_QunZu" StoreEntitySet="YongHu_QunZu">
+      <EndProperty Name="YongHu">
+        <ScalarProperty Name="ID" ColumnName="YongHu_ID" />
+      </EndProperty>
+      <EndProperty Name="QunZu">
+        <ScalarProperty Name="ID" ColumnName="QunZu_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,474 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<FMS.QunZu>
+@{
+    ViewBag.Title = "群组管理";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<script>
+    $(function () {    
+        CheckAll(); //数据表格的全选函数
+        CheckedTr();  //数据表格实现点击table里的某一个tr 选中此行  
+        AddNewGroup();
+        ShowGroup();
+        EditGroup();
+        DeleteGroup();
+    });
+
+    //添加群组
+    function AddNewGroup() {
+        $("#AddGroupDialog").dialog({
+            title: '添加群组',
+            width: 600,
+            height: 415,
+            modal: true,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+        
+        //查找出所有接受者 然后添加到select里面
+        $("#AddNewGroupBtn").click(function () {
+            $("#AllMemery").empty();
+            $("#CheckMemery").empty();
+            $.post("@Url.Action("FindReceivers", "GroupManager")", function(reData) {
+                var receivers = eval(reData);
+                for (var i = 0; i < receivers.length; i++) {
+                    var NewOption = new Option();
+                    NewOption.text = receivers[i].Name + " (" + receivers[i].Position + ")";
+                    NewOption.value = receivers[i].NickName;
+                    NewOption.title = receivers[i].Email;
+                    NewOption.style.cssText = "color: #0a0aaa; ";
+                    AllMemery.add(NewOption);
+                };
+            });
+            $("#AddGroupDialog").dialog("open");
+        });
+    }
+
+    //实现点击数据在两张表之间交换
+    function LeftSelect(CheckMemery, AllMemery) {
+        var NewOption = new Option();
+        var curOpt = AllMemery.selectedIndex;
+        NewOption.text = AllMemery[curOpt].text;
+        NewOption.value = AllMemery[curOpt].value;
+        NewOption.title = AllMemery[curOpt].title;
+        NewOption.style.cssText = "color: #000000";
+        //列表框add()方法,可以将option对象放置到select标记中
+        CheckMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        AllMemery.remove(curOpt);
+    }
+
+    //实现点击数据在两张表之间交换
+    function RightSelect(CheckMemery, AllMemery) {
+        var NewOption = new Option();
+        var curOpt = CheckMemery.selectedIndex;
+        NewOption.text = CheckMemery[curOpt].text;
+        NewOption.value = CheckMemery[curOpt].value;
+        NewOption.title = CheckMemery[curOpt].title;
+        NewOption.style.cssText = "color: #aaaaaa;";
+        //列表框add()方法,可以将option对象放置到select标记中
+        AllMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        CheckMemery.remove(curOpt);
+    }
+
+    //修改群组信息弹出框里面的select
+    //实现点击数据在两张表之间交换
+    function EditLeftSelect() {
+        var NewOption = new Option();
+        var curOpt = EditAllMemery.selectedIndex;
+        NewOption.text = EditAllMemery[curOpt].text;
+        NewOption.value = EditAllMemery[curOpt].value;
+        NewOption.title = EditAllMemery[curOpt].title;
+        NewOption.style.cssText = "color: #000000";
+        //列表框add()方法,可以将option对象放置到select标记中
+        EditCheckMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        EditAllMemery.remove(curOpt);
+    }
+
+    //实现点击数据在两张表之间交换
+    function EditRightSelect() {
+        var NewOption = new Option();
+        var curOpt = EditCheckMemery.selectedIndex;
+        NewOption.text = EditCheckMemery[curOpt].text;
+        NewOption.value = EditCheckMemery[curOpt].value;
+        NewOption.title = EditCheckMemery[curOpt].title;
+        NewOption.style.cssText = "color: #aaaaaa;";
+        //列表框add()方法,可以将option对象放置到select标记中
+        EditAllMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        EditCheckMemery.remove(curOpt);
+    }
+
+
+
+    //提交新建群组的信息(Dialog里面的确定提交按钮)
+    function AddGroupOkBtn() {
+        if ($("#AddGroupName").val() == "") {
+            $("#AddGroupName").css('border', '1px red solid');
+        }
+        //收集群组基本信息
+        var postData = {
+            GroupName: $("#AddGroupName").val(),
+            GroupExplain: $("#AddGroupExplain").val()
+        };
+        //收集新建群组的接收者
+        var receivers = "";
+        for (var i = 0; i < CheckMemery.length; i++) {
+            receivers += CheckMemery[i].value + ",";
+        };
+        receivers = receivers.substring(0, receivers.length - 1);
+        $.post("@Url.Action("AddGroup", "GroupManager")?receivers=" + receivers, postData, function(reData) {
+            alert(reData);
+            $("#AddGroupDialog").dialog("close");
+            window.location.reload();  //刷新页面
+        });
+    }
+
+    //查看群组详细
+    function ShowGroup() {
+        $("#ShowGroupDialog").dialog({
+            title: '查看群组',
+            width: 600,
+            height: 415,
+            modal: true,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+        $("#ShowGroupBtn").click(function () {
+            var postDataArr = new Array;
+            var i = 0;
+            $("#mytable #TableData tr td").find(":checkbox").each(function () {
+                if ($(this).prop("checked") == true) {
+                    postDataArr[i] = $(this).val();
+                    i++;
+                }
+            });
+            if (postDataArr[0] == null) {
+                alert("亲,先选一个群组啊~");
+                return;
+            }
+            $.post("@Url.Action("FindGroups", "GroupManager")?group_ID=" + postDataArr[0], function (reData) {
+                var groupReceivers = eval(reData);
+                var text = new Array;  //保存选中的所有行的信息
+                var t = 0;
+                $("#mytable #TableData tr td").find(":checkbox").each(function () {
+                    if ($(this).prop("checked") == true) {
+                        text[t] = $(this).parent("td").parent("tr").children("td");
+                        t++;
+                    }
+                });
+                $("#ShowGroupDialog").dialog("open");
+                $("#ShowGroupName").val(text[0].eq(2).text().trim());  //.trim()  --去除所有空格
+                $("#ShowGroupExplain").val(text[0].eq(3).text().trim());
+                $("#SelectReceivers").empty();  //清除select的option  empty函数清除当前选中元素所有子元素
+                for (var n = 0; n < groupReceivers.length; n++) {
+                    var NewOption = new Option();
+                    NewOption.text = "姓名:" + groupReceivers[n].Name + " >电话:" + groupReceivers[n].Phone + " >邮箱:" + groupReceivers[n].Email + " >部门:" + groupReceivers[n].Position;
+                    SelectReceivers.add(NewOption);
+                }
+            });
+        });
+    };
+
+    //编辑群组详细信息
+    function EditGroup() {
+        $("#EditGroupDialog").dialog({
+            title: '修改群组',
+            width: 600,
+            height: 415,
+            modal: true,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+
+        $("#EditGroupBtn").click(function () {
+            var postDataArr = new Array;
+            var i = 0;
+            $("#mytable #TableData tr td").find(":checkbox").each(function () {
+                if ($(this).prop("checked") == true) {
+                    postDataArr[i] = $(this).val();
+                    i++;
+                }
+            });
+            if (postDataArr[0] == null) {
+                alert("亲,先选一个群组啊~");
+                return;
+            }
+
+            $("#EditAllMemery").empty();
+            $("#EditCheckMemery").empty();
+
+            //为弹窗赋值
+            $.post("@Url.Action("FindGroups", "GroupManager")?group_ID=" + postDataArr[0], function (reData) {
+                var groupReceivers = eval(reData);
+                var text = new Array;  //保存选中的所有行的信息
+                var t = 0;
+                $("#mytable #TableData tr td").find(":checkbox").each(function () {
+                    if ($(this).prop("checked") == true) {
+                        text[t] = $(this).parent("td").parent("tr").children("td");
+                        t++;
+                    }
+                });
+                $("#EditGroupDialog").dialog("open");
+                $("#EditGroupName").val(text[0].eq(2).text().trim());  //.trim()  --去除所有空格
+                $("#EditGroupExplain").val(text[0].eq(3).text().trim());
+                //$("#SelectReceivers").empty();  //清除select的option  empty函数清除当前选中元素所有子元素
+                for (var n = 0; n < groupReceivers.length; n++) {
+                    var NewOption = new Option();
+                    NewOption.text = groupReceivers[n].Name;
+                    NewOption.value = groupReceivers[n].NickName;
+                    NewOption.title = groupReceivers[n].Email;
+                    EditCheckMemery.add(NewOption);
+                }
+                //将群组里面已经包含的接收者的NickName传递给数组checkReceiversArr
+                var checkReceiversArr = new Array;
+                for (var t = 0; t < groupReceivers.length; t++) {
+                    checkReceiversArr[t] = groupReceivers[t].NickName;
+                }
+                
+                //加载全部接收者信息
+                $.post("@Url.Action("FindReceivers", "GroupManager")", function(reData) {
+                    var receivers = eval(reData);
+                    for (var i = 0; i < receivers.length; i++) {
+                        //先判断所有接受者里面有没有 群组已经包含的接收者 如果重复就去掉
+                        if ($.inArray(receivers[i].NickName, checkReceiversArr) == -1) {
+                            var NewOption = new Option();
+                            NewOption.text = receivers[i].Name + " (" + receivers[i].Position + ")";
+                            NewOption.value = receivers[i].NickName;
+                            NewOption.title = receivers[i].Email;
+                            NewOption.style.cssText = "color: #0a0aaa; ";
+                            EditAllMemery.add(NewOption);
+                        }
+                    };
+                });
+            });
+        });
+    }
+
+    //修改群组信息弹出框里面的提交按钮函数
+    function EditDialogOkBtn() {
+        if ($("#EditGroupName").val() == "") {
+            $("#EditGroupName").css('border', '1px red solid');
+            return;
+        }
+        var oldGroupId = new Array;
+        var t = 0;
+        $("#mytable #TableData tr td").find(":checkbox").each(function () {
+            if ($(this).prop("checked") == true) {
+                oldGroupId[t] = $(this).val();
+                t++;
+            }
+        });
+
+        //收集群组基本信息
+        var postData = {
+            GroupName: $("#EditGroupName").val(),
+            GroupExplain: $("#EditGroupExplain").val()
+        };
+        //收集修改群组的接收者
+        var receivers = "";
+        for (var i = 0; i < EditCheckMemery.length; i++) {
+            receivers += EditCheckMemery[i].value + ",";
+        };
+        receivers = receivers.substring(0, receivers.length - 1);
+        $.post("@Url.Action("EditGroup", "GroupManager")?receivers=" + receivers + "&Group_ID=" + oldGroupId[0], postData, function (reData) {
+            //alert(reData);
+            $("#EditGroupDialog").dialog("close");
+            window.location.reload();  //刷新页面
+        });
+    }
+
+    //Toolbar删除群组按钮
+    function DeleteGroup() {
+        //获取多个需要删除的群组ID
+        $("#DeleteGroupBtn").click(function() {
+            var GroupIds = new Array;
+            var t = 0;
+            $("#mytable #TableData tr td").find(":checkbox").each(function () {
+                if ($(this).prop("checked") == true) {
+                    GroupIds[t] = $(this).val();
+                    t++;
+                }
+            });
+            //alert("真的要删除选中的群组吗?");
+            if (GroupIds.length == 0) {
+                alert("先选一个事项再删除..");
+                return;
+            }
+            $.get("@Url.Action("DeleteGroup", "GroupManager")?GroupIds=" + GroupIds, function(reData) {
+                alert(reData);
+                window.location.reload();
+            });
+        });
+    }
+
+</script>
+
+
+<div class="toolbar">
+    <ul>
+        <li><a href="#" id="AddNewGroupBtn">添加群组</a></li>
+        <li><a href="#" id="ShowGroupBtn">查看群组</a></li>
+        <li><a href="#" id="EditGroupBtn">编辑群组</a></li>
+        <li><a href="#" id="DeleteGroupBtn">删除群组</a></li>
+    </ul>
+</div>
+
+<div id="DataGrid" style="width: 100%; height: 420px; background-color: #ffffff;">
+    <style type="text/css">
+        .mvcPager a {
+            text-decoration: none;  
+        }
+
+        .mvcPager {
+            background-color: #696969;
+            border-bottom: 1px #000000 solid;
+            font-size: 12px;
+            color: #ffffff;
+            padding-left: 10px;
+            font-weight: bolder;
+        }
+
+        .mvcPager input[type=text] {
+            width: 24px;
+            border: #ffffff 1px solid;
+        }
+
+        .mvcPager .gotoPage {
+            float: right;
+        }
+    </style>
+
+
+    <table id="mytable" cellspacing="0" style="width: 100%">
+        <tr style="height: 25px;">
+            <th width="30px">
+                <input name="chkAll" type="checkbox" value="checkbox" id="CheckAll" />
+            </th>
+            <th width="30px">
+                序号
+            </th>
+            <th width = "150px">
+                群组名
+            </th>
+            <th>
+                群组备注
+            </th>
+        </tr>
+        <tbody id="TableData">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="30px" style="text-align: center;" id="SingleCheck">
+                        <input type="checkbox" value="@Html.DisplayFor(modelItem => item.ID)" />
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.GroupName)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.GroupExplain)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @Html.AjaxPager(Model, new PagerOptions
+    {
+        AutoHide = false,
+        CssClass = "mvcPager",
+        PageIndexParameterName = "id",
+        FirstPageText = "首页",
+        LastPageText = "末页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        GoButtonText = "跳转",
+        HorizontalAlign = "left",
+        SeparatorHtml = "&nbsp; &nbsp;",
+        ShowMorePagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        ShowPageIndexBox = true,
+        PageIndexBoxWrapperFormatString = "{0}页"
+    }, new AjaxOptions() { UpdateTargetId = "DataGrid" })
+</div>
+
+
+
+
+
+
+
+
+
+<!-----------------------添加群组弹出层-------------------------->
+
+<div id="AddGroupDialog">
+    <div style="width: 100%; height: 30px; float: left;">
+        <label>群组名称:</label>
+        <input type="text" id="AddGroupName" style="width: 20%;" maxlength="15" required />
+        <label>群组简介:</label>
+        <input type="text" id="AddGroupExplain" style="width: 50%; float: right;" maxlength="500" />
+    </div>
+    <div style="width: 100%; height: 265px; float: left; border-top: 1px solid #dcdcdc; margin-top: 8px; border-bottom: 1px solid #dcdcdc;">
+        <h3 style="width: 100%; height: 30px; float: left; display: block; margin: 0;">--为新群组添加组员</h3>
+        <div id="left" style="float: left; width: 50%;">
+            <select id="AllMemery" size="12" style="width: 95%; overflow: auto;" onclick="LeftSelect()"></select>
+        </div>
+        <div id="right" style="float: left; width: 50%;" onclick="RightSelect()">
+            <select id="CheckMemery" size="12" style="width: 95%; float: right; overflow: auto;"></select>
+        </div>
+    </div>
+    <input type="button" value="关闭" onclick="$('#AddGroupDialog').dialog('close');" style="width: 100px; height: 40px; margin: 6px;" />
+    <input type="button" value="确定" onclick="AddGroupOkBtn();" style="width: 100px; height: 40px; margin: 6px 0 0 20px;" />
+</div>
+ 
+<!-----------------------查看群组详细信息弹出层----------------->
+<div id="ShowGroupDialog">
+    <div style="width: 100%; height: 30px; float: left;">
+        <label>群组名称：</label>
+        <input type="text" id="ShowGroupName" style="width: 100px;" maxlength="15" readonly />
+        <label>群组简介：</label>
+        <input type="text" id="ShowGroupExplain" style="width: 295px; float: right; " maxlength="500" readonly />
+    </div>
+    <div id="Receivers" style="width: 100%; height: 200px; float: left; margin: 10px 0 0 0px;">
+        <select style="border: #cccccc 1px solid; height: 200px; width: 100%; overflow: auto;" id="SelectReceivers" size="22"></select>
+    </div>     
+    <input type="button" value="关闭" onclick="$('#ShowGroupDialog').dialog('close');" style="width: 100px; height: 40px; margin: 50px 0 0 6px;" />
+</div>
+
+<!-----------------------编辑群组信息弹出层------------------------>
+<div id="EditGroupDialog">
+    <div style="width: 100%; height: 30px; float: left;">
+        <label>群组名称：</label>
+        <input type="text" id="EditGroupName" style="width: 100px;" maxlength="15" />
+        <label>群组简介：</label>
+        <input type="text" id="EditGroupExplain" style="width: 295px; float: right; " maxlength="500"  />
+    </div>
+    <div style="width: 50%; height: 200px; float: left; margin: 10px 0 0 0;">
+        <select style="border: #cccccc 1px solid; height: 200px; width: 95%; overflow: auto;" onclick="EditLeftSelect()" id="EditAllMemery" size="22"></select>
+    </div>
+    <div style="width: 50%; height: 200px; float: right; margin: 10px 0 0 0;">
+        <select style="border: #cccccc 1px solid; float: right; height: 200px; width: 95%; overflow: auto;" onclick="EditRightSelect()" id="EditCheckMemery" size="22"></select>
+    </div>
+    <input type="button" value="关闭" onclick="$('#EditGroupDialog').dialog('close');" style="width: 100px; height: 40px; margin: 50px 0 0 6px;" />
+    <input type="button" value="确定" onclick="EditDialogOkBtn();" style="width: 100px; height: 40px; margin: 50px 0 0 6px;" />
+</div>

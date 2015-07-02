@@ -1,0 +1,88 @@
+﻿@using FMS.Controllers
+@{
+    ViewBag.Title = "欢迎登陆";
+    Layout = "~/Views/Shared/LoginHome.cshtml";
+}
+
+    <script type="text/javascript">
+        $(function () {
+            $("#home").animate({top: '0px'}, 1000);
+
+            //$('#btnOk').unbind('click');
+            $("#btnOk").click(function () {
+                if ($("#Password").val() == "") {
+                    var postData = {
+                        NickName: $("#NickName").val(),
+                        Password: $("#Password").val()
+                    };
+                } else {
+                    var postData = {
+                        NickName: $("#NickName").val(),
+                        Password: hex_md5($("#Password").val())
+                    };
+                }
+                
+                $.post("@Url.Action("Login", "Home")", postData, function (reData) {
+                    if (reData == 'Admin') {
+                        $("#home").animate({ opacity: '0', width: '0', height: '0', margin: '200px 0 0 250px'}, 800);
+                        setTimeout("window.location.href = '@Url.Action("Index","Welcome")';", 800);
+                    } else if (reData == "Publisher") {
+                        $("#home").animate({ opacity: '0', });
+                        setTimeout("window.location.href = '@Url.Action("Index","Welcome")';", 800);
+                    } else if (reData == "Receiver") {
+                        $("#home").animate({ opacity: '0', });
+                        setTimeout("window.location.href = '@Url.Action("Index","Welcome")';", 800);
+                    } else if (reData == "false") {
+                        $("#error").find("p").remove();
+                        $("#error").append("<p style='display: block; width: 100%; height: 20px; color: red; line-height: 20px; text-align: center;'>你输入的用户名根本就没有啊亲!</p>");
+                        $("#home").animate({ left: '15px', }, 100);
+                        $("#home").animate({ left: '0', }, 100);
+                        $("#home").animate({ left: '15px', }, 100);
+                        $("#home").animate({ left: '0', }, 100);
+
+                        //alert("亲, 看看你的用户名对了么!");
+                    } else if (reData == "PasswordError") {
+                        $("#error").find("p").remove();
+                        $("#error").append("<p style='display: block; width: 100%; height: 20px; color: red; line-height: 20px; text-align: center;'>你的密码不对哟!</p>");
+                        $("#home").animate({ left: '15px', }, 100);
+                        $("#home").animate({ left: '0', }, 100);
+                        $("#home").animate({ left: '15px', }, 100);
+                        $("#home").animate({ left: '0', }, 100);
+                        //alert("密码记错了? 重新输一遍试试吧!");
+                    }
+                });
+                //}));
+            });
+
+            //按下回车按钮触发登录事件
+            $("body").unbind("keydown").bind('keydown', (function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnOk").click();
+                }
+            })
+            );
+        });
+        
+    </script>
+
+
+<div id="home" style="float: left; width: 400px; height: 500px; position: relative; top: -700px; background-image: url(@Url.Content("~/Images/login.png")); ">
+    <div id="error" style="margin: 263px 0 0 0; width: 100%; height: 20px; float: left;"></div>
+    <table style="margin: 303px 0 0 0;">
+        <tr style="display: block; margin-left: 158px;">
+            <td><input type="text" maxlength="50" name="NickName" id="NickName" autofocus style="width: 200px; border: 0px; height: 20px; font-size: 20px;"></td>
+        </tr>
+        <tr style="display: block; margin-top: 20px; margin-left: 158px;">
+            <td><input type="password" maxlength="20" name="Password" id="Password" style="width: 200px; ime-mode: disabled; border: 0px; height: 20px; font-size: 20px;"></td>
+        </tr>
+        
+    </table>
+    <div style="margin: 27px 60px; width: 100%; float: left;">
+        <input id="btnOk" onclick="Login()" value="登陆" type="button" style="width: 305px; height: 42px; font-size: 20px; font-weight: bolder;">
+    </div>
+    <p style="color: #ffffff; font-weight: bolder; display: block; float: left; width: 100%; height: 30px; font-size: 12px; line-height: 30px; text-align: center; margin-top: -20px;">聊城大学计算机学院·大神@李寰 菜鸟@刘明@吴桐</p>
+</div>
+
+
+
+

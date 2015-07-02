@@ -1,0 +1,584 @@
+﻿@using System.Drawing
+@using Webdiyer.WebControls.Mvc
+
+@model PagedList<FMS.RenWu>
+@{
+    ViewBag.Title = "草稿箱";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    //解决Uploadify在非IE浏览器下上传文件出现302错误的问题
+    var auth = "@(Request.Cookies[FormsAuthentication.FormsCookieName] == null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value)";
+    var ASPSESSID = "@Session.SessionID";
+    var FilePath = "";
+   
+    $(function () {
+
+        //对日期选择的汉化
+        $.datepicker.regional['zh-CN'] = {
+            closeText: '关闭',
+            prevText: '<上月',
+            nextText: '下月>',
+            currentText: '今天',
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesMin: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            weekHeader: '周',
+            dateFormat: 'yy-mm-dd',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '年',
+        };
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+
+        $("#EditUploadTime").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+        });
+        $("#EditCloseTime").datepicker({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            changeMonth: true,
+            changeYear: true,
+        });
+
+        CheckAll(); //数据表格的全选函数
+        CheckedTr();  //数据表格实现点击table里的某一个tr 选中此行
+
+        ShowTaskDialog();  //查看详细事项按钮
+        //UploadFile();  //上传文件按钮（在查看详细事项弹出框里面）
+        DeleteTask();  //删除事项按钮
+        EditTaskBtn();
+
+        $("#UploadFileOkBtn").button({
+        });
+
+    });
+
+    //修改群组信息弹出框里面的select
+    //实现点击数据在两张表之间交换
+    function EditLeftSelect() {
+        var NewOption = new Option();
+        var curOpt = EditAllMemery.selectedIndex;
+        NewOption.text = EditAllMemery[curOpt].text;
+        NewOption.value = EditAllMemery[curOpt].value;
+        NewOption.title = EditAllMemery[curOpt].title;
+        NewOption.style.cssText = "color: #000000";
+        //列表框add()方法,可以将option对象放置到select标记中
+        EditCheckMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        EditAllMemery.remove(curOpt);
+    }
+
+    //实现点击数据在两张表之间交换
+    function EditRightSelect() {
+        var NewOption = new Option();
+        var curOpt = EditCheckMemery.selectedIndex;
+        NewOption.text = EditCheckMemery[curOpt].text;
+        NewOption.value = EditCheckMemery[curOpt].value;
+        NewOption.title = EditCheckMemery[curOpt].title;
+        NewOption.style.cssText = "color: #aaaaaa;";
+        //列表框add()方法,可以将option对象放置到select标记中
+        EditAllMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        EditCheckMemery.remove(curOpt);
+    }
+
+    //邮件提醒函数
+    function SendEmail(newTask_ID) {
+        var postData = "";
+        for (var i = 0; i < EditCheckMemery.length - 1; i++) {
+            postData += EditCheckMemery[i].value.toString() + ",";
+        }
+        
+        postData += EditCheckMemery[i].value.toString();   //为了在邮箱字符串的结尾不加","
+        $.post("@Url.Action("SendEmail", "DraftBox")?receiverNickName=" + postData + "&Group_ID=" + "" + "&Task_ID=" + newTask_ID, function (data) {
+            alert(data);
+            $("#EditTaskDialog").dialog("close");
+            window.location.reload();
+        });
+    };
+
+    //数据表格checkbox选择行 返回第一列ID的值
+    //删除按钮
+    function DeleteTask() {
+        $("#DeleteTaskBtn").click(function () {
+            var postData = new Array;
+            var i = 0;
+            $("#mytable #TableData tr td").find(":checkbox").each(function () {
+                if ($(this).prop("checked") == true) {
+                    postData[i] = $(this).val();
+                    i++;
+                }
+            });
+
+            alert("删除选中的任务?");
+            if (postData.length == 0) {
+                alert("删除之前先选择一个任务好不的?");
+                return;
+            }
+            $.get("@Url.Action("DeleteTask", "HistoryTask")?TaskIds=" + postData, function (reData) {
+                alert(reData);
+                window.location.reload();
+            });
+        });
+    }
+
+
+    //ToolBar 栏目的 查看任务按钮
+    function ShowTaskDialog() {
+        $("#ShowTaskDialog").dialog({
+            title: '查看任务',
+            width: 620,
+            height: 400,
+            modal: false,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+
+        $("#ShowTaskBtn").click(function () {
+            var postData = new Array;
+            var i = 0;
+            $("#TableData :checkbox:checked").each(function () {
+                var tablerow = $(this).parent("td").parent("tr");
+                postData[i] = parseInt(tablerow.find("td").eq(1).text());
+                i++;
+            });
+
+            if (postData[0] != null) {  //判断用户是否选择了一行数据 如果选择多行只会显示第一行
+                $.ajax({
+                    url: "@Url.Action("Finds", "DraftBox")",
+                    dataType: "json",
+                    data: { "Draft_ID": postData[0] },
+                    type: "POST",
+                    traditional: true,   //这个属性必须加上 可以试实现传递数组
+                    success: function (reData) {
+                        var obj = eval(reData);
+                        if (reData.UploadTime == "") {
+                            var UploadTime = "(空)";
+                        } else {
+                            UploadTime = new Date(parseInt(reData.UploadTime.replace("/Date(", "").replace(")/", ""))).toLocaleString();
+                        }
+                        if (reData.CloseTime == "") {
+                            var CloseTime = "(空)" +
+                                "";
+                        } else {
+                            CloseTime = new Date(parseInt(reData.CloseTime.replace("/Date(", "").replace(")/", ""))).toLocaleString();
+                        }
+                        $("#TaskName").val(obj.TaskName);
+                        $("#UploadTime").val(UploadTime);
+                        $("#CloseTime").val(CloseTime);
+                        $("#Publisher").val(obj.Publisher);
+                        $("#TaskDetails").val(obj.TaskDetails);
+                        UploadFile();
+                    },
+                    error: function () {
+                        alert("出现错误!");
+                    }
+                });
+                $("#ShowTaskDialog").dialog("open");
+
+            } else {
+                alert("先选择一个任务..");
+            }
+        });
+    }
+
+    //Toolbar编辑草稿按钮
+    function EditTaskBtn() {
+        $("#EditTaskDialog").dialog({
+            title: '编辑任务',
+            width: 920,
+            height: 400,
+            modal: false,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+        $("#EditTaskBtn").click(function() {
+            var postData = new Array;
+            var i = 0;
+            $("#TableData :checkbox:checked").each(function () {
+                var tablerow = $(this).parent("td").parent("tr");
+                postData[i] = parseInt(tablerow.find("td").eq(1).text());
+                i++;
+            });
+
+            if (postData[0] != null) {  //判断用户是否选择了一行数据 如果选择多行只会显示第一行
+                $.ajax({
+                    url: "@Url.Action("Finds", "DraftBox")",
+                    dataType: "json",
+                    data: { "Draft_ID": postData[0] },
+                    type: "POST",
+                    traditional: true,   //这个属性必须加上 可以试实现传递数组
+                    success: function (reData) {
+                        $("#EditAllMemery").empty();
+                        $("#EditCheckMemery").empty();
+
+                        var obj = eval(reData);
+                        if (reData.UploadTime == "") {
+                            var UploadTime = "(空)";
+                        } else {
+                            UploadTime = new Date(parseInt(reData.UploadTime.replace("/Date(", "").replace(")/", ""))).toLocaleString();
+                        }
+                        if (reData.CloseTime == "") {
+                            var CloseTime = "(空)" +
+                                "";
+                        } else {
+                            CloseTime = new Date(parseInt(reData.CloseTime.replace("/Date(", "").replace(")/", ""))).toLocaleString();
+                        }
+
+                        $("#EditTaskName").val(obj.TaskName);
+                        $("#EditUploadTime").val(UploadTime);
+                        $("#EditCloseTime").val(CloseTime);
+                        $("#EditPublisher").val(obj.Publisher);
+                        $("#EditTaskDetails").val(obj.TaskDetails);
+                        UploadFile();
+
+                        //加载任务包含的接收者
+                        $.post("@Url.Action("FindReceivers", "DraftBox")?DraftId=" + postData[0], function (data) {
+                            var receivers = eval(data);
+                            for (var i = 0; i < receivers.length; i++) {
+                                //先判断所有接受者里面有没有 群组已经包含的接收者 如果重复就去掉
+                                var NewOption = new Option();
+                                NewOption.text = receivers[i].Name + " (" + receivers[i].Position + ")";
+                                NewOption.value = receivers[i].NickName;
+                                NewOption.title = receivers[i].Email;
+                                NewOption.style.cssText = "color: #0a0aaa; ";
+                                EditCheckMemery.add(NewOption);
+                            };
+
+                            //将群组里面已经包含的接收者的NickName传递给数组checkReceiversArr
+                            var checkReceiversArr = new Array;
+                            for (var t = 0; t < receivers.length; t++) {
+                                checkReceiversArr[t] = receivers[t].NickName;
+                            }
+
+                            //加载全部接收者信息
+                            $.post("@Url.Action("FindAllReceivers", "DraftBox")", function(reData) {
+                                var receivers = eval(reData);
+                                for (var i = 0; i < receivers.length; i++) {
+                                    //先判断所有接受者里面有没有 群组已经包含的接收者 如果重复就去掉
+                                    if ($.inArray(receivers[i].NickName, checkReceiversArr) == -1) {
+                                        var NewOption = new Option();
+                                        NewOption.text = receivers[i].Name + " (" + receivers[i].Position + ")";
+                                        NewOption.value = receivers[i].NickName;
+                                        NewOption.title = receivers[i].Email;
+                                        NewOption.style.cssText = "color: #0a0aaa; ";
+                                        EditAllMemery.add(NewOption);
+                                    }
+                                };
+                            });
+                        });
+
+                    },
+                    error: function () {
+                        alert("出现错误!");
+                    }
+                });
+                $("#EditTaskDialog").dialog("open");
+
+            } else {
+                alert("先选择一个任务..");
+            }
+        });
+    }
+
+    //编辑草稿弹出框里面的确认信息按钮
+    function EditDialogOkBtn() {
+        if ($("#EditTaskName").val() == "") {
+            $("#EditTaskName").css('border', '1px red solid');
+            return;
+        } else {
+            $("#EditTaskName").css('border', '1px #999 solid');
+        }
+        
+        var draftId = new Array;
+        var i = 0;
+        $("#TableData :checkbox:checked").each(function () {
+            var tablerow = $(this).parent("td").parent("tr");
+            draftId[i] = parseInt(tablerow.find("td").eq(1).text());
+            i++;
+        });
+
+        //任务的基本信息
+        var postData = {
+            YongHu_ID: '@Session["ID"]',
+            TaskName: $("#EditTaskName").val(),
+            CloseTime: $("#EditCloseTime").val(),
+            UploadTime: $("#EditUploadTime").val(),
+            TaskDetails: $("#EditTaskDetails").val(),
+            Remark: false,
+            Publisher: '@Session["Name"]',
+            FilePath: FilePath,
+        };
+        //任务的接收者列表 NickName
+        var receiver = new Array;
+        for (var i = 0; i < EditCheckMemery.length; i++) {
+            receiver[i] = EditCheckMemery[i].value;
+        }
+
+        $.post("@Url.Action("PublicDraft", "DraftBox")?receiversList=" + receiver + "&DraftId=" + draftId[0], postData, function (data) {
+            //邮件提醒 //$("#id").attr("checked") == true
+            if ($("#Email").is(":checked")) {
+                SendEmail(data);
+            }
+            alert("任务创建成功!");
+        });
+    }
+
+    //编辑草稿弹出框的上传文件按钮
+    function UploadFile() {
+        $("#UploadFileBtn").uploadify({
+            'formData': { 'ASPSESSID': ASPSESSID, 'AUTHID': auth }, //防止在非IE浏览器中出302错误
+            'swf': '@Url.Content("~/Content/Uploaddify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadFile", "NewTask")', //处理文件上传Action
+            'auto': false, //是否自动上传
+            'buttonText': '选择文件',
+            'fileSizeLimit': '100MB',
+            'fileTypeExts': '*.*',
+            'height': 25,
+            'width': 80,
+            'queueID': 'fileQueue', //队列的ID
+            'method': 'post',
+            'multi': false,
+            'rollover': true,
+            'onQueueComplete': function (event) { //所有队列完成后事件
+                if (event.uploadsSuccessful) {
+                } else
+                    $("#ShowFileOk").append("<h4 style='margin: 5px 0 0 0; color: red;'>上传失败!</h4>"); //提示失败
+            },
+            'onUploadSuccess': function (file, data) {
+                FilePath = data;
+                $("#ShowFileOk").append("<h4 style='margin: 5px 0 0 0; color: green;'>" + file.name + "--上传成功!</h4>"); //提示完成
+            },
+            'onUploadStart': function () {
+                $("#UploadFileBtn").uploadify("settings", 'formData', { 'TaskName': $("#EditTaskName").val() }); //动态传参数
+            }
+        });
+    }
+
+</script>
+
+<div class="toolbar">
+    
+    <ul>
+        <li><a href="#" id="ShowTaskBtn">查看任务</a></li>
+        <li><a href="#" id="EditTaskBtn">继续编辑</a></li>
+        <li><a href="#" id="DeleteTaskBtn">删除任务</a></li>
+        <li><a href="#" id="PublicTaskBtn">发布任务</a></li>
+    </ul>
+</div>
+
+<div id="DataGrid" style="width: 100%; height: 420px; background-color: #ffffff;">
+    <style type="text/css">
+        .mvcPager a {
+            text-decoration: none;
+        }
+
+        .mvcPager {
+            background-color: #696969;
+            border-bottom: 1px #000000 solid;
+            font-size: 12px;
+            color: #ffffff;
+            padding-left: 10px;
+            font-weight: bolder;
+        }
+
+            .mvcPager input[type=text] {
+                width: 24px;
+                border: #ffffff 1px solid;
+            }
+
+            .mvcPager .gotoPage {
+                float: right;
+            }
+    </style>
+
+
+    <table id="mytable" cellspacing="0" style="width: 100%">
+        <tr style="height: 25px;">
+            <th width="30px">
+                <input name="chkAll" type="checkbox" value="checkbox" id="CheckAll" />
+            </th>
+            <th style="width: 30px;">
+                序号
+            </th>
+            <th style="width: 200px;">
+                任务名称
+            </th>
+            <th style="width: 200px;">
+                开始日期
+            </th>
+            <th style="width: 200px;">
+                截止日期
+            </th>
+            <th style="width: 200px;">
+                创建者
+            </th>
+
+        </tr>
+        <tbody id="TableData">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="30px" style="text-align: center;" id="SingleCheck">
+                        <input id="@Html.DisplayFor(modelItem => item.ID)" type="checkbox" value="@Html.DisplayFor(modelItem => item.ID)" />
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.TaskName)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.UploadTime)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.CloseTime)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.Publisher)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @Html.AjaxPager(Model, new PagerOptions
+    {
+        AutoHide = false,
+        CssClass = "mvcPager",
+        PageIndexParameterName = "id",
+        FirstPageText = "首页",
+        LastPageText = "末页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        GoButtonText = "跳转",
+        HorizontalAlign = "left",
+        SeparatorHtml = "&nbsp; &nbsp;",
+        ShowMorePagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        ShowPageIndexBox = true,
+        PageIndexBoxWrapperFormatString = "{0}页"
+    }, new AjaxOptions() { UpdateTargetId = "DataGrid" })
+</div>
+
+
+
+
+
+
+
+
+
+<!--------------查看新任务详细信息的弹出对话框--------------->
+<div id="ShowTaskDialog">
+    <div id="formData">
+        <table style="border: #696969 1px solid; width: 100%;">
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="TaskName">事项名称：</label>
+                    <input id="TaskName" name="TaskName" readonly />
+                </td>
+                <td>
+                    <label name="UploadTime">开始日期：</label>
+                    <input id="UploadTime" name="UploadTime" readonly />
+                </td>
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="CloseTime">截止日期：</label>
+                    <input id="CloseTime" name="CloseTime" readonly />
+                </td>
+                <td>
+                    <label name="Publisher">发布者&nbsp;：&nbsp;&nbsp;</label>
+                    <input id="Publisher" name="Publisher" readonly />
+                </td>
+            </tr>
+        </table>
+        <label name="TaskDetails">任务详细&nbsp;：&nbsp;&nbsp;</label>
+        <textarea id="TaskDetails" name="TaskDetails" style="width: 99%; height: 100px;" readonly></textarea>
+    </div>
+    <input value="关闭" type="button" style="width: 100px; height: 40px; float: left; margin-top: 60px;" onclick="$('#ShowTaskDialog').dialog('close');" />
+</div>
+
+
+
+<!----------------------编辑任务的对话框--------------------------->
+<div id="EditTaskDialog" style="width: 100%;">
+    <div style="width: 50%; height: 100%; float: left;">
+        <div id="EditFormData" style="width: 100%; height: 61%; float: left;">
+            <table style="border: #696969 1px solid; width: 100%;">
+                <tr style="border: #696969 1px solid">
+                    <td>
+                        <label name="EditTaskName">事项名称：</label>
+                        <input id="EditTaskName" name="EditTaskName" />
+                    </td>
+                    <td>
+                        <label name="EditUploadTime">开始日期：</label>
+                        <input id="EditUploadTime" name="EditUploadTime" />
+                    </td>
+                </tr>
+                <tr style="border: #696969 1px solid">
+                    <td>
+                        <label name="EditCloseTime">截止日期：</label>
+                        <input id="EditCloseTime" name="EditCloseTime" />
+                    </td>
+                    <td>
+                        <label name="EditPublisher">发布者&nbsp;：&nbsp;&nbsp;</label>
+                        <input id="EditPublisher" name="EditPublisher" />
+                    </td>
+                </tr>
+            </table>
+            <label name="EditTaskDetails">任务详细&nbsp;：&nbsp;&nbsp;</label>
+            <textarea id="EditTaskDetails" name="EditTaskDetails" style="width: 99%; height: 100px;"></textarea>
+        </div>
+        <div style="width: 100%; height: 40px; margin: 20px 0 0 0px; border-bottom: #cccccc 1px solid; float: left;">
+            <div style="width: 50px; height: 40px; float: left; margin-top: 6px;">
+                <input id="UploadFileBtn" name="UploadFileBtn" type="file" multiple="multiple" style="z-index: 10000; width: 60px; height: 20px; " />
+            </div>
+            <div style="width: 50px; height: 30px; float: left; margin: 6px 30px 0 60px;">
+                <input id="UploadFileOkBtn" type="button" value="确定上传" onclick="$('#UploadFileBtn').uploadify('upload', '*')" style="width: 80px; height: 30px; font-size: 12px; font-weight: bolder;" />
+            </div>
+            <div id="ShowFileOk" style="float: left; width: 150px; height: 30px; margin: 6px 0 0 40px; "></div>
+
+        </div>
+        <div style="width: 100%; height: 50px; float: left; margin-top: 20px;">
+            <input type="button" value="关闭" onclick="$('#EditTaskDialog').dialog('close');" style="width: 100px; height: 40px; float: left;" />
+            <input type="button" value="发布任务" onclick="EditDialogOkBtn();" style="width: 100px; height: 40px; float: left;" />
+            <div style="margin: 10px 0 0 30px; width: 200px; height: 40px; float: left;">
+                <h4 name="Email" style="display: block; float: left; margin:0;">邮件提醒接收者</h4>
+                <input id="Email" type="checkbox" value="checkbox" style="margin: 3px 0 0 10px; float: left;" />
+            </div>
+        </div>
+    </div>
+    <div style="width: 48%; height: 100%; float: right;">
+        <div style="width: 50%; height: 100%; float: left;">
+            <select style="border: #cccccc 1px solid; height: 100%; width: 95%; overflow: auto;" onclick="EditLeftSelect()" id="EditAllMemery" size="22"></select>
+        </div>
+        <div style="width: 50%; height: 100%; float: right;">
+            <select style="border: #cccccc 1px solid; float: right; height: 100%; width: 95%; overflow: auto; " onclick="EditRightSelect()" id="EditCheckMemery" size="22"></select>
+        </div>
+    </div>
+
+</div>
+
+ 

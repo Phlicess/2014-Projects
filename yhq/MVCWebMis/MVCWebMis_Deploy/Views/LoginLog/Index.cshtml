@@ -1,0 +1,541 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>聊城大学学科竞赛系统平台</title>
+    @*添加Jquery EasyUI的样式*@
+    <link href="~/Content/JqueryEasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/JqueryEasyUI/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/themes/Default/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/themes/Default/default.css" rel="stylesheet" type="text/css" />
+
+    @*添加Jquery，EasyUI和easyUI的语言包的JS文件*@
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    @*日期格式的引用*@
+    <script src="~/Content/datapattern.js"></script>
+
+    <script type="text/javascript">
+        $(function () {            
+            InitGrid();       //初始化Datagrid表格数据
+
+            BindSearchEvent();//绑定查询按钮事件
+            BindAddEvent();   //绑定添加按钮的事件
+            BindEditEvent();  //绑定修改按钮的事件
+        });
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid(queryData) {
+            $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
+                url: '/LoginLog/FindWithPager',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                title: '用户登陆日志',
+                //下面的这些属性如果谁不太清楚的话我建议去官方网站去学习
+                iconCls: 'icon-view',
+                height: 650,
+                width: function () { return document.body.clientWidth * 0.9 },
+                nowrap: true,
+                autoRowHeight: false,
+                striped: true,
+                collapsible: true,
+                pagination: true,
+                pageSize: 50,
+                pageList: [50, 100, 200],
+                rownumbers: true,
+                //sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                queryParams: queryData,  //异步查询的参数
+                columns: [[
+	                { field: 'ck', checkbox: true },   //选择
+	                { title: 'ID', field: 'ID', width: 40, sortable: true },  //主键
+                     { title: '登录用户ID', field: 'User_ID', width: 80, sortable: true },
+                     { title: '登录名称', field: 'LoginName', width: 80, sortable: true },
+                     { title: '真实名称', field: 'FullName', width: 80, sortable: true },
+                     { title: '日志描述', field: 'Note', width: 100, sortable: true },
+                     { title: 'IP地址', field: 'IPAddress', width: 100, sortable: true },
+                     { title: 'Mac地址', field: 'MacAddress', width: 120, sortable: true },
+                     { title: '系统编号', field: 'SystemType_ID', width: 120, sortable: true },
+                     { title: '记录日期', field: 'LastUpdated', width: 120, sortable: true },
+                ]],
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        ShowAddDialog();//实现添加记录的页面
+                    }
+                }, '-', {
+                    id: 'btnEdit',
+                    text: '修改',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        ShowEditOrViewDialog();//实现修改记录的方法
+                    }
+                }, '-', {
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        Delete();//实现直接删除数据的方法
+                    }
+                }, '-', {
+                    id: 'btnView',
+                    text: '查看',
+                    iconCls: 'icon-table',
+                    handler: function () {
+                        ShowEditOrViewDialog("view");//实现查看记录详细信息的方法
+                    }
+                }, '-', {
+                    id: 'btnReload',
+                    text: '刷新',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        //实现刷新栏目中的数据
+                        $("#grid").datagrid("reload");
+                    }
+                }],
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#grid').datagrid('uncheckAll');
+                    $('#grid').datagrid('checkRow', rowIndex);
+                    ShowEditOrViewDialog();
+                }
+            })
+        };
+
+        //绑定搜索按钮的的点击事件
+        function BindSearchEvent() {
+            //按条件进行查询数据，首先我们得到数据的值
+            $("#btnSearch").click(function () {
+                //得到用户输入的参数
+                //取值有几种方式：$("#id").combobox('getValue'), $("#id").datebox('getValue'), $("#id").val()
+                //字段增加WHC_前缀字符，避免传递如URL这样的Request关键字冲突
+                var queryData = {
+                    WHC_SystemType_ID: $("#txtSystemType_ID").combobox('getValue'),
+                    WHC_LoginName: $("#txtLoginName").val(),
+                    WHC_FullName: $("#txtFullName").val(),
+                    WHC_Note: $("#txtNote").val(),
+                    WHC_IPAddress: $("#txtIPAddress").val(),
+                    WHC_MacAddress: $("#txtMacAddress").val(),
+                    WHC_LastUpdated: $("#txtLastUpdated").datebox('getValue') + "~" + $("#txtLastUpdated2").datebox('getValue')
+                }
+                //将值传递给
+                InitGrid(queryData);
+                return false;
+            });
+        }
+
+        //实现删除数据的方法
+        function Delete() {
+            //得到用户选择的数据的ID
+            var rows = $("#grid").datagrid("getSelections");
+            if (rows.length >= 1) {
+                //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                var ids = "";   //1,2,3,4,5
+                for (var i = 0; i < rows.length; i++) {
+                    ids += rows[i].ID + ",";
+                }
+                //最后去掉最后的那一个,
+                ids = ids.substring(0, ids.length - 1);
+                var postData = { Ids: ids };
+
+                //然后确认发送异步请求的信息到后台删除数据
+                $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function (deleteAction) {
+                    if (deleteAction) {
+                        $.get("/LoginLog/DeletebyIds", postData, function (data) {
+                            if (data == "true") {
+                                $.messager.alert("提示", "删除选定的记录成功");
+                                $("#grid").datagrid("reload");
+
+                                //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息                                
+                                rows.length = "";//第一种方法                                
+                                $("#grid").datagrid("clearSelections");//第二种方法
+                            }
+                            else {
+                                $.messager.alert("提示", data);
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                $.messager.alert("提示", "请选择你要删除的数据");
+            }
+        }
+
+        //弹出新增对话框
+        function ShowAddDialog() {
+            $("#DivAdd").dialog('open').dialog('setTitle', '添加信息');
+        }
+
+        //绑定添加按钮的事件
+        function BindAddEvent() {
+            $("#btnAddOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffAdd").form('validate');
+                if (validate == false) {
+                    return false;
+                }
+
+                var postData = $("#ffAdd").serializeArray();
+                $.post("/LoginLog/Insert", postData, function (data) {
+                    if (data = "true") {
+                        //添加成功  1.关闭弹出层，2.刷新DataGird
+                        $.messager.alert("提示", "添加成功");
+                        $("#DivAdd").dialog("close");
+                        $("#grid").datagrid("reload");
+                        $("#ffAdd").form("clear");
+                    }
+                    else {
+                        $.messager.alert("提示", "添加失败，请您检查");
+                    }
+                });
+            });
+        }
+        
+        //修改或查看明细信息（绑定显示数据）
+        function ShowEditOrViewDialog(view) {
+            //首先取出来用户选择的数据的ID
+            var rows = $("#grid").datagrid("getSelections");
+            //首先取出来值判断用户只能选择一个
+            if (rows.length == 0) {
+                $.messager.alert("提示", "请选择一条记录", "error");
+                return;
+            }
+            else if (rows.length > 1) {
+                $.messager.alert("提示", "每次只能修改/查看一条记录，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>条", "error");
+                return;
+            }
+            if (view == null) {
+                //处理修改的信息
+                $("#DivEdit").dialog('open').dialog('setTitle', '修改信息');
+                //绑定修改详细信息的方法
+                BindEditInfo();
+            }
+            else {
+                //处理查看详细
+                $("#DivView").dialog('open').dialog('setTitle', '查看详细信息');
+                //绑定查看详细信息方法
+                BindViewInfo();
+            }
+        }
+        
+        //绑定编辑详细信息的方法
+        function BindEditInfo() {
+            //首先用户发送一个异步请求去后台实现方法
+            var ID = $("#grid").datagrid("getSelections")[0].ID;  //获取到了用用户选择的ID
+            $.getJSON("/LoginLog/FindByID?r=" + Math.random() + "&id=" + ID, function (info) {
+                $("#ID1").val(info.ID);
+                $("#User_ID1").val(info.User_ID);
+                $("#LoginName1").val(info.LoginName);
+                $("#FullName1").val(info.FullName);
+                $("#Note1").val(info.Note);
+                $("#IPAddress1").val(info.IPAddress);
+                $("#MacAddress1").val(info.MacAddress);
+                $("#LastUpdated1").datebox('setValue', info.LastUpdated);
+                $("#SystemType_ID1").val(info.SystemType_ID);
+            });
+        }
+
+        //绑定查看详细信息的方法
+        function BindViewInfo() {
+            var ID = $("#grid").datagrid('getSelections')[0].ID;            
+            //发送请求
+            $.getJSON("/LoginLog/FindByID?r=" + Math.random() + "&id=" + ID, function (info) {
+                $("#ID2").text(info.ID);
+                $("#User_ID2").text(info.User_ID);
+                $("#LoginName2").text(info.LoginName);
+                $("#FullName2").text(info.FullName);
+                $("#Note2").text(info.Note);
+                $("#IPAddress2").text(info.IPAddress);
+                $("#MacAddress2").text(info.MacAddress);
+                $("#LastUpdated2").text(info.LastUpdated);
+                $("#SystemType_ID2").text(info.SystemType_ID);
+
+                //$('input[name="Gender"][value="' + info.Gender + '"]').prop("checked", true);
+                //$("#Birthday2").datebox('setValue', info.Birthday);
+                //$("#AuditStatus2").combobox('setValue', info.AuditStatus);
+                //$("#CreateOn2").datebox('setValue', (eval(info.CreateOn.replace(/\/Date\((\d+)\)\//gi, "new Date($1)")).pattern("yyyy-M-d h:m:s")));
+                //$("#ModifirdOn2").datebox('setValue', (eval(info.ModifirdOn.replace(/\/Date\((\d+)\)\//gi, "new Date($1)")).pattern("yyyy-M-d h:m:s")));
+            });
+        }
+
+        //绑定修改按钮的事件
+        function BindEditEvent() {
+            $("#btnEditOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffEdit").form("validate");
+                if (validate == false) {
+                    return false;
+                }
+
+                //构造参数发送给后台
+                var ID = $("#ID1").val();
+                var postData = $("#ffEdit").serializeArray();
+                $.post("/LoginLog/Update?ID=" + ID, postData, function (date) {
+                    if (date == "true") {
+                        //修改成功，关闭弹出层，刷新DataGird
+                        $.messager.alert("提示", "修改成功");
+                        $("#DivEdit").dialog('close');
+                        $("#grid").datagrid("reload");
+                    }
+                    else {
+                        $.messager.alert("提示", "修改失败，请您检查");
+                    }
+                })
+            });
+        }
+    </script>
+
+    <style>
+        table.view {border:1px solid #A8CFEB;border-collapse: collapse;margin-bottom:5px;}
+        .view th{ padding-left:10px;padding-right:5px;padding-top:5px;padding-bottom:5px;height:23px;width: 150px;border: 1px solid silver;background-color:#F1F6FF;}
+        .view td{ padding-left:10px;padding-right:5px;padding-top:5px;padding-bottom:5px;height:23px;width: 150px;border: 1px solid silver;background-color:#FAFCFF;}
+    </style>
+    </head>
+<body>
+    <div id="loading" style="display: none;"><img alt="数据正在加载中..." src="~/Content/images/loading02.gif" /></div>
+    <div class="easyui-layout" id="tb" style="padding:5px;height:auto">
+        <!-------------------------------搜索框----------------------------------->
+        <fieldset>
+            <legend>信息查询</legend>
+            <form id="ffSearch" method="post">
+		        <div style="margin-bottom:5px">
+                    <label for="txtSystemType_ID">系统编号：</label>
+                    <input class="easyui-combobox" type="text" ID="txtSystemType_ID" name="txtSystemType_ID" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <label for="txtLoginName">登录名称：</label>
+                    <input type="text" ID="txtLoginName" name="txtLoginName" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <label for="txtFullName">真实名称：</label>
+                    <input type="text" ID="txtFullName" name="txtFullName" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <label for="txtNote">日志描述：</label>
+                    <input type="text" ID="txtNote" name="txtNote" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+                </div>
+		        <div>
+                    <label for="txtIPAddress"> I P 地 址：</label>
+                    <input type="text" ID="txtIPAddress" name="txtIPAddress" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <label for="txtMacAddress">Mac地址：</label>
+                    <input type="text" ID="txtMacAddress" name="txtMacAddress" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <label for="txtLastUpdated">开始时间：</label>
+                    <input class="easyui-datebox" type="text" ID="txtLastUpdated" name="txtLastUpdated" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <label for="txtLastUpdated2">结束时间：</label>
+                    <input class="easyui-datebox" type="text" ID="txtLastUpdated2" name="txtLastUpdated2" style="width:100px"  />&nbsp;&nbsp;&nbsp;
+
+                    <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">查询</a>
+                </div>
+            </form>
+        </fieldset>
+                
+        <!-------------------------------详细信息展示表格----------------------------------->
+        <table id="grid" style="width: 940px" title="用户操作" iconcls="icon-view" >
+            
+        </table>
+    </div>
+
+    <!--------------------------添加信息的弹出层---------------------------->
+    <div id="DivAdd" class="easyui-dialog" style="width:580px;height:250px;"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+        <form id="ffAdd" method="post" novalidate="novalidate">
+                <table id="tblAdd" class="view">
+                    <tr>
+                        <th>
+                            <label for="User_ID">登录用户ID：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="User_ID" name="User_ID" data-options="required:true" />
+                        </td>
+                        <th>
+                            <label for="LoginName">登录名称：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="LoginName" name="LoginName" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="FullName">真实名称：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="FullName" name="FullName" data-options="required:true" />
+                        </td>
+                        <th>
+                            <label for="Note">日志描述：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Note" name="Note" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="IPAddress">IP地址：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="IPAddress" name="IPAddress" data-options="required:true" />
+                        </td>
+                        <th>
+                            <label for="MacAddress">Mac地址：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="MacAddress" name="MacAddress" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="LastUpdated">更新时间：</label></th>
+                        <td>
+                            <input class="easyui-datebox" type="text" id="LastUpdated" name="LastUpdated" data-options="required:true" />
+                        </td>
+                        <th>
+                            <label for="SystemType_ID">系统编号：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="SystemType_ID" name="SystemType_ID" data-options="required:true" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnAddOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivAdd').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------编辑信息的弹出层---------------------------->
+    <div id="DivEdit" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-edit',buttons: '#dlg-buttons'">
+        <form id="ffEdit" method="post" novalidate="novalidate">
+                <table id="tblEdit" class="view">
+                    <tr>
+                        <th>
+                            <label for="User_ID1">登录用户ID：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="User_ID1" name="User_ID" data-options="required:true,validType:'length[1,50]'" />
+                        </td>
+                        <th>
+                            <label for="LoginName1">登录名称：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="LoginName1" name="LoginName" data-options="required:true,validType:'length[1,50]'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="FullName1">真实名称：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="FullName1" name="FullName" data-options="required:true,validType:'length[1,50]'" />
+                        </td>
+                        <th>
+                            <label for="Note1">日志描述：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Note1" name="Note" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="IPAddress1">IP地址：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="IPAddress1" name="IPAddress" data-options="required:true" />
+                        </td>
+                        <th>
+                            <label for="MacAddress1">Mac地址：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="MacAddress1" name="MacAddress" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="LastUpdated1">更新时间：</label></th>
+                        <td>
+                            <input  class="easyui-datebox" type="text" id="LastUpdated1" name="LastUpdated" data-options="required:true" />
+                        </td>
+                        <th>
+                            <label for="SystemType_ID1">系统编号：</label></th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="SystemType_ID1" name="SystemType_ID" data-options="required:true" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input type="hidden" id="ID1" name="ID" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnEditOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivEdit').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------查看详细信息的弹出层---------------------------->
+    <div id="DivView" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-view',buttons: '#dlg-buttons'">
+        <form id="ffView" method="post" novalidate="novalidate">
+                <table id="tblView" class="view">
+                    <tr>
+                        <th>
+                            <label for="User_ID2">登录用户ID：</label></th>
+                        <td>
+                            <label id="User_ID2" />
+                        </td>
+                        <th>
+                            <label for="LoginName2">登录名称：</label></th>
+                        <td>
+                            <label id="LoginName2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="FullName2">真实名称：</label></th>
+                        <td>
+                            <label id="FullName2" />
+                        </td>
+                        <th>
+                            <label for="Note2">日志描述：</label></th>
+                        <td>
+                            <label id="Note2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="IPAddress2">IP地址：</label></th>
+                        <td>
+                            <label id="IPAddress2" />
+                        </td>
+                        <th>
+                            <label for="MacAddress2">Mac地址：</label></th>
+                        <td>
+                            <label id="MacAddress2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="LastUpdated2">更新时间：</label></th>
+                        <td>
+                            <label  id="LastUpdated2" />
+                        </td>
+                        <th>
+                            <label for="SystemType_ID2">系统编号：</label></th>
+                        <td>
+                            <label id="SystemType_ID2" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input type="hidden" id="ID2" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivView').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+</body>
+</html>
+

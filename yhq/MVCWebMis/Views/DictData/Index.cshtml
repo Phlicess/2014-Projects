@@ -1,0 +1,942 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>字典明细项目信息</title>
+    @*添加Jquery EasyUI的样式*@
+    <link href="~/Content/JqueryEasyUI/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/JqueryEasyUI/themes/icon.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/themes/Default/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/themes/Default/default.css" rel="stylesheet" type="text/css" />
+
+    @*添加Jquery，EasyUI和easyUI的语言包的JS文件*@
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Content/JqueryEasyUI/locale/easyui-lang-zh_CN.js"></script>
+
+    @*日期格式的引用*@
+    <script src="~/Content/datapattern.js"></script>
+    <link href="~/Content/JQueryTools/JQueryTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/JQueryTools/JQueryTree/js/jquery.ztree.core-3.5.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	 <!--
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick,
+                onDblClick: onDblClick
+            }
+        }
+
+        //重新加载树形结构（异步）
+        function reloadTree() {
+            $("#loading").show();
+
+            $.getJSON("/DictType/GetTreeJson?r=" + Math.random(), function (json) {
+                $.fn.zTree.init($("#treeDemo"), setting, json);
+                $.fn.zTree.getZTreeObj("treeDemo").expandAll(true);
+
+                var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+                var treeNodes = treeObj.getNodes();
+                if (treeNodes != null) {
+                    loadTypeData(treeNodes[0].id);
+                }
+            });
+            $("#loading").fadeOut(500);
+        }
+
+        //树单击节点操作
+        function onClick(event, treeId, treeNode, clickFlag) {
+            var id = treeNode.id;
+            loadTypeData(id);
+        }
+        //树双击节点操作
+        function onDblClick(event, treeId, treeNode) {
+            var id = treeNode.id;
+            loadTypeData(id);
+            ShowDictType('edit');
+        }
+        //加载指定的对象数据
+        function loadTypeData(id) {
+            $("#loading").show();
+            $.getJSON("/DictType/FindById?r=" + Math.random() + "&id=" + id, function (json) {
+                $("#type_ID1").val(json.ID);
+                $("#type_Name1").val(json.Name);
+                $("#type_Seq1").val(json.Seq);
+                $("#type_Remark1").val(json.Remark);
+                $("#type_PID1").combobox('setValue', json.PID);
+
+                var queryParams = $('#grid').datagrid('options').queryParams;
+                queryParams.WHC_DictType_ID = $('#type_ID1').val();    //设置值
+                $("#grid").datagrid("reload");
+                $('#grid').datagrid('uncheckAll');
+            });           
+
+            $("#loading").fadeOut(500);
+        }
+
+        //删除当前记录
+        function deleteTypeData() {
+            if ($("#txtID").val() == "") {
+                $.messager.alert("提示", "请选择记录");
+                return;
+            }
+
+            $.messager.confirm("删除确认信息", "您要确定删除该条记录吗？", function (deleteAction) {
+                if (deleteAction) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/DictType/Delete?r=' + Math.random(),
+                        async: false,
+                        data: { ID: $("#type_ID1").val() },
+                        success: function (msg) {
+                            if (msg == "true") {
+                                $.messager.alert("提示", "操作成功！ ");
+                            }
+                            else {
+                                $.messager.alert("提示", "删除失败，请您检查");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $.messager.alert("提示", "操作失败");
+                        }
+                    });
+
+                    reloadTree(); //更新树形列表
+                    InitDictItem();//要更新父节点集合
+                }
+            });
+        }
+
+        //展开节点操作	
+        function expandNode(e) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            type = e.data.type,
+            nodes = zTree.getSelectedNodes();
+            if (type.indexOf("All") < 0 && nodes.length == 0) {
+                $.messager.alert("提示", "请先选择一个父节点");
+            }
+
+            if (type == "expandAll") {
+                zTree.expandAll(true);
+            } else if (type == "collapseAll") {
+                zTree.expandAll(false);
+            } else {
+                var callbackFlag = $("#callbackTrigger").attr("checked");
+                for (var i = 0, l = nodes.length; i < l; i++) {
+                    zTree.setting.view.fontCss = {};
+                    if (type == "expand") {
+                        zTree.expandNode(nodes[i], true, null, null, callbackFlag);
+                    } else if (type == "collapse") {
+                        zTree.expandNode(nodes[i], false, null, null, callbackFlag);
+                    } else if (type == "toggle") {
+                        zTree.expandNode(nodes[i], null, null, null, callbackFlag);
+                    } else if (type == "expandSon") {
+                        zTree.expandNode(nodes[i], true, true, null, callbackFlag);
+                    } else if (type == "collapseSon") {
+                        zTree.expandNode(nodes[i], false, true, null, callbackFlag);
+                    }
+                }
+            }
+        }
+
+        //对象居中的函数，调用例子：$("#loading").center();
+        jQuery.fn.center = function () {
+            this.css("position", "absolute");
+            this.css("top", Math.max(0, (($(window).height() - this.outerHeight()) / 2) +
+                                                $(window).scrollTop()) + "px");
+            this.css("left", Math.max(0, (($(window).width() - this.outerWidth()) / 2) +
+                                                $(window).scrollLeft()) + "px");
+            return this;
+        }
+
+        //初始化对象
+        $(document).ready(function () {
+            reloadTree();
+            $("#expandAllBtn").bind("click", { type: "expandAll" }, expandNode);
+            $("#collapseAllBtn").bind("click", { type: "collapseAll" }, expandNode);
+
+            $("#loading").center();//loading的图片显示居中
+        });
+        //-->
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            BindAddTypeEvent();//绑定字典大类添加事件
+            BindEditTypeEvent();//绑定字典大类修改事件
+
+            InitGrid();       //初始化Datagrid表格数据            
+            InitDictItem();   //初始化字典信息
+            
+            BindSearchEvent();//绑定查询按钮事件
+            BindAddEvent();   //绑定添加按钮的事件
+            BindEditEvent();  //绑定修改按钮的事件
+            BindBatchAddEvent();//绑定批量添加按钮事件
+        });
+
+        //初始化字典信息
+        function InitDictItem() {
+            $('#type_PID').combobox({
+                url: '/DictType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+            $('#type_PID1').combobox({
+                url: '/DictType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+            $('#DictType_ID').combobox({
+                url: '/DictType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+            $('#DictType_ID1').combobox({
+                url: '/DictType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+            $('#Batch_DictType_ID').combobox({
+                url: '/DictType/GetDictJson',
+                valueField: 'Value',
+                textField: 'Text'
+            });
+        }
+
+        //实现对DataGird控件的绑定操作
+        function InitGrid(queryData) {
+            $('#grid').datagrid({   //定位到Table标签，Table标签的ID是grid
+                url: '/DictData/FindWithPager',   //指向后台的Action来获取当前用户的信息的Json格式的数据
+                title: '通用字典明细项目信息', 
+                //下面的这些属性如果谁不太清楚的话我建议去官方网站去学习
+                iconCls: 'icon-view',
+                height: 650,
+                width: function () { return document.body.clientWidth * 0.9 },
+                nowrap: true,
+                autoRowHeight: false,
+                striped: true,
+                collapsible: true,
+                pagination: true,
+                pageSize: 50,
+                pageList: [50, 100, 200],
+                rownumbers: true,
+                //sortName: 'ID',    //根据某个字段给easyUI排序
+                sortOrder: 'asc',
+                remoteSort: false,
+                idField: 'ID',
+                queryParams: queryData,  //异步查询的参数
+                columns: [[
+	                { field: 'ck', checkbox: true },   //选择
+                     { title: '字典名称', field: 'Name', width: 250, sortable: true },
+                     { title: '字典值', field: 'Value', width: 250, sortable: true },
+                     { title: '备注', field: 'Remark', width: 150, sortable: true },
+                     { title: '排序', field: 'Seq', width: 80, sortable: true },
+                     { title: '编辑者', field: 'Editor', width: 80, sortable: true },
+                     { title: '编辑时间', field: 'LastUpdated', width: 120, sortable: true }
+                ]],
+                rowStyler:function(index,row){     
+                    if (index % 2 == 0) {
+                        return 'background-color:#F0F5FC;';
+                    }
+                    else {
+                        return 'background-color:#ffffff;';
+                    }
+                },
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {                        
+                        ShowAddDialog();//实现添加记录的页面
+                    }
+                }, '-', {
+                    id: 'btnBatchAdd',
+                    text: '批量添加',
+                    iconCls: 'icon-batch-add',
+                    handler: function () {                        
+                        ShowBatchAddDialog();//实现批量添加记录的方法
+                    }
+                }, '-', {
+                    id: 'btnEdit',
+                    text: '修改',
+                    iconCls: 'icon-edit',
+                    handler: function () {                        
+                        ShowEditOrViewDialog();//实现修改记录的方法
+                    }
+                }, '-', {
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {                        
+                        Delete();//实现直接删除数据的方法
+                    }
+                }, '-', {
+                    id: 'btnView',
+                    text: '查看',
+                    iconCls: 'icon-table',
+                    handler: function () {                        
+                        ShowEditOrViewDialog("view");//实现查看记录详细信息的方法
+                    }
+                }, '-', {
+                    id: 'btnReload',
+                    text: '刷新',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        //实现刷新栏目中的数据
+                        $("#grid").datagrid("reload");
+                    }
+                }],
+                onDblClickRow: function (rowIndex, rowData) {
+                    $('#grid').datagrid('uncheckAll');
+                    $('#grid').datagrid('checkRow', rowIndex);
+                    ShowEditOrViewDialog();
+                }
+            })
+        };
+
+        //绑定搜索按钮的的点击事件
+        function BindSearchEvent() {
+            //按条件进行查询数据，首先我们得到数据的值
+            $("#btnSearch").click(function () {
+                //得到用户输入的参数
+                //取值有几种方式：$("#id").combobox('getValue'), $("#id").datebox('getValue'), $("#id").val()
+                //字段增加WHC_前缀字符，避免传递如URL这样的Request关键字冲突
+                var queryData = {
+                    WHC_DictType_ID: $("#txtDictType_ID").val(),
+                    WHC_Name: $("#txtName").val(),
+                    WHC_Value: $("#txtValue").val(),
+                    WHC_Remark: $("#txtRemark").val(),
+                 }
+                //将值传递给
+                InitGrid(queryData);
+                return false;
+            });
+        }
+
+        //实现删除数据的方法
+        function Delete() {
+            //得到用户选择的数据的ID
+            var rows = $("#grid").datagrid("getSelections");
+            if (rows.length >= 1) {
+                //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                var ids = "";   //1,2,3,4,5
+                for (var i = 0; i < rows.length; i++) {
+                    ids += rows[i].ID + ",";
+                }
+                //最后去掉最后的那一个,
+                ids = ids.substring(0, ids.length - 1);
+                var postData = { Ids: ids };
+
+                //然后确认发送异步请求的信息到后台删除数据
+                $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function (deleteAction) {
+                    if (deleteAction) {
+                        $.get("/DictData/DeletebyIds", postData, function (data) {
+                            if (data == "true") {
+                                $.messager.alert("提示", "删除选定的记录成功");
+                                $("#grid").datagrid("reload");
+
+                                //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息                                
+                                rows.length = "";//第一种方法                                
+                                $("#grid").datagrid("clearSelections");//第二种方法
+                            }
+                            else {
+                                $.messager.alert("提示", data);
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                $.messager.alert("提示", "请选择你要删除的数据");
+            }
+        }
+
+        //弹出批量添加对话框
+        function ShowBatchAddDialog() {
+            //当单击左边树的时候，$("#type_ID1")已经赋值了，因此用这个作为字典的默认类型
+            $("#Batch_DictType_ID").combobox('setValue', $("#type_ID1").val());
+            $('input:radio[name="SplitType"][value="Split"]').prop('checked', true);
+
+            $("#DivBatchAdd").dialog('open').dialog('setTitle', '批量添加字典数据');
+        }
+
+        //绑定添加按钮的事件
+        function BindBatchAddEvent() {
+            $("#btnBatchAddOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffBatchAdd").form('validate');
+                if (validate == false) {
+                    return false;
+                }
+
+                var postData = $("#ffBatchAdd").serializeArray();
+                $.post("/DictData/BatchInsert", postData, function (data) {
+                    if (data = "true") {
+                        //添加成功  1.关闭弹出层，2.刷新DataGird
+                        $.messager.alert("提示", "添加成功");
+                        $("#DivBatchAdd").dialog("close");
+                        $("#grid").datagrid("reload");
+                        $("#ffBatchAdd").form("clear");
+                    }
+                    else {
+                        $.messager.alert("提示", "添加失败，请您检查");
+                    }
+                });
+            });
+        }
+
+        //弹出新增对话框
+        function ShowAddDialog() {
+            //当单击左边树的时候，$("#type_ID1")已经赋值了，因此用这个作为字典的默认类型
+            $("#DictType_ID").combobox('setValue', $("#type_ID1").val());
+            $("#DivAdd").dialog('open').dialog('setTitle', '添加字典数据');
+        }
+
+        //绑定添加按钮的事件
+        function BindAddEvent() {
+            $("#btnAddOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffAdd").form('validate');
+                if (validate == false) {
+                    return false;
+                }
+
+                var postData = $("#ffAdd").serializeArray();
+                $.post("/DictData/Insert", postData, function (data) {
+                    if (data = "true") {
+                        //添加成功  1.关闭弹出层，2.刷新DataGird
+                        $.messager.alert("提示", "添加成功");
+                        $("#DivAdd").dialog("close");
+                        $("#grid").datagrid("reload");
+                        $("#ffAdd").form("clear");
+                    }
+                    else {
+                        $.messager.alert("提示", "添加失败，请您检查");
+                    }
+                });
+            });
+        }
+        
+        //修改或查看明细信息（绑定显示数据）
+        function ShowEditOrViewDialog(view) {
+            //首先取出来用户选择的数据的ID
+            var rows = $("#grid").datagrid("getSelections");
+            //首先取出来值判断用户只能选择一个
+            if (rows.length == 0) {
+                $.messager.alert("提示", "请选择一条记录", "error");
+                return;
+            }
+            else if (rows.length > 1) {
+                $.messager.alert("提示", "每次只能修改/查看一条记录，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>条", "error");
+                return;
+            }
+            if (view == null) {
+                //处理修改的信息
+                $("#DivEdit").dialog('open').dialog('setTitle', '修改信息');
+                //绑定修改详细信息的方法
+                BindEditInfo();
+            }
+            else {
+                //处理查看详细
+                $("#DivView").dialog('open').dialog('setTitle', '查看详细信息');
+                //绑定查看详细信息方法
+                BindViewInfo();
+            }
+        }
+        
+        //绑定编辑详细信息的方法
+        function BindEditInfo() {
+            //首先用户发送一个异步请求去后台实现方法
+            var ID = $("#grid").datagrid("getSelections")[0].ID;  //获取到了用用户选择的ID
+            $.getJSON("/DictData/FindByID?r=" + Math.random() + "&id=" + ID, function (info) {
+            //赋值有几种方式：.datebox('setValue', info.Birthday);.combobox('setValue', info.Status);.val(info.Name);
+                $("#ID1").val(info.ID);
+                $("#DictType_ID1").combobox('setValue', info.DictType_ID);
+                $("#Name1").val(info.Name);
+                $("#Value1").val(info.Value);
+                $("#Remark1").val(info.Remark);
+                $("#Seq1").val(info.Seq);
+                $("#Editor1").val(info.Editor);
+                $("#LastUpdated1").datebox('setValue', info.LastUpdated);
+             });
+        }
+
+        //绑定查看详细信息的方法
+        function BindViewInfo() {
+            var ID = $("#grid").datagrid('getSelections')[0].ID;            
+            //发送请求
+            $.getJSON("/DictData/FindByID?r=" + Math.random() + "&id=" + ID, function (info) {
+                $("#ID2").text(info.ID);                
+                $("#Name2").text(info.Name);
+                $("#Value2").text(info.Value);
+                $("#Remark2").text(info.Remark);
+                $("#Seq2").text(info.Seq);
+                $("#Editor2").text(info.Editor);
+                $("#LastUpdated2").text(info.LastUpdated);
+ 
+                $.getJSON("/DictType/FindByID?id=" + info.DictType_ID, function (newinfo) {
+                    if (newinfo != 'undefined') {
+                        $("#DictType_ID2").text(newinfo.Name);
+                    }
+                });
+            });
+        }
+
+        //绑定修改按钮的事件
+        function BindEditEvent() {
+            $("#btnEditOK").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffEdit").form("validate");
+                if (validate == false) {
+                    return false;
+                }
+
+                //构造参数发送给后台
+                var ID = $("#ID1").val();
+                var postData = $("#ffEdit").serializeArray();
+                $.post("/DictData/Update?ID=" + ID, postData, function (date) {
+                    if (date == "true") {
+                        //修改成功，关闭弹出层，刷新DataGird
+                        $.messager.alert("提示", "修改成功");
+                        $("#DivEdit").dialog('close');
+                        $("#grid").datagrid("reload");
+                    }
+                    else {
+                        $.messager.alert("提示", "修改失败，请您检查");
+                    }
+                })
+            });
+        }
+
+        //弹出增加/修改字典大类的对话框
+        function ShowDictType(type) {
+            if (type == 'add') {
+                //新增清空控件
+                $("#type_PID").combobox('setValue', $("#type_ID1").val());
+                $("#type_Name").val("");
+                $("#type_Seq").val("");
+                $("#type_Remark").empty();
+
+                $("#DivAddType").dialog('open').dialog('setTitle', '添加字典大类');
+            }
+            else if (type == 'edit') {
+                $("#DivEditType").dialog('open').dialog('setTitle', '修改字典大类');
+            }
+        }
+
+        //绑定字典大类添加按钮的事件
+        function BindAddTypeEvent() {
+            $("#btnAddOKType").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffAddType").form('validate');
+                if (validate == false) {
+                    return false;
+                }
+
+                var postData = $("#ffAddType").serializeArray();
+                $.post("/DictType/Insert", postData, function (data) {
+                    if (data = "true") {
+                        //添加成功  1.关闭弹出层，2.刷新DataGird
+                        $.messager.alert("提示", "添加成功");
+                        $("#DivAddType").dialog("close");
+                        reloadTree();
+                        $("#ffAddType").form("clear");
+                    }
+                    else {
+                        $.messager.alert("提示", "添加失败，请您检查");
+                    }
+                });
+            });
+        }
+
+        //绑定修改按钮的事件
+        function BindEditTypeEvent() {
+            $("#btnEditOKType").click(function () {
+                //判断表单的信息是否通过验证
+                var validate = $("#ffEditType").form("validate");
+                if (validate == false) {
+                    return false;
+                }
+
+                //构造参数发送给后台
+                var ID = $("#type_ID1").val();
+                var postData = $("#ffEditType").serializeArray();
+                $.post("/DictType/Update?ID=" + ID, postData, function (date) {
+                    if (date == "true") {
+                        //修改成功，关闭弹出层，刷新DataGird
+                        $.messager.alert("提示", "修改成功");
+                        $("#DivEditType").dialog('close');
+                        reloadTree();
+                    }
+                    else {
+                        $.messager.alert("提示", "修改失败，请您检查");
+                    }
+                })
+            });
+        }
+    </script>
+
+    <style>
+        table.view {border:1px solid #A8CFEB;border-collapse: collapse;margin-bottom:5px;}
+        .view th{ padding-left:10px;padding-right:5px;padding-top:5px;padding-bottom:5px;height:23px;width: 150px;border: 1px solid silver;background-color:#F1F6FF;}
+        .view td{ padding-left:10px;padding-right:5px;padding-top:5px;padding-bottom:5px;height:23px;width: 150px;border: 1px solid silver;background-color:#FAFCFF;}
+    </style>
+    </head>
+<body>
+    <div id="loading" style="display: none;"><img alt="数据正在加载中..." src="~/Content/images/loading02.gif" /></div>
+    <div class="easyui-layout" style="width:700px;height:700px;" fit="true">
+        <div data-options="region:'west',split:true,title:'字典类别',iconCls:'icon-book'" style="width: 300px; padding: 1px;">
+            <div style="padding: 1px; border: 1px solid #ddd;">                
+                <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'" id="A1" onclick="ShowDictType('add');">添加</a>
+                <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'" id="A2" onclick="ShowDictType('edit');">修改</a>
+                <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'" id="A3" onclick="deleteTypeData()">删除</a>
+                <a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'" id="A4" onclick="reloadTree()">刷新</a>
+@*                <a id="expandAllBtn" href="#" title="展开所有" onclick="return false;">展开</a>
+                <a id="collapseAllBtn" href="#" title="关闭所有" onclick="return false;">折叠</a>*@
+            </div>
+            <div>
+                <ul id="treeDemo" class="ztree">
+                </ul>
+            </div>
+        </div>
+        <div id="tb" data-options="region:'center',title:'字典数据',iconCls:'icon-book'" style="padding:5px;height:auto">                
+            <!-------------------------------详细信息展示表格----------------------------------->
+            <table id="grid" style="width: 940px" title="用户操作" iconcls="icon-view">
+            
+            </table>
+        </div>
+    </div>
+   
+    <!--------------------------添加字典大类信息的弹出层---------------------------->
+    <div id="DivAddType" class="easyui-dialog" style="width:380px;height:300px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+        <form id="ffAddType" method="post" novalidate="novalidate">
+                <table id="tblAddType"  class="view">
+                    <tr>
+                        <th>
+                            <label for="type_Name">类型名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="type_Name" name="Name" data-options="required:true,validType:'length[1,250]'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="type_PID">父节点：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="type_PID" name="PID" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="type_Seq">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="type_Seq" name="Seq" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="type_Remark">备注：</label>
+                        </th>
+                        <td>
+                           <textarea style="height:60px;width:200px" id="type_Remark" name="Remark"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnAddOKType" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivAddType').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------编辑字典大类信息的弹出层---------------------------->
+    <div id="DivEditType" class="easyui-dialog" style="width:380px;height:300px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-edit',buttons: '#dlg-buttons'">
+        <form id="ffEditType" method="post" novalidate="novalidate">
+                <table id="tblEditType"  class="view">
+                    <tr>
+                        <th>
+                            <label for="type_Name1">类型名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="type_Name1" name="Name" data-options="required:true,validType:'length[1,250]'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="type_PID1">父节点：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="type_PID1" name="PID" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="type_Seq1">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="type_Seq1" name="Seq" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="type_Remark1">备注：</label>
+                        </th>
+                        <td>
+                            <textarea style="height:60px;width:200px" id="type_Remark1" name="Remark"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input type="hidden" id="type_ID1" name="ID" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnEditOKType" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivEditType').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------批量添加字典信息的弹出层---------------------------->
+    <div id="DivBatchAdd" class="easyui-dialog" style="width:680px;height:570px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-batch-add',buttons: '#dlg-buttons'">
+        <form id="ffBatchAdd" method="post" novalidate="novalidate">
+                <table id="tblAddBatch" class="view" style="width:98%">
+                    <tr>
+                        <th>
+                            <label for="Batch_DictType_ID">字典大类：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="Batch_DictType_ID" name="DictType_ID" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Batch_Seq">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Batch_Seq" name="Seq" value="001" />(数值开始或者字符作为前缀)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>字典数据：</label>
+                        </th>
+                        <td>
+                            <textarea style="height:260px;width:500px" id="Batch_Data" name="Data" data-options="required:true" ></textarea>
+                        </td>
+                   </tr>
+                    <tr>
+                        <th>
+                            <label>数据分开方式：</label>
+                        </th>
+                        <td>
+                            <input name="SplitType" type="radio" class="easyui-validatebox" checked="checked" required="true" value="Split">分隔符方式，多个数据中英文逗号，分号，斜杠或顿号[, ， ; ； / 、]分开，或一行一个　
+                            <br />
+                            <input name="SplitType" type="radio" class="easyui-validatebox" required="true" value="Line">一行一个记录模式，忽略所有分隔符号
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Batch_Remark">备注信息：</label>
+                        </th>
+                        <td>
+                            <textarea style="height:40px;width:500px" id="Batch_Remark" name="Remark" ></textarea> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="2" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnBatchAddOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivBatchAdd').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------添加字典信息的弹出层---------------------------->
+    <div id="DivAdd" class="easyui-dialog" style="width:580px;height:270px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+        <form id="ffAdd" method="post" novalidate="novalidate">
+                <table id="tblAdd"  class="view">
+                    <tr>                        
+                        <th>
+                            <label for="DictType_ID">字典大类：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="DictType_ID" name="DictType_ID" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="Seq">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Seq" name="Seq" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Name">字典名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Name" name="Name" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="Value">字典值：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Value" name="Value" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Remark">备注信息：</label>
+                        </th>
+                        <td colspan="3">
+                            <textarea style="height:60px;width:300px" id="Remark" name="Remark"></textarea>
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnAddOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivAdd').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------编辑字典信息的弹出层---------------------------->
+    <div id="DivEdit" class="easyui-dialog" style="width:580px;height:270px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-edit',buttons: '#dlg-buttons'">
+        <form id="ffEdit" method="post" novalidate="novalidate">
+                <table id="tblEdit" class="view">
+                    <tr>
+                        <th>
+                            <label for="DictType_ID1">字典大类：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-combobox" type="text" id="DictType_ID1" name="DictType_ID" />
+                        </td>
+                        <th>
+                            <label for="Seq1">排序：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Seq1" name="Seq" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Name1">字典名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Name1" name="Name" />
+                            <!--data-options="required:true,validType:'length[1,50]'"-->
+                        </td>
+                        <th>
+                            <label for="Value1">字典值：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="Value1" name="Value" />
+                            <!--data-options="required:true,validType:'length[1,50]'"-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="Remark1">备注信息：</label>
+                        </th>
+                        <td colspan="3">
+                            <textarea style="height: 60px; width: 300px" id="Remark1" name="Remark"></textarea>
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input type="hidden" id="ID1" name="ID" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnEditOK" iconcls="icon-ok" >确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivEdit').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+    <!--------------------------查看字典详细信息的弹出层---------------------------->
+    <div id="DivView" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+			closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-view',buttons: '#dlg-buttons'">
+        <form id="ffView" method="post" novalidate="novalidate">
+            <table id="tblView" class="view">
+                <tr>
+                    <th>
+                        <label for="DictType_ID2">字典大类：</label>
+                    </th>
+                    <td>
+                        <label id="DictType_ID2" />
+                    </td>
+                    <th>
+                        <label for="Seq2">排序：</label>
+                    </th>
+                    <td>
+                        <label id="Seq2" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Name2">字典名称：</label>
+                    </th>
+                    <td>
+                        <label id="Name2" />
+                    </td>
+                    <th>
+                        <label for="Value2">字典值：</label>
+                    </th>
+                    <td>
+                        <label id="Value2" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Remark2">备注信息：</label>
+                    </th>
+                    <td colspan="3">
+                        <label id="Remark2" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="Editor2">编辑者：</label>
+                    </th>
+                    <td>
+                        <label id="Editor2" />
+                    </td>
+                    <th>
+                        <label for="LastUpdated2">编辑时间：</label>
+                    </th>
+                    <td>
+                        <label id="LastUpdated2" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right; padding-top: 10px">
+                        <input type="hidden" id="ID2" />
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#DivView').dialog('close')">关闭</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

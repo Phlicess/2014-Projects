@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7dd99663fb80424b96b240995352d351" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="WJModel.GuanLiYuan" Width="1.5" PointX="11.75" PointY="2.375" />
+        <EntityTypeShape EntityType="WJModel.QunZu" Width="1.5" PointX="2.375" PointY="2.5" />
+        <EntityTypeShape EntityType="WJModel.RenWu" Width="1.5" PointX="1.375" PointY="5.875" />
+        <EntityTypeShape EntityType="WJModel.WenJian" Width="1.5" PointX="4.375" PointY="5.125" />
+        <EntityTypeShape EntityType="WJModel.YongHu" Width="1.5" PointX="7" PointY="3.5" />
+        <EntityTypeShape EntityType="WJModel.YongHu_RenWu" Width="1.5" PointX="10.5" PointY="5.625" />
+        <AssociationConnector Association="WJModel.FK_QunZu_Manager" />
+        <AssociationConnector Association="WJModel.FK_RENWU_MID" />
+        <AssociationConnector Association="WJModel.FK_RENWU_WENJIAN" />
+        <AssociationConnector Association="WJModel.FK_YONGHU_RENWU" />
+        <AssociationConnector Association="WJModel.FK_RENWU_YONGHU" />
+        <AssociationConnector Association="WJModel.FK_YONGHU_MID" />
+        <AssociationConnector Association="WJModel.YongHu_QunZu" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

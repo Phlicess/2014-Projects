@@ -1,0 +1,2355 @@
+﻿@using WHC.MVCWebMis.BLL
+@using WHC.MVCWebMis.Commons
+@{
+    ViewBag.Title = "LiShi";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>历史</title>
+    
+    @*添加Jquery EasyUI的样式*@
+    <link href="@Url.Content("~/Content/JqueryEasyUI/themes/default/easyui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/JqueryEasyUI/themes/icon.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/themes/Default/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/Default/default.css")" rel="stylesheet" type="text/css" />
+
+    @*添加Jquery，EasyUI和easyUI的语言包的JS文件*@
+    <script type="text/javascript" src="@Url.Content("~/Content/JqueryEasyUI/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/JqueryEasyUI/jquery.easyui.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/JqueryEasyUI/locale/easyui-lang-zh_CN.js")"></script>
+
+    @*日期格式的引用*@
+    <script src="@Url.Content("~/Content/datapattern.js")"></script>
+
+    @*添加对ckeditor的支持*@
+    <script src="@Url.Content("~/Content/JQueryTools/ckeditor/ckeditor.js")"></script>
+    <script src="@Url.Content("~/Content/JQueryTools/ckeditor/adapters/jquery.js")"></script>
+    
+    @*添加对uploadify控件的支持*@
+    <script type="text/javascript" src="@Url.Content("~/Content/JQueryTools/uploadify/jquery.uploadify.js")"></script>
+    <link href="@Url.Content("~/Content/JQueryTools/uploadify/uploadify.css")" rel="stylesheet" type="text/css" />
+
+ 
+    <script type="text/javascript">
+
+            //初始化字典信息
+            function InitDictItem() {
+               
+                //顶部筛选栏的combobox
+                $("#txtXueYuan").combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+                
+                $("#txtLeiBie").combobox({
+                    url: '/JingSai/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+
+                //中间项目combobox
+                //combobox
+                $("#addJingSai").combobox({
+                    url: '/JingSai/GetDictJson1',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $("#addQiYeDaoShi").combobox({
+                    url: '/QiYeDaoShi/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+                $("#editJingSai").combobox({
+                    url: '/JingSai/GetDictJson1',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $("#editQiYeDaoShi").combobox({
+                    url: '/QiYeDaoShi/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+                
+
+                //底部信息弹出层的combobox
+                $("#AddzdjsXueYuan").combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#EditzdjsXueYuan').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#AddqydsXueYuan').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#EditqydsXueYuan').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#AddxsXueYuan').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#AddxsXueYuan_Id').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#EditxsXueYuan_Id').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+
+                $('#EditxsXueYuan').combobox({
+                    url: '/XueYuan/GetDictJson',
+                    valueField: 'Value',
+                    textField: 'Text',
+                    editable: false
+                });
+               
+                var data = [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5']];
+
+                $('#EditxsWeiCi').combobox({
+                    data: data, //数据源
+                    valueField: 0,
+                    textField: 1,
+                    editable: false
+                });
+               
+                $('#AddxsWeiCi').combobox({
+                    data: data, //数据源
+                    valueField: 0,
+                    textField: 1,
+                    editable: false
+                });
+                
+            };
+
+            var XM_ID; //项目ID的全局变量
+            var XS_ID; //学生ID的全局变量
+            var ZDJS_ID; //指导教师ID的全局变量
+
+            var isAddOrEdit = 'add'; //标识是新增还是编辑对话框弹出，用于删除附件的操作
+
+            //解决Uploadify在非IE浏览器下上传文件出现302错误的问题
+            var auth = "@(Request.Cookies[FormsAuthentication.FormsCookieName] == null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value)";
+            var ASPSESSID = "@Session.SessionID";
+
+        $(function () {
+                var queryData = {}; //可添加一些预设条件
+                InitGrid(queryData); //初始化Datagrid表格数据
+                
+                InitDictItem(); //初始化字典信息这儿有错误
+
+                BindRestarEvent(); //绑定重置按钮事件
+                
+                BindSearchEvent(); //绑定查询按钮事件
+        
+                BindAddEvent(); //绑定添加按钮的事件
+                BindEditEvent(); //绑定修改按钮的事件
+     
+                
+                // 文件上传
+                
+
+                $("#txtXingMing").blur(function() {
+                    
+                    var condition = "xingming = '" + $("#txtXingMing").val() + "'";
+                    $.get("@Url.Action("FindSingle", "ZhiDaoJiaoShi")?r=" + Math.random() + "&condition=" + condition, function(info) {
+                        if (info == "") {
+                            $.messager.alert("提示", "您输入的教师名字不存在，请继续输入以便于创建此教师信息。");
+                        } else {
+                            var infoobj = eval('(' + info + ')');
+
+                            $("#txtID").val(infoobj.ID);
+                            $("#txtZhuanYe").val(infoobj.ZhuanYe);
+                            $("#txtZhiCheng").val(infoobj.ZhiCheng);
+                            $("#txtShenFenZhengHao").val(infoobj.ShenFenZhengHao);
+                            $("#txtXueYuan").combobox("setValue", infoobj.XueYuan_Id);
+                        }
+                    });
+                });
+
+                //身份证号焦点离开事件
+                $("#txtShenFenZhengHao").blur(function() {
+                    
+                    var condition = "xingming = '" + $("#txtXingMing").val() + "'";
+                    $.get("@Url.Action("FindSingle", "ZhiDaoJiaoShi")?r=" + Math.random() + "&condition=" + condition, function(info) {
+                        if (info == "") {
+                            var postData = {
+                                XingMing: $("#txtXingMing").val(),
+                                ZhuanYe: $("#txtZhuanYe").val(),
+                                ZhiCheng: $("#txtZhiCheng").val(),
+                                XueYuan_Id: $("#txtXueYuan").combobox('getValue'), //此为外键  学院ID  注意以后设置成 下拉列表显示不同的学院 通过在后台ID确认学院
+                                ShenFenZhengHao: $("#txtShenFenZhengHao").val()
+                            };
+                            $.post("@Url.Action("Insert", "ZhiDaoJiaoShi")", postData, function(data) {
+                                if (data = "true") {
+                                    $.messager.alert("提示", "教师信息提交成功！" + data);
+                                } else
+                                    $.messager.alert("提示", "创建不成功，请您刷新后重试！");
+                            });
+                        } else {
+                            $.messager.alert("提示", "教师信息已经存在！");
+                        }
+                    });
+                });
+
+
+            $('#addFuJian').uploadify({
+                'formData': { 'ASPSESSID': ASPSESSID, 'AUTHID': auth }, //防止在非IE浏览器中出302错误
+                'swf': '@Url.Content("~/Content/JQueryTools/uploadify/uploadify.swf")', //FLash文件路径
+                'buttonText': '浏  览', //按钮文本
+                'uploader': '@Url.Action("Upload", "FuJian")', //处理文件上传Action
+                'queueID': 'fileQueue', //队列的ID
+                'queueSizeLimit': 10, //队列最多可上传文件数量，默认为999
+                'auto': true, //选择文件后是否自动上传，默认为true
+                'multi': false, //是否为多选，默认为true'
+                'removeCompleted': true, //是否完成后移除序列，默认为true
+                'fileSizeLimit': '10MB', //单个文件大小，0为无限制，可接受KB,MB,GB等单位的字符串值
+                'fileTypeDesc': 'Picture Files', //文件描述
+                'fileTypeExts': '*.*', //上传的文件后缀过滤器
+                'onQueueComplete': function (event) { //所有队列完成后事件
+                    //InitGrid(""); //完成后更新已上传的文件列表
+                    if (event.uploadsSuccessful) {
+                        $.messager.alert("提示", "文件上传完毕！"); //提示完成            
+                    } else
+                        $.messager.alert("提示", "上传失败，请检查输入信息,并且刷新重试！"); //提示完成
+                    //$("#DivImport").dialog("close");
+                    //$("#grid").datagrid("reload");
+                },
+
+                'onUploadStart': function (file) {
+                    $("#addFuJian").uploadify("settings", 'formData', { 'XiangMu_ID': XM_ID, 'ShuoMing': $("#addShuoMing").val() }); //动态传参数
+                    $.messager.alert("提示", XM_ID);
+                },
+                'onUploadError': function (event, queueId, fileObj, errorObj) {
+                    //alert(errorObj.type + "：" + errorObj.info);
+                }
+            });
+
+
+            });
+
+            //实现对DataGird控件的绑定操作
+            function InitGrid(queryData) {
+                var role = "@ViewBag.Role";
+                if (role == "Admin") {
+                    $('#grid').datagrid({
+                        //定位到Table标签，Table标签的ID是grid
+                        url: '@Url.Action("FindXiangMuWithPage", "XiangMu")', //指向后台的Action来获取当前用户的信息的Json格式的数据
+                        title: '项目基础信息显示',
+                        iconCls: 'icon-view',
+                        fit: true,
+                        //height: 650,
+                        //width: function () { return document.body.clientWidth * 0.9 },//自动宽度
+                        width: function() { return document.body.clientWidth * 0.2 }, //自动宽度
+
+                        nowrap: true,
+                        autoRowHeight: false,
+                        striped: true,
+                        collapsible: true,
+                        pagination: true,
+                        pageSize: 10,
+                        pageList: [10, 20, 50],
+                        rownumbers: true,
+                        //sortName: 'ID',    //根据某个字段给easyUI排序
+                        sortOrder: 'asc',
+                        remoteSort: false,
+                        idField: 'ID',
+                        queryParams: queryData, //异步查询的参数
+                        singleSelect: false,
+
+                        columns: [
+                            [
+                                { field: 'ck', checkbox: true }, //选择
+                                { title: '项目编号', field: 'ID', width: 80, sortable: true },
+                                { title: '项目名称', field: 'XiangMuMingCheng', width: 150, sortable: true },
+                                { title: '项目简介', field: 'XiangMuJianJie', width: 200, sortable: true },
+                                { title: '参赛时间', field: 'CanSaiShiJian', width: 70, sortable: true },
+                                { title: '获奖时间', field: 'HuoJiangShiJian', width: 70, sortable: true },
+                                { title: '获奖级别', field: 'HuoJiangJiBie', width: 100, sortable: true },
+                                { title: '获奖名称', field: 'HuoJiangMingCheng', width: 80, sortable: true },
+                                { title: '备注', field: 'BeiZhu', width: 185, sortable: true },
+                                { title: '学院审批', field: 'XueYuanShenPi', width: 60, sortable: true,
+                                    formatter: function(value, row, index) {
+                                        if (value) {
+                                            return '已审批';
+                                        } else {
+                                            return "未审批";
+                                        }
+                                    },
+                                },
+                                { title: '学校审批', field: 'XueXiaoShenPi', width: 60, sortable: true,
+                                    formatter: function(value, row, index) {
+                                        if (value) {
+                                            return '已审批';
+                                        } else {
+                                            return "未审批";
+                                        }
+                                    },
+                                }
+                            ]
+                        ],
+                        toolbar: [
+                            {
+                                id: 'btnAdd',
+                                text: '添加',
+                                iconCls: 'icon-add',
+                                handler: function() {
+                                    ShowAddDialog(); //实现添加记录的页面
+                                }
+                            }, '-', {
+                                id: 'btnEdit',
+                                text: '修改',
+                                iconCls: 'icon-edit',
+                                handler: function() {
+                                    ShowEditOrViewDialog(); //实现修改记录的方法
+                                }
+                            }, '-', {
+                                id: 'btnDelete',
+                                text: '删除',
+                                iconCls: 'icon-remove',
+                                handler: function() {
+                                    Delete(); //实现直接删除数据的方法
+                                }
+                            }, '-', {
+                                id: 'btnView',
+                                text: '查看',
+                                iconCls: 'icon-table',
+                                handler: function() {
+                                    ShowEditOrViewDialog("view"); //实现查看记录详细信息的方法
+                                }
+                            }, '-', {
+                                id: 'btnView',
+                                text: '审批',
+                                iconCls: 'icon-edit',
+                                handler: function() {
+                                    BindShenPiEvent(); //实现审批项目的方法
+                                }
+                            }, '-', {
+                                id: 'btnReload',
+                                text: '刷新',
+                                iconCls: 'icon-reload',
+                                handler: function() {
+                                    //实现刷新栏目中的数据
+                                    $("#grid").datagrid("reload");
+                                }
+                            }
+                        ],
+
+
+                        onDblClickRow: function(rowIndex, rowData) {
+                            $('#grid').datagrid('uncheckAll');
+                            $('#grid').datagrid('checkRow', rowIndex);
+                            ShowEditOrViewDialog("view");
+                        },
+
+                        onClickRow: function(rowIndex, rowData) {
+                            //if (ID == rowData.ID) {
+                            //    return;
+                            //}
+                            XM_ID = rowData.ID;
+                            var querySubData = {
+                                userid: '@ViewBag.CurrentUserId',
+                                caseid: rowData.ID
+                            };
+                            //ShowOrHide(querySubData);
+
+                            var querySubData1 = {
+                                WHC_XiangMu_Id: rowData.ID
+                            };
+                            InitZhiDaoJiaoShiGrid(querySubData1);
+
+                            var querySubData2 = {
+                                WHC_ID: rowData.ID
+                            };
+                            InitQiYeDaoShiGrid(querySubData2);
+
+                            var querySubData3 = {
+                                WHC_XiangMu_Id: rowData.ID
+                            };
+                            InitXueShengGrid(querySubData3);
+
+                        }
+                    });
+                } else if (role == "XueSheng") {
+                    $('#grid').datagrid({
+                        //定位到Table标签，Table标签的ID是grid
+                        url: '@Url.Action("FindXiangMuWithPage", "XiangMu")', //指向后台的Action来获取当前用户的信息的Json格式的数据
+                        title: '项目基础信息显示',
+                        iconCls: 'icon-view',
+                        fit: true,
+                        //height: 650,
+                        //width: function () { return document.body.clientWidth * 0.9 },//自动宽度
+                        width: function() { return document.body.clientWidth * 0.2 }, //自动宽度
+
+                        nowrap: true,
+                        autoRowHeight: false,
+                        striped: true,
+                        collapsible: true,
+                        pagination: true,
+                        pageSize: 10,
+                        pageList: [10, 20, 50],
+                        rownumbers: true,
+                        //sortName: 'ID',    //根据某个字段给easyUI排序
+                        sortOrder: 'asc',
+                        remoteSort: false,
+                        idField: 'ID',
+                        queryParams: queryData, //异步查询的参数
+                        singleSelect: true,
+
+                        columns: [
+                            [
+                                { field: 'ck', checkbox: true }, //选择
+                                { title: '项目编号', field: 'ID', width: 80, sortable: true },
+                                { title: '项目名称', field: 'XiangMuMingCheng', width: 150, sortable: true },
+                                { title: '项目简介', field: 'XiangMuJianJie', width: 200, sortable: true },
+                                { title: '参赛时间', field: 'CanSaiShiJian', width: 70, sortable: true },
+                                { title: '获奖时间', field: 'HuoJiangShiJian', width: 70, sortable: true },
+                                { title: '获奖级别', field: 'HuoJiangJiBie', width: 100, sortable: true },
+                                { title: '获奖名称', field: 'HuoJiangMingCheng', width: 80, sortable: true },
+                                { title: '备注', field: 'BeiZhu', width: 185, sortable: true },
+                                {
+                                    title: '学院审批', field: 'XueYuanShenPi', width: 60, sortable: true,
+                                    formatter: function (value, row, index) {
+                                        if (value) {
+                                            return '已审批';
+                                        } else {
+                                            return "未审批";
+                                        }
+                                    },
+                                },
+                                {
+                                    title: '学校审批', field: 'XueXiaoShenPi', width: 60, sortable: true,
+                                    formatter: function (value, row, index) {
+                                        if (value) {
+                                            return '已审批';
+                                        } else {
+                                            return "未审批";
+                                        }
+                                    },
+                                }
+                            ]
+                        ],
+                        toolbar: [
+                            {
+                                id: 'btnAdd',
+                                text: '添加',
+                                iconCls: 'icon-add',
+                                handler: function() {
+                                    ShowAddDialog(); //实现添加记录的页面
+                                }
+                            }, {
+                                id: 'btnEdit',
+                                text: '修改',
+                                iconCls: 'icon-edit',
+                                handler: function() {
+                                    ShowEditOrViewDialog(); //实现修改记录的方法
+                                }
+                            }, {
+                                id: 'btnDelete',
+                                text: '删除',
+                                iconCls: 'icon-remove',
+                                handler: function() {
+                                    Delete(); //实现直接删除数据的方法
+                                }
+                            }, {
+                                id: 'btnView',
+                                text: '查看',
+                                iconCls: 'icon-table',
+                                handler: function() {
+                                    ShowEditOrViewDialog("view"); //实现查看记录详细信息的方法
+                                }
+                            }, {
+                                id: 'btnReload',
+                                text: '刷新',
+                                iconCls: 'icon-reload',
+                                handler: function() {
+                                    //实现刷新栏目中的数据
+                                    $("#grid").datagrid("reload");
+                                }
+                            }
+                        ],
+
+
+                        onDblClickRow: function(rowIndex, rowData) {
+                            $('#grid').datagrid('uncheckAll');
+                            $('#grid').datagrid('checkRow', rowIndex);
+                            ShowEditOrViewDialog("view");
+                        },
+
+                        onClickRow: function(rowIndex, rowData) {
+                            //if (ID == rowData.ID) {
+                            //    return;
+                            //}
+                            XM_ID = rowData.ID;
+                            var querySubData = {
+                                userid: '@ViewBag.CurrentUserId',
+                                caseid: rowData.ID
+                            };
+                            if (rowData.XueXiaoShenPi == true) {
+                                $('#btnDelete').hide();
+                                $('#btnAdd').hide();
+                                $('#btnEdit').hide();
+                            }
+
+
+                            var querySubData1 = {
+                                WHC_XiangMu_Id: rowData.ID
+                            };
+                            InitZhiDaoJiaoShiGrid(querySubData1);
+
+                            var querySubData2 = {
+                                WHC_ID: rowData.ID
+                            };
+                            InitQiYeDaoShiGrid(querySubData2);
+
+                            var querySubData3 = {
+                                WHC_XiangMu_Id: rowData.ID
+                            };
+                            InitXueShengGrid(querySubData3);
+
+                        }
+                    });
+                }
+            };
+
+            //管理员审批 学校审批项目
+            function BindShenPiEvent() {
+                var rows = $("#grid").datagrid("getSelections");
+                if (rows.length >= 1) {
+                    //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                    var ids = ""; //1,2,3,4,5
+                    for (var i = 0; i < rows.length; i++) {
+                        ids += rows[i].ID + ",";
+                    }
+                    //最后去掉最后的那一个,
+                    ids = ids.substring(0, ids.length - 1);
+                    var postData = { Ids: ids };
+                    $.post("@Url.Action("XiangMuShenPi", "XiangMu")", postData, function(data) {
+                        $.messager.alert("提示", "成功审批项目数：" + data);
+                        $("#grid").datagrid("reload");
+                    });
+                }
+            }
+
+
+            //实现对DataGird控件的绑定操作   bottom指导教师**************************
+            function InitZhiDaoJiaoShiGrid(queryData) {
+                $('#ZhiDaoJiaoShiGrid').datagrid({
+                    //定位到Table标签，Table标签的ID是grid
+                    url: '@Url.Action("FindWithPager", "XiangMuZhiDaoJiaoShi")', //指向后台的Action来获取当前用户的信息的Json格式的数据
+                    //title: '指导教师',
+                    iconCls: 'icon-view',
+                    fit: true,
+                    //height: 100,
+                    //width: function () { return document.body.clientWidth * 0.9 },//自动宽度
+                    nowrap: true,
+                    autoRowHeight: false,
+                    striped: true,
+                    collapsible: true,
+                    pagination: true,
+                    pageSize: 50,
+                    pageList: [50, 100, 200],
+                    rownumbers: true,
+                    //sortName: 'ID',    //根据某个字段给easyUI排序
+                    sortOrder: 'asc',
+                    remoteSort: false,
+                    idField: 'ID',
+                    queryParams: queryData, //异步查询的参数
+                    singleSelect: true,
+                    columns: [
+                        [
+                            { field: 'ck', checkbox: true }, //选择
+                            { title: '指导教师编号', field: 'ID', width: 160, sortable: true, hidden: true },
+                            { title: '姓名', field: 'XingMing', width: 160, sortable: true },
+                            { title: '专业', field: 'ZhuanYe', width: 160, sortable: true },
+                            { title: '职称', field: 'ZhiCheng', width: 160, sortable: true },
+                            { title: '身份证号', field: 'ShenFenZhengHao', width: 160, sortable: true },
+                            { title: '位次', field: 'WeiCi', width: 40, sortable: true }
+                        ]
+                    ],
+                    toolbar: [
+                        {
+                            id: 'btnAdd',
+                            text: '添加',
+                            iconCls: 'icon-add',
+                            handler: function() {
+                                //$.messager.alert("123", "12312312312321321");
+                                ShowEditorAddDialog('ZhiDaoJiaoShi', "add"); //实现添加记录的页面
+                            }
+                        }, '-', {
+                            id: 'btnttEdit',
+                            text: '修改',
+                            iconCls: 'icon-edit',
+                            handler: function() {
+                                ShowEditorAddDialog('ZhiDaoJiaoShi'); //实现修改记录的方法
+                            }
+                        }, '-', {
+                            id: 'btnDelete',
+                            text: '删除',
+                            iconCls: 'icon-remove',
+                            handler: function() {
+                                ShowDelete("ZhiDaoJiaoShi"); //实现直接删除数据的方法
+                            }
+                        }, '-', {
+                            id: 'btnReload',
+                            text: '刷新',
+                            iconCls: 'icon-reload',
+                            handler: function() {
+                                //实现刷新栏目中的数据
+                                $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+                            }
+                        }
+                    ],
+                    onDblClickRow: function(rowIndex, rowData) {
+                        $('#ZhiDaoJiaoShiGrid').datagrid('uncheckAll');
+                        $('#ZhiDaoJiaoShiGrid').datagrid('checkRow', rowIndex);
+                        ShowEditorAddDialog('ZhiDaoJiaoShi');
+                    }
+                });
+            }
+
+            //实现对DataGird控件的绑定操作   bottom学生***************************************
+            function InitXueShengGrid(queryData) {
+                $('#XueShengGrid').datagrid({
+                    //定位到Table标签，Table标签的ID是grid
+                    url: '@Url.Action("FindWithPager", "XiangMuXueSheng")', //指向后台的Action来获取当前用户的信息的Json格式的数据
+                    //title: '指导教师',
+                    iconCls: 'icon-view',
+                    fit: true,
+                    //height: 100,
+                    //width: function () { return document.body.clientWidth * 0.9 },//自动宽度
+                    nowrap: true,
+                    autoRowHeight: false,
+                    striped: true,
+                    collapsible: true,
+                    pagination: true,
+                    pageSize: 5,
+                    pageList: [5, 10, 20],
+                    rownumbers: true,
+                    //sortName: 'ID',    //根据某个字段给easyUI排序
+                    sortOrder: 'asc',
+                    remoteSort: false,
+                    idField: 'ID',
+                    queryParams: queryData, //异步查询的参数
+                    singleSelect: true,
+                    columns: [
+                        [
+                            { field: 'ck', checkbox: true }, //选择
+                            { title: '编号', field: 'ID', width: 160, sortable: true, hidden: true },
+                            { title: '学号', field: 'XueHao', width: 160, sortable: true },
+                            { title: '姓名', field: 'XingMing', width: 160, sortable: true },
+                            { title: '专业', field: 'ZhuanYe', width: 160, sortable: true },
+                            { title: '姓别', field: 'XingBie', width: 160, sortable: true },
+                            { title: '手机号', field: 'ShouJi', width: 160, sortable: true }
+                        ]
+                    ],
+                    toolbar: [
+                        {
+                            id: 'btnAdd',
+                            text: '添加',
+                            iconCls: 'icon-add',
+                            handler: function() {
+                                ShowEditorAddDialog('XueSheng', "add"); //实现添加记录的页面
+                            }
+                        }, '-', {
+                            id: 'btnttEdit',
+                            text: '修改',
+                            iconCls: 'icon-edit',
+                            handler: function() {
+                                ShowEditorAddDialog('XueSheng'); //实现添加记录的页面
+                            }
+                        }, '-', {
+                            id: 'btnDelete',
+                            text: '删除',
+                            iconCls: 'icon-remove',
+                            handler: function() {
+                                ShowDelete("XueSheng"); //实现直接删除数据的方法
+                            }
+                        }, '-', {
+                            id: 'btnReload',
+                            text: '刷新',
+                            iconCls: 'icon-reload',
+                            handler: function() {
+                                //实现刷新栏目中的数据
+                                $("#XueShengGrid").datagrid("reload");
+                            }
+                        }
+                    ],
+                    onDblClickRow: function(rowIndex, rowData) {
+                        $('#XueShengGrid').datagrid('uncheckAll');
+                        $('#XueShengGrid').datagrid('checkRow', rowIndex);
+                        ShowEditorAddDialog('XueSheng');
+                    }
+                });
+            }
+
+            //实现对DataGird控件的绑定操作   bottom企业导师**************************
+            function InitQiYeDaoShiGrid(queryData) {
+                $('#QiYeDaoShiGrid').datagrid({
+                    //定位到Table标签，Table标签的ID是grid
+                    url: '@Url.Action("FindQiYeDaoShiWithPage", "XiangMu")', //指向后台的Action来获取当前用户的信息的Json格式的数据
+                    //title: '指导教师',
+                    iconCls: 'icon-view',
+                    fit: true,
+                    //height: 100,
+                    //width: function () { return document.body.clientWidth * 0.9 },//自动宽度
+                    nowrap: true,
+                    autoRowHeight: false,
+                    striped: true,
+                    collapsible: true,
+                    pagination: true,
+                    pageSize: 5,
+                    pageList: [5, 10, 20],
+                    rownumbers: true,
+                    //sortName: 'ID',    //根据某个字段给easyUI排序
+                    sortOrder: 'asc',
+                    remoteSort: false,
+                    idField: 'QiYeDaoShi_Id',
+                    queryParams: queryData, //异步查询的参数
+                    singleSelect: true,
+                    columns: [
+                        [
+                            { field: 'ck', checkbox: true }, //选择
+                            { title: '企业导师编号', field: 'QiYeDaoShi_Id', width: 160, sortable: true, hidden: true },
+                            { title: '姓名', field: 'XingMing', width: 160, sortable: true },
+                            { title: '专业', field: 'ZhuanYe', width: 160, sortable: true },
+                            { title: '职务', field: 'ZhiWu', width: 160, sortable: true },
+                            { title: '公司', field: 'GongSi', width: 160, sortable: true },
+                            { title: '身份证号', field: 'ShenFenZhengHao', width: 160, sortable: true }
+                        ]
+                    ],
+                    toolbar: [
+                        {
+                            id: 'btnAdd',
+                            text: '添加',
+                            iconCls: 'icon-add',
+                            handler: function() {
+                                ShowEditorAddDialog('QiYeDaoShi', "add"); //实现添加记录的页面
+                            }
+                        }, '-', {
+                            id: 'btnttEdit',
+                            text: '修改',
+                            iconCls: 'icon-edit',
+                            handler: function() {
+                                ShowEditorAddDialog('QiYeDaoShi'); //实现添加记录的页面
+                            }
+                        }, '-', {
+                            id: 'btnDelete',
+                            text: '删除',
+                            iconCls: 'icon-remove',
+                            handler: function() {
+                                ShowDelete("QiYeDaoShi"); //实现直接删除数据的方法
+                            }
+                        }, '-', {
+                            id: 'btnReload',
+                            text: '刷新',
+                            iconCls: 'icon-reload',
+                            handler: function() {
+                                //实现刷新栏目中的数据
+                                $("#QiYeDaoShiGrid").datagrid("reload");
+                            }
+                        }
+                    ],
+                    onDblClickRow: function(rowIndex, rowData) {
+                        $('#QiYeDaoShiGrid').datagrid('uncheckAll');
+                        $('#QiYeDaoShiGrid').datagrid('checkRow', rowIndex);
+                        ShowEditorAddDialog("QiYeDaoShi");
+                    }
+                });
+            };
+
+
+            //绑定搜索按钮的的点击事件
+            function BindSearchEvent() {
+                //按条件进行查询数据，首先我们得到数据的值
+                $("#btnSearch").click(function() {                   
+                    //得到用户输入的参数
+                    //取值有几种方式：$("#id").combobox('getValue'), $("#id").datebox('getValue'), $("#id").val()
+                    //字段增加WHC_前缀字符，避免传递如URL这样的Request关键字冲突
+                    var queryData = {
+                        WHC_ID: $("#txtID").val(),
+                        WHC_LeiBie: $("#txtLeiBie").combobox('getText'),
+                        WHC_XueYuan: $("#txtXueYuan").combobox('getText'),
+                        WHC_XingMing: $("#txtXingMing").val(),
+                        WHC_ZhuanYe: $("#txtZhuanYe").val(),
+                        WHC_ZhiCheng: $("#txtZhiCheng").val(),
+                        WHC_ShenFenZhengHao: $("#txtShenFenZhengHao").val(),
+                    }
+                    //将值传递给
+                    InitGrid(queryData);
+                    return false;
+                });
+            }
+
+            function BindRestarEvent() {
+                $("#btnRestar").click(function() {
+
+                    //得到用户输入的参数
+                    //取值有几种方式：$("#id").combobox('getValue'), $("#id").datebox('getValue'), $("#id").val()
+                    //字段增加WHC_前缀字符，避免传递如URL这样的Request关键字冲突
+
+                    var queryData = {
+                        //WHC_ID: $("#txtID").val(),
+                        ////WHC_LeiBie: $("#txtLeiBie").combobox('getValue'),
+                        //WHC_XingMing: $("#txtXingMing").val(),
+                        //WHC_ZhuanYe: $("#txtZhuanYe").val(),
+                        //WHC_ZhiCheng: $("#txtZhiCheng").val(),
+                        //WHC_ShenFenZhengHao: $("#txtShenFenZhengHao").val(),
+                    }
+                    //将值传递给
+                    $("#ffSearch").form("clear");
+                    InitGrid(queryData);
+
+                    return false;
+                });
+            }
+
+
+//实现删除数据的方法
+            function Delete() {
+                //得到用户选择的数据的ID
+                var rows = $("#grid").datagrid("getSelections");
+                if (rows.length >= 1) {
+                    //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                    var ids = ""; //1,2,3,4,5
+                    for (var i = 0; i < rows.length; i++) {
+                        ids += rows[i].ID + ",";
+                    }
+                    //最后去掉最后的那一个,
+                    ids = ids.substring(0, ids.length - 1);
+                    var postData = { Ids: ids };
+
+                    //然后确认发送异步请求的信息到后台删除数据
+                    $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function(deleteAction) {
+                        if (deleteAction) {
+                            $.get("@Url.Action("DeletebyIds", "XiangMu")", postData, function(data) {
+                                if (data == "true") {
+                                    $.messager.alert("提示", "删除选定的记录成功");
+                                    $("#grid").datagrid("reload");
+
+                                    //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息
+                                    rows.length = ""; //第一种方法
+                                    $("#grid").datagrid("clearSelections"); //第二种方法
+                                } else {
+                                    $.messager.alert("提示", data);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    $.messager.alert("提示", "请选择你要删除的项目！");
+                }
+            }
+
+            //弹出新增对话框   **********中间弹出添加项目的信息框***********
+            function ShowAddDialog() {
+                isAddOrEdit = 'add'; //新增对话框标识
+                //CKEDITOR.instances.Content.setData('');  //清空编辑器的数据
+                var documentHeight = $(document).height();
+                //$("#DivAdd").height(documentHeight - 100);
+                $('#DivAdd').dialog('move', {
+                    top: 0
+                });
+
+                $("#DivAdd").dialog('open').dialog('setTitle', '添加').dialog('resize', { height: documentHeight - 20 });
+            }
+
+            //绑定添加按钮的事件  ************添加项目弹出层的确定添加按钮**************
+            function BindAddEvent() {
+                $("#btnAddOK").click(function() {
+                    //判断表单的信息是否通过验证
+                    var validate = $("#ffAdd").form('validate');
+                    if (validate == false) {
+                        return false;
+                    }
+
+                    //var postData = $("#ffAdd").serializeArray();
+                    var postData = {
+                        //ID: $("#addID").val(),
+                        JingSai_Id: $("#addJingSai").combobox('getValue'),
+                        QiYeDaoShi_Id: $("#addQiYeDaoShi").combobox('getValue'),
+
+                        XiangMuMingCheng: $("#addXiangMuMingCheng").val(),
+                        XiangMuJianJie: $("#addXiangMuJianJie").val(),
+                        CanSaiShiJian: $("#addCanSaiShiJian").datetimebox("getValue"),
+                        HuoJiangShiJian: $("#addHuoJiangShiJian").datetimebox("getValue"),
+                        HuoJiangMingCheng: $("#addHuoJiangMingCheng").val(),
+                        HuoJiangJiBie: $("#addHuoJiangJiBie").val(),
+                        BeiZhu: $("#addBeiZhu").val()
+                    };
+
+
+                    $.post("@Url.Action("Insert2", "XiangMu")", postData, function(data) {
+                        if (data != "") {
+                            //添加成功  1.关闭弹出层，2.刷新DataGird
+                            $.messager.alert("提示", "添加成功");
+                            //$("#DivAdd").dialog("close");
+                            $("#grid").datagrid("reload");
+                            XM_ID = data;
+                            //   $("#ffAdd").form("clear");
+                        } else {
+                            $.messager.alert("提示", "添加失败，请您检查");
+                        }
+                    }).error(function() {
+                        $.messager.alert("提示", "您未被授权使用该功能，请联系管理员进行处理。", 'warning');
+                    });
+                });
+            }
+
+            //修改或查看明细信息（绑定显示数据）  *弹出对话框函数*
+            function ShowEditOrViewDialog(view) {
+                //首先取出来用户选择的数据的ID
+                var rows = $("#grid").datagrid("getSelections");
+                //首先取出来值判断用户只能选择一个
+                if (rows.length == 0) {
+                    $.messager.alert("提示", "请选择一个项目", "error");
+                    return;
+                } else if (rows.length > 1) {
+                    $.messager.alert("提示", "每次只能修改/查看一个项目，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>个", "error");
+                    return;
+                }
+                var documentHeight = $(document).height();
+                if (view == null) {
+                    //处理修改的信息
+                    $('#DivEdit').dialog('move', {
+                        top: 0
+                    });
+                    $("#DivEdit").dialog('open').dialog('setTitle', '修改信息').dialog('resize', { height: documentHeight - 20 });
+                    //绑定修改详细信息的方法
+                    BindEditInfo();
+                } else {
+                    //处理查看详细
+                    $('#DivView').dialog('move', {
+                        top: 0
+                    });
+                    $("#DivView").dialog('open').dialog('setTitle', '查看详细信息').dialog('resize', { height: documentHeight - 20 });
+                    //绑定查看详细信息方法
+                    BindViewInfo();
+                }
+            }
+
+            //绑定编辑详细信息的方法  *项目*  对弹出框的数据操作
+            function BindEditInfo() {
+                //首先用户发送一个异步请求去后台实现方法
+                var ID = $("#grid").datagrid("getSelections")[0].ID; //获取到了用用户选择的ID
+                $.getJSON("@Url.Action("FindByID", "XiangMu")?r=" + Math.random() + "&id=" + ID, function(info) {
+                    //赋值有几种方式：.datebox('setValue', info.Birthday);.combobox('setValue', info.Status);.val(info.Name);
+
+                    $("#editXiangMuMingCheng").val(info.XiangMuMingCheng);
+                    $("#editXiangMuJianJie").val(info.XiangMuJianJie);
+                    $("#editCanSaiShiJian").val(info.CanSaiShiJian);
+                    $("#editHuoJiangShiJian").val(info.HuoJiangShiJian);
+                    $("#editHuoJiangJiBie").val(info.HuoJiangJiBie);
+                    $("#editHuoJiangMingCheng").val(info.HuoJiangMingCheng);
+                    $("#editBeiZhu").val(info.BeiZhu);
+
+                    if (info.XueXiaoShenPi = "true") {
+                        $("#editXueXiaoShenPi").val("已审批");
+                    } else if (info.XueXiaoShenPi = "false") {
+                        $("#editXueXiaoShenPi").val("未审批");
+                    };
+
+
+                    isAddOrEdit = 'edit'; //新增对话框标识
+                });
+            }
+
+            //绑定查看详细信息的方法   *项目*  对弹出框的数据操作
+            function BindViewInfo() {
+                var ID = $("#grid").datagrid('getSelections')[0].ID;
+                //发送请求
+                $.getJSON("@Url.Action("FindByID", "XiangMu")?r=" + Math.random() + "&id=" + ID, function(info) {
+
+                    //var data = evalquerySubData1;
+
+                    $("#schID").val(info.ID);
+                    $("#schXiangMuMingCheng").val(info.XiangMuMingCheng);
+                    $("#schXiangMuJianJie").val(info.XiangMuJianJie);
+                    $("#schCanSaiShiJian").val(info.CanSaiShiJian);
+                    $("#schHuoJiangShiJian").val(info.HuoJiangShiJian);
+                    $("#schHuoJiangJiBie").val(info.HuoJiangJiBie);
+                    $("#schHuoJiangMingCheng").val(info.HuoJiangMingCheng);
+                    $("#schBeiZhu").val(info.BeiZhu);
+
+                    if (info.XueXiaoShenPi = "ture") {
+                        $("#schXueXiaoShenPi").val("已审批");
+                    } else if (info.XueXiaoShenPi = "false") {
+                        $("#schXueXiaoShenPi").val("未审批");
+                    };
+                });
+            }
+
+            //绑定修改按钮的事件      ************修改项目弹出层的确定添加按钮**************
+            function BindEditEvent() {
+                $("#btnEditOK").click(function() {
+                    //判断表单的信息是否通过验证
+                    var validate = $("#ffEdit").form("validate");
+                    if (validate == false) {
+                        return false;
+                    }
+                    //构造参数发送给后台
+                    var postData = {
+                        //ID: $("#editID").val(),
+                        JingSai_Id: $("#editJingSai").combobox('getValue'),
+                        QiYeDaoShi_Id: $("#editQiYeDaoShi").combobox('getValue'),
+
+                        XiangMuMingCheng: $("#editXiangMuMingCheng").val(),
+                        XiangMuJianJie: $("#editXiangMuJianJie").val(),
+                        CanSaiShiJian: $("#editCanSaiShiJian").datetimebox("getValue"),
+                        HuoJiangShiJian: $("#editHuoJiangShiJian").datetimebox("getValue"),
+                        HuoJiangMingCheng: $("#editHuoJiangMingCheng").val(),
+                        HuoJiangJiBie: $("#editHuoJiangJiBie").val(),
+                        BeiZhu: $("#editBeiZhu").val()
+                    };
+                    var ID = XM_ID;
+                    $.post("@Url.Action("Update", "XiangMu")?ID=" + ID, postData, function(date) {
+                        if (date == "true") {
+                            //修改成功，关闭弹出层，刷新DataGird
+                            $.messager.alert("提示", "修改成功");
+                            $("#DivEdit").dialog('close');
+                            $("#grid").datagrid("reload");
+                        } else {
+                            $.messager.alert("提示", "修改失败，请您检查");
+                        }
+                    }).error(function() {
+                        $.messager.alert("提示", "您未被授权使用该功能，请重新登录测试或联系管理员进行处理。", 'warning');
+                    });
+                });
+            }
+
+            //修改或添加信息（绑定显示数据）  *指导教师* *企业导师* *学生*  弹出层对话框函数
+            function ShowEditorAddDialog(para, add) {
+                //首先取出来用户选择的数据的IDz
+
+                var documentHeight = $(document).height();
+                var documentWidth = $(document).width();
+                if (add == null) {
+
+                    var rows = null;
+                    if (para == "ZhiDaoJiaoShi") {
+                        var rows = $("#ZhiDaoJiaoShiGrid").datagrid("getSelections");
+
+                    } else if (para == "QiYeDaoShi") {
+                        var rows = $("#QiYeDaoShiGrid").datagrid("getSelections");
+                    } else if (para == "XueSheng") {
+                        var rows = $("#XueShengGrid").datagrid("getSelections");
+                    }
+
+                    if (rows == null || rows.length == 0) {
+                        $.messager.alert("提示", "请选择一条记录", "error");
+                        return;
+                    } else if (rows.length > 1) {
+                        $.messager.alert("提示", "每次只能修改/添加一条记录，你已经选择了<font color='red'  size='6'>" + rows.length + "</font>条", "error");
+                        return;
+                    }
+
+                    //处理修改的信息
+                    if (para == "ZhiDaoJiaoShi") {
+                        //$("#DivAnJianEdit").height(documentHeight - 100);
+                        $('#Editzdjs').dialog('move', {
+                            top: 0
+                        }).dialog('resize', { height: documentHeight - 20, width: documentWidth * 0.8 }).dialog('hcenter');
+                        $("#Editzdjs").dialog('open').dialog('setTitle', '修改指导教师信息');
+                        $("#tblEdit").css({
+                            'width': documentWidth * 0.8 - 50 + 'px'
+                        });
+                        $("#tblEdit").find('th').each(function(i) {
+                            {
+                                $(this).attr("style", "width:40px;");
+                            }
+                        });
+
+                        //这里是为指导教师修改信息弹出层赋值
+                        var ZhiDaoJiaoShirow = $("#ZhiDaoJiaoShiGrid").datagrid('getSelected');
+
+                        $("#EditzdjsXingMing").val(ZhiDaoJiaoShirow.XingMing);
+                        $("#EditzdjsZhuanYe").val(ZhiDaoJiaoShirow.ZhuanYe);
+                        $("#EditzdjsZhiCheng").val(ZhiDaoJiaoShirow.ZhiCheng);
+                        $("#EditzdjsXueYuan_Id").val(ZhiDaoJiaoShirow.XueYuan_Id);
+                        $("#EditzdjsShenFenZhengHao").val(ZhiDaoJiaoShirow.ShenFenZhengHao);
+
+
+                        //$("#tblEdit input[type='text']").each(function (i) {
+                        //    $(this).attr("style", "width:95%");
+                        //});
+                    } else if (para == "QiYeDaoShi") {
+                        //$("#DivDangShiRenEdit").height(documentHeight - 100);
+                        $('#Editqyds').dialog('move', {
+                            top: 0
+                        }).dialog('resize', { height: documentHeight - 20 });
+                        $("#Editqyds").dialog('open').dialog('setTitle', '修改企业导师信息');
+                        $("#tblEdit").css({
+                            'width': documentWidth * 0.8 - 50 + 'px'
+                        });
+                        $("#tblEdit").find('th').each(function(i) {
+                            {
+                                $(this).attr("style", "width:40px;");
+                            }
+                        });
+
+                        //这里是为企业导师修改信息弹出层赋值
+                        var QiYeDaoShirow = $("#QiYeDaoShiGrid").datagrid('getSelected');
+
+                        $("#EditqydsXingMing").val(QiYeDaoShirow.XingMing);
+                        $("#EditqydsZhuanYe").val(QiYeDaoShirow.ZhuanYe);
+                        $("#EditqydsZhiCheng").val(QiYeDaoShirow.ZhiCheng);
+                        $("#EditqydsXueYuan_Id").val(QiYeDaoShirow.XueYuan_Id);
+                        $("#EditqydsShenFenZhengHao").val(QiYeDaoShirow.ShenFenZhengHao);
+
+                    } else if (para == "XueSheng") {
+                        //$("#DivCuiBanEdit").height(documentHeight - 100);
+                        $('#Editxs').dialog('move', {
+                            top: 0
+                        }).dialog('resize', { height: documentHeight - 20 });
+                        $("#Editxs").dialog('open').dialog('setTitle', '修改学生信息');
+
+                        //这里是为学生修改信息弹出层赋值
+                        var XueShengrow = $("#XueShengGrid").datagrid('getSelected');
+
+                        $("#EditxsShouJi").val(XueShengrow.ShouJi);
+                        $("#EditxsXingMing").val(XueShengrow.XingMing);
+                        $("#EditxsZhuanYe").val(XueShengrow.ZhuanYe);
+                        $("#EditxsXingBie").val(XueShengrow.XingBie);
+                        //$("#EditxsXueYuan_Id").val(XueShengrow.XueYuan_Id);
+                        $("#EditxsXueHao").val(XueShengrow.XueHao);
+
+
+                    }
+
+                    //绑定修改详细信息的方法
+                    DialogEditbtn(para); //bottom数据表格弹出层修改信息方法
+
+                } else if (add == "add") {
+                    //处理添加信息
+                    if (para == "ZhiDaoJiaoShi") {
+                        //$("#DivAnJianEdit").height(documentHeight - 100);
+                        $('#Addzdjs').dialog('move', {
+                            top: 0
+                        }).dialog('resize', { height: documentHeight - 20, width: documentWidth * 0.8 }).dialog('hcenter');
+                        $("#Addzdjs").dialog('open').dialog('setTitle', '添加指导教师信息');
+                        $("#tblEdit").css({
+                            'width': documentWidth * 0.8 - 50 + 'px'
+                        });
+                        $("#tblEdit").find('th').each(function(i) {
+                            {
+                                $(this).attr("style", "width:40px;");
+                            }
+                        });
+                        //$("#tblEdit input[type='text']").each(function (i) {
+                        //    $(this).attr("style", "width:95%");
+                        //});
+                    } else if (para == "QiYeDaoShi") {
+                        //$("#DivDangShiRenEdit").height(documentHeight - 100);
+                        $('#Addqyds').dialog('move', {
+                            top: 0
+                        }).dialog('resize', { height: documentHeight - 20 });
+                        $("#Addqyds").dialog('open').dialog('setTitle', '添加企业导师信息');
+                    } else if (para == "XueSheng") {
+                        //$("#DivCuiBanEdit").height(documentHeight - 100);
+                        $('#Addxs').dialog('move', {
+                            top: 0
+                        }).dialog('resize', { height: documentHeight - 20 });
+                        $("#Addxs").dialog('open').dialog('setTitle', '添加学生信息');
+
+                    }
+
+                    //绑定修改详细信息的方法
+                    DialogAddbtn(para); //bottom数据表格弹出层修改信息方法
+
+                }
+            }
+
+            //添加信息弹出框 的确认按钮事件  *指导教师* *企业导师* *学生*
+            function DialogAddbtn(para) {
+
+                if (para == "ZhiDaoJiaoShi") {
+
+                    $("#DialogzdjsOkbtn").click(function() {
+                        //var postData = $("#ffAddzdjs").serialize();
+                        var postData = {
+                            XingMing: $("#AddzdjsXingMing").val(),
+                            ZhuanYe: $("#AddzdjsZhuanYe").val(),
+                            ZhiCheng: $("#AddzdjsZhiCheng").val(),
+                            XueYuan_Id: $("#AddzdjsXueYuan").combobox('getValue'),
+                            ShenFenZhengHao: $("#AddzdjsShenFenZhengHao").val()
+                        };
+                        // var condition = "xingming = '" + $("#txtXingMing").val() + "'";
+                        var fpostData = "ShenFenZhengHao ='" + $("#AddzdjsShenFenZhengHao").val() + "'";
+
+
+                        $.get("@Url.Action("FindSingle", "ZhiDaoJiaoShi")?r=" + Math.random() + "&condition=" + fpostData, function(data) {
+
+                            var fdata = eval('(' + data + ')');
+
+                            if (fdata == "") {
+                                $.post("@Url.Action("Insert2", "ZhiDaoJiaoShi")", postData, function(data1) {
+
+                                    if (data1 != "-1") {
+
+                                        $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+                                        $("#Addzdjs").dialog("close");
+
+                                        ZDJS_ID = data1; //保存添加的指导教师ID
+                                        var postData3 = {
+                                            XiangMu_Id: XM_ID,
+                                            ZhiDaoJiaoShi_Id: ZDJS_ID,
+                                            WeiCi: $("#AddzdjsWeiCi").val(),
+                                        }
+
+                                        $.post("@Url.Action("Insert", "XiangMuZhiDaoJiaoShi")", postData3, function(info) {
+                                            if (info == "true") {
+                                                $.messager.alert("提示", "添加指导教师项目成功1");
+                                                $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+                                            } else {
+                                                $.messager.alert("提示", "添加指导教师项目失败");
+                                            }
+                                        });
+
+                                    } else {
+                                        //$.messager.alert("提示", "添加教师信息失败！");
+                                        $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+                                        $("#Addzdjs").dialog("close");
+
+                                    }
+                                });
+                            } else {
+                                @*var postData2 = {
+                            XiangMu_Id: XM_ID,
+                            ZhiDaoJiaoShi_Id: fdata.ID,
+                            WeiCi: fdata.ID + 1,
+                        }
+
+                        $.post("@Url.Action("Insert", "XiangMuZhiDaoJiaoShi")", postData2, function(info2) {
+                            if (info2 == "true") {
+                                $.messager.alert("提示", "添加指导教师项目成功2");
+                            } else {
+                                $.messager.alert("提示", "添加指导教师项目失败");
+                            }
+                        });*@
+                                $.messager.alert("提示", "此指导教师信息已经存在，请检查输入！");
+                                $("#Addzdjs").dialog("close");
+                            }
+                        });
+
+
+                    });
+                } else if (para == "QiYeDaoShi") {
+                    $("#DialogqydsOkbtn").click(function() {
+
+
+                        var postData = $("#ffAddqyds").serializeArray();
+                        $.post("@Url.Action("Insert", "QiYeDaoShi")", postData, function(data) {
+                            if (data == "ture") {
+                                $.messager.alert("提示", "添加企业导师信息成功！");
+                                $("#QiYeDaoShiGrid").datagrid("reload");
+                                $("#Addqyds").dialog("close");
+                            } else {
+                                $.messager.alert("提示", "添加企业导师信息失败！");
+                                $("#QiYeDaoShiGrid").datagrid("reload");
+                                $("#Addqyds").dialog("close");
+                            }
+                        });
+                    });
+                } else if (para == "XueSheng") {
+                    $("#DialogxsOkbtn").click(function() {
+
+                        //  var postData = $("#ffAddxs").serialize();
+
+
+                        var postData = {
+                            XueYuan_Id: $("#AddxsXueYuan_Id").combobox('getValue'),
+                            XueHao: $("#AddxsXueHao").val(),
+                            XingMing: $("#AddxsXingMing").val(),
+                            ZhuanYe: $("#AddxsZhuanYe").val(),
+                            XingBie: $("#AddxsXingBie").val(),
+                            ShouJi: $("#AddxsShouJi").val()
+                        };
+                        var fpostData = "XueHao ='" + $("#AddxsXueHao").val() + "'";
+
+
+                        $.get("@Url.Action("FindSingle", "XueSheng")?r=" + Math.random() + "&condition=" + fpostData, function(data) {
+                            if (data == "") {
+
+                                $.post("@Url.Action("Insert2", "XueSheng")", postData, function(data1) {
+                                    if (data1 != "-1") {
+                                        //$.messager.alert("提示", "添加学生信息成功！");
+                                        $("#XueShengGrid").datagrid("reload");
+                                        $("#Addxs").dialog("close");
+                                        //$("#Addxs").dialog("clear");
+                                        XS_ID = data1; //保存添加的学生的ID
+                                        //XS_ID = parseInt(data);
+
+                                        var postData2 = {
+                                            XueSheng_Id: XS_ID,
+                                            XiangMu_Id: XM_ID,
+                                            WeiCi: $("#AddxsWeiCi").val(),
+                                        }
+
+                                        $.post("@Url.Action("Insert", "XiangMuXueSheng")", postData2, function(info) {
+                                            if (info == "true") {
+
+                                                var WeiCiData = {
+                                                    XiangMu_Id: XM_ID,
+                                                    XueSheng_Id: XS_ID,
+                                                    WeiCi: $("#AddxsWeiCi").combobox('getValue')
+                                                };
+                                                $.messager.alert("提示", parseInt($("#AddxsWeiCi").val()));
+                                                $.post("@Url.Action("Insert", "XiangMuXueSheng")", WeiCiData, function(Wdata) {
+                                                    if (Wdata == "true") {
+                                                        $.messager.alert("提示", "添加学生信息成功");
+                                                        $("#XueShengGrid").datagrid("reload");
+                                                    } else {
+                                                        $.messager.alert("提示", "添加学生信息失败");
+                                                        $("#XueShengGrid").datagrid("reload");
+                                                        $("#Editxs").dialog("close");
+                                                        $("#Editxs").dialog("clear");
+                                                    }
+                                                });
+
+                                            }
+                                        });
+
+                                    } else {
+                                        //$.messager.alert("提示", "添加学生信息失败！");
+                                        $("#XueShengGrid").datagrid("reload");
+                                        $("#Addxs").dialog("close");
+                                        //$("#Addxs").dialog("clear");
+                                    }
+                                }); //***********
+                            } else {
+                                @*var postData3 = {
+                            XiangMu_Id: XM_ID,
+                            XueSheng_Id: XS_ID,
+                            WeiCi: data + 1,
+                        }
+
+                        $.post("@Url.Action("Insert", "XiangMuXueSheng")", postData3, function(info) {
+                            if (info == "true") {
+                                $.messager.alert("提示", "添加学生信息成功");
+                            } else {
+                                $.messager.alert("提示", "添加学生信息失败");
+                            }
+                        });*@
+                                $.messager.alert("提示", "此学生信息已经存在，请检查输入！");
+                                $("#Addxs").dialog("close");
+                            }
+                        });
+                    });
+                } else {
+                    $.messager.alert("提示", "确定按钮失效！");
+                }
+
+            }
+
+
+//修改信息弹出框 的确认按钮事件  *指导教师* *企业导师* *学生*
+            function DialogEditbtn(para) {
+
+                if (para == "ZhiDaoJiaoShi") {
+
+                    $("#Dialogzdjseditbtn").click(function() {
+                        //var postData = $("#ffAddzdjs").serializeArray();
+
+                        var postData = {
+                            XingMing: $("#EditzdjsXingMing").val(),
+                            ZhuanYe: $("#EditzdjsZhuanYe").val(),
+                            ZhiCheng: $("#EditzdjsZhiCheng").val(),
+                            XueYuan_Id: $("#EditzdjsXueYuan").combobox('getValue'),
+                            ShenFenZhengHao: $("#EditzdjsShenFenZhengHao").val()
+                        };
+                        var ZDJSID = $("#ZhiDaoJiaoShiGrid").datagrid("getSelected").ID;
+
+                        $.post("@Url.Action("Update", "ZhiDaoJiaoShi")" + "?ID=" + ZDJSID, postData, function(data) {
+
+                            if (data == "true") {
+                                $.messager.alert("提示", "修改教师信息成功！");
+                                $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+                                $("#Editzdjs").dialog("close");
+                                $("#Editzdjs").dialog("clear");
+                            } else {
+                                $.messager.alert("提示", "修改教师信息失败！");
+                                $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+                                $("#Editzdjs").dialog("close");
+                                $("#Editzdjs").dialog("clear");
+                            }
+                        });
+                    });
+                } else if (para == "QiYeDaoShi") {
+                    $("#Dialogqydseditbtn").click(function() {
+                        var postData = $("#ffEditqyds").serialize();
+
+                        var QYDSID = $("#QiYeDaoShiGrid").datagrid("getSelected").ID;
+
+                        $.post("@Url.Action("Update", "QiYeDaoShi")" + "?ID=" + QYDSID, postData, function(data) {
+                            if (data == "ture") {
+                                $.messager.alert("提示", "修改企业导师信息成功！");
+                                $("#QiYeDaoShiGrid").datagrid("reload");
+                                $("#Editqyds").dialog("close");
+                            } else {
+                                $.messager.alert("提示", "修改企业导师信息失败！");
+                                $("#QiYeDaoShiGrid").datagrid("reload");
+                                $("#Editqyds").dialog("close");
+                            }
+                        });
+                    });
+                } else if (para == "XueSheng") {
+                    $("#Dialogxseditbtn").click(function() {
+                        //var postData = $("#ffEditxs").serialize();
+                        var postData = {
+                            XueYuan_Id: $("#EditxsXueYuan_Id").combobox('getValue'),
+                            XueHao: $("#EditxsXueHao").val(),
+                            XingMing: $("#EditxsXingMing").val(),
+                            ZhuanYe: $("#EditxsZhuanYe").val(),
+                            XingBie: $("#EditxsXingBie").val(),
+                            ShouJi: $("#EditxsShouJi").val()
+                        };
+                        var XSID = $("#XueShengGrid").datagrid("getSelected").ID;
+
+                        $.post("@Url.Action("Update", "XueSheng")" + "?ID=" + XSID, postData, function(data) {
+                            if (data == "true") {
+
+                                var WeiCiData = {
+                                    XiangMu_Id: XM_ID,
+                                    XueSheng_Id: XSID,
+                                    WeiCi: $("#EditxsWeiCi").combobox('getValue')
+                                };
+
+                                $.post("@Url.Action("WUpload", "XiangMuXueSheng")", WeiCiData, function(Wdata) {
+                                    if (Wdata == "true") {
+                                        $.messager.alert("提示", "修改学生信息成功！");
+                                        $("#XueShengGrid").datagrid("reload");
+                                        $("#Editxs").dialog("close");
+                                        $("#Editxs").dialog("clear");
+                                    } else {
+                                        $.messager.alert("提示", "修改学生信息失败！");
+                                        $("#XueShengGrid").datagrid("reload");
+                                        $("#Editxs").dialog("close");
+                                        $("#Editxs").dialog("clear");
+                                    }
+                                });
+
+                            } else {
+                                $.messager.alert("提示", "修改学生信息失败！");
+                                $("#XueShengGrid").datagrid("reload");
+                                $("#Editxs").dialog("close");
+                                $("#Editxs").dialog("clear");
+                            }
+                        });
+                    });
+                } else {
+                    $.messager.alert("提示", "确定按钮失效！");
+                }
+
+
+            }
+
+
+            function ShowDelete(para) {
+
+                if (para == "ZhiDaoJiaoShi") {
+                    //得到用户选择的数据的ID
+                    var rows = $("#ZhiDaoJiaoShiGrid").datagrid("getSelections");
+                    if (rows.length >= 1) {
+                        //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                        var ids = ""; //1,2,3,4,5
+                        for (var i = 0; i < rows.length; i++) {
+                            ids += rows[i].ID + ",";
+                        }
+                        //最后去掉最后的那一个,
+                        ids = ids.substring(0, ids.length - 1);
+                        var postData = { Ids: ids };
+
+                        //然后确认发送异步请求的信息到后台删除数据
+                        $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function(deleteAction) {
+                            if (deleteAction) {
+                                $.get("@Url.Action("DeletebyIds", "ZhiDaoJiaoShi")", postData, function(data) {
+                                    if (data == "true") {
+                                        $.messager.alert("提示", "删除选定的记录成功");
+                                        $("#ZhiDaoJiaoShiGrid").datagrid("reload");
+
+                                        //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息
+                                        rows.length = ""; //第一种方法
+                                        $("#ZhiDaoJiaoShiGrid").datagrid("clearSelections"); //第二种方法
+                                    } else {
+                                        $.messager.alert("提示", data);
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        $.messager.alert("提示", "请选择你要删除的项目！");
+                    }
+                } else if (para == "QiYeDaoShi") {
+                    var rows = $("#QiYeDaoShiGrid").datagrid("getSelections");
+                    if (rows.length >= 1) {
+                        //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                        var ids = ""; //1,2,3,4,5
+                        for (var i = 0; i < rows.length; i++) {
+                            ids += rows[i].ID + ",";
+                        }
+                        //最后去掉最后的那一个,
+                        ids = ids.substring(0, ids.length - 1);
+                        var postData = { Ids: ids };
+
+                        //然后确认发送异步请求的信息到后台删除数据
+                        $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function(deleteAction) {
+                            if (deleteAction) {
+                                $.get("@Url.Action("DeletebyIds", "QiYeDaoShi")", postData, function(data) {
+                                    if (data == "true") {
+                                        $.messager.alert("提示", "删除选定的记录成功");
+                                        $("#QiYeDaoShiGrid").datagrid("reload");
+
+                                        //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息
+                                        rows.length = ""; //第一种方法
+                                        $("#QiYeDaoShiGrid").datagrid("clearSelections"); //第二种方法
+                                    } else {
+                                        $.messager.alert("提示", data);
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        $.messager.alert("提示", "请选择你要删除的项目！");
+                    }
+                } else if (para == "XueSheng") {
+                    var rows = $("#XueShengGrid").datagrid("getSelections");
+                    if (rows.length >= 1) {
+                        //遍历出用户选择的数据的信息，这就是用户用户选择删除的用户ID的信息
+                        var ids = ""; //1,2,3,4,5
+                        for (var i = 0; i < rows.length; i++) {
+                            ids += rows[i].ID + ",";
+                        }
+                        //最后去掉最后的那一个,
+                        ids = ids.substring(0, ids.length - 1);
+                        var postData = { Ids: ids };
+
+                        //然后确认发送异步请求的信息到后台删除数据
+                        $.messager.confirm("删除确认", "您确认删除选定的记录吗？", function(deleteAction) {
+                            if (deleteAction) {
+                                $.get("@Url.Action("DeletebyIds", "XueSheng")", postData, function(data) {
+                                    if (data == "true") {
+                                        $.messager.alert("提示", "删除选定的记录成功");
+                                        $("#XueShengGrid").datagrid("reload");
+
+                                        //当删除完成之后，第二次删除的时候还记得上次的信息，这样是不可以的，所以我们需要清除第一次的信息
+                                        rows.length = ""; //第一种方法
+                                        $("#XueShengGrid").datagrid("clearSelections"); //第二种方法
+                                    } else {
+                                        $.messager.alert("提示", data);
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        $.messager.alert("提示", "请选择你要删除的项目！");
+                    }
+                }
+            }
+        
+    </script>
+
+    <style>
+        table.view {
+            border: 1px solid #A8CFEB;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+        }
+
+        .view th {
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 100px;
+            border: 1px solid silver;
+            background-color: #F1F6FF;
+        }
+
+        .view td {
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 150px;
+            border: 1px solid silver;
+            background-color: #FAFCFF;
+        }
+    </style>
+</head>
+    <body>
+        
+        <div class="easyui-layout" fit="true">
+            <div region="north" border="true" split="true" style="height: 300px;">
+                <div class="easyui-layout" id="tb" fit="true" style="padding:5px; height:350px;">
+                    <div region="north" border="true" style="height: 70px;">
+                        <!-------------------------------搜索框----------------------------------->
+                        <fieldset style="height: 70px; float: left;">
+                            <legend>项目筛选</legend>
+                            <form id="ffSearch" method="post">
+                                <div style="margin-bottom:5px">
+                                    <label for="txtXueYuan">学院：</label>
+                                    <select id="txtXueYuan" name="XueYuan" style="width:120px"></select>
+                                    <label for="txtLeiBie">竞赛：</label>
+                                    <select id="txtLeiBie" name="LeiBie" style="width:120px"></select>
+
+                                    @*<label for="txtID">指导教师序号：</label>
+                                    <input type="text" id="txtID" name="ID" style="width:20px" readonly="readonly" />&nbsp;&nbsp;&nbsp;*@
+                                    <label for="txtXingMing">指导教师姓名：</label>
+                                    <input type="text" id="txtXingMing" name="XingMing" style="width:80px" />&nbsp;&nbsp;&nbsp;
+                                    <label for="txtZhuanYe">专业：</label>
+                                    <input type="text" id="txtZhuanYe" name="ZhuanYe" style="width:100px" />&nbsp;&nbsp;&nbsp;
+                                    <label for="txtZhiCheng">职称：</label>
+                                    <input type="text" id="txtZhiCheng" name="ZhiCheng" style="width:100px" />&nbsp;&nbsp;&nbsp;
+                                    <label for="txtShenFenZhengHao">身份证号：</label>
+                                    <input type="text" id="txtShenFenZhengHao" name="ShenFenZhengHao" style="width:150px" />&nbsp;&nbsp;&nbsp;
+                                    
+                                    @*<a id="btnSearch" class="easyui-linkbutton" data-options="iconCls:'icon-search'" href="#">
+                                        查询
+                                    </a>*@
+                                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="btnSearch">查询</a>
+                                    <a id="btnRestar" class="easyui-linkbutton" data-options="iconCls:'icon-undo'" href="#">
+                                        重置
+                                    </a>
+
+                                </div>
+                            </form>
+                        </fieldset>
+                    </div>
+                    <!--*******************详细信息显示********************-->
+                    <div region="center" border="true" fit="ture">
+                        <table id="grid" data-options="tools:'#tab-tools'" style="width:1200px;"></table>
+                    </div>                  
+                </div>
+            </div>
+            
+            <div region="center" border="true">
+                <div id="subtabs" class="easyui-tabs" fit="true">
+                    <div title="指导教师">
+                        <div class="easyui-layout" fit="true">
+                            <div region="center" style="overflow: hidden;">
+                                <!-------------------------------指导教师详细信息展示表格------------------title="指导教师" data-options="iconCls:'icon-view'"----------------->
+                                <table id="ZhiDaoJiaoShiGrid"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div title="企业导师">
+                        <div class="easyui-layout" fit="true">
+                            <div region="center" style="overflow: hidden;">
+                                <!-------------------------------企业导师详细信息展示表格------------title="企业导师" data-options="iconCls:'icon-view'"----------------------->
+                                <table id="QiYeDaoShiGrid"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div title="学生">
+                        <div class="easyui-layout" fit="true">
+                            <div region="center" style="overflow: hidden;">
+                                <!-------------------------------学生详细信息展示表格--------------title="学生" data-options="iconCls:'icon-view'"--------------------->
+                                <table id="XueShengGrid"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <!-------------------------查看项目详细信息的弹出层-------------------------->
+        <div id="DivView" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-view',buttons: '#dlg-buttons'">
+            <form id="ffView" method="post" novalidate="novalidate">
+                <table id="tblView" class="view">
+                    <tr>
+                        <th>
+                            <label for="schID">项目编号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schID" name="ID" /> <!-- data-options="required:true,validType:'length[1,5]'" -->
+                        </td>
+                        <th>
+                            <label for="schXiangMuMingCheng">项目名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schXiangMuMingCheng" name="XiangMuMingCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="schXiangMuJianJie">项目简介：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schXiangMuJianJie" name="XiangMuJianJie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="schCanSaiShiJian">参赛时间：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schCanSaiShiJian" name="CanSaiShiJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="schHuoJiangShiJian">获奖时间：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schHuoJiangShiJian" name="HuoJiangShiJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="schHuoJiangJiBie">获奖级别：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schHuoJiangJiBie" name="HuoJiangJiBie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="schHuoJiangMingCheng">获奖名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schHuoJiangMingCheng" name="HuoJiangMingCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="schBeiZhu">备注：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schBeiZhu" name="BeiZhu" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="schXueXiaoShenPi">学校审批：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="schXueXiaoShenPi" name="XueXiaoShenPi" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <input class="easyui-layout" type="hidden" id="ID2" />
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls: 'icon-cancel'" onclick="javascript:$('#DivView').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!---------------------------修改项目信息弹出层------------------------------>
+        <div id="DivEdit" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-view',buttons: '#dlg-buttons'">
+            <form id="ffEdit" method="post" novalidate="novalidate">
+                <table id="tblView" class="view">
+                    <tr>
+                        
+                        <th>
+                            <label for="editXiangMuMingCheng">项目名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="editXiangMuMingCheng" name="XiangMuMingCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>       
+                        
+                        <th>
+                            <label for="editJingSai">竞赛名称：</label>
+                        </th>
+                        <td>
+                            <select id="editJingSai" name="JingSai" style="width:120px"></select>
+                        </td>
+                    </tr>
+                    
+
+                    <tr>
+                        <th>
+                            <label for="editXiangMuJianJie">项目简介：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="editXiangMuJianJie" name="XiangMuJianJie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="editCanSaiShiJian">参赛时间：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-datetimebox" data-options="showSeconds:false" id="editCanSaiShiJian" name="CanSaiShiJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="editHuoJiangShiJian">获奖时间：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-datetimebox" data-options="showSeconds:false" id="editHuoJiangShiJian" name="HuoJiangShiJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                        <th>
+                            <label for="editHuoJiangJiBie">获奖级别：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="editHuoJiangJiBie" name="HuoJiangJiBie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="editHuoJiangMingCheng">获奖名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="editHuoJiangMingCheng" name="HuoJiangMingCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    
+                        <th>
+                            <label for="editBeiZhu">备注：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="editBeiZhu" name="BeiZhu" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th><label for="editQiYeDaoShi">企业导师：</label></th>
+                        <td><select id="editQiYeDaoShi" name="QiYeDaoShi" style="width:120px"></select></td>
+                        <th>
+                            <label for="editXueXiaoShenPi">学校审批：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="editXueXiaoShenPi" name="XueXiaoShenPi" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnEditOK" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls: 'icon-cancel'" onclick="javascript:$('#DivEdit').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        <!---------------------------添加项目信息弹出层------------------------------>
+        <div id="DivAdd" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-view',buttons: '#dlg-buttons'">
+            <form id="ffAdd" method="post" novalidate="novalidate">
+                <table id="tblView" class="view">
+                    <tr>                   
+                        <th>
+                            <label for="addXiangMuMingCheng">项目名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="addXiangMuMingCheng" name="XiangMuMingCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="addJingSai">竞赛名称：</label>
+                        </th>
+                        <td>
+                            <select id="addJingSai" name="JingSai" style="width:120px"></select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <label for="addXiangMuJianJie">项目简介：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="addXiangMuJianJie" name="XiangMuJianJie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="addCanSaiShiJian">参赛时间：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-datetimebox" data-options="showSeconds:false" type="text" id="addCanSaiShiJian" name="CanSaiShiJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="addHuoJiangShiJian">获奖时间：</label>
+                        </th>
+                        <td>
+                            <input class ="easyui-datetimebox" data-options="showSeconds:false" type="text" id="addHuoJiangShiJian" name="HuoJiangShiJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                        <th>
+                            <label for="addHuoJiangJiBie">获奖级别：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="addHuoJiangJiBie" name="HuoJiangJiBie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="addHuoJiangMingCheng">获奖名称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="addHuoJiangMingCheng" name="HuoJiangMingCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="addBeiZhu">备注：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="addBeiZhu" name="BeiZhu" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="addQiYeDaoShi">企业导师：</label>
+                        </th>
+                        <td>    
+                            <select id="addQiYeDaoShi" name="QiYeDaoShi" style="width:120px"></select>
+                        </td>
+
+                        <th>
+                            <label for="addXueXiaoShenPi">学校审批：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="addXueXiaoShenPi" name="XueXiaoShenPi" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="btnAddOK" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls: 'icon-cancel'" onclick="javascript: $('#DivAdd').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+
+                </table>
+                <div style="float: left; width: 600px; border: #999999 1px solid">
+                    <div>
+                        <label for="addShuoMing" style="float: left">附件说明：</label>
+
+                        <textarea class="easyui-layout" id="addShuoMing" name="ShuoMing" style="float: left; width: 230px; height: 100px; float: left;"></textarea> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                    </div>
+
+                    <div style="float: left">
+                        <label for="addFuJian">附件上传：</label>
+
+                        <input id="addFuJian" name="addFuJian" type="file" multiple="multiple" />
+                        <input id="jianjieleibie" type="hidden" />
+                        <!-- <input class="easyui-layout" type="file" id="addFuJian" name="FuJian" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        
+        
+        
+  <!--*********************************************************下面信息弹出层DIV*******************************************************************-->      
+    
+        
+        <!--------------------------添加指导教师信息的弹出层---------------------------->
+        <div id="Addzdjs" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+            <form id="ffAddzdjs" method="post" novalidate="novalidate">
+                <table id="tblAdd" class="view">
+                    <tr>
+                       
+                        <th>
+                            <label for="AddzdjsZhiCheng">职称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddzdjsZhiCheng" name="ZhiCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="AddzdjsXueYuan">所属学院：</label>
+                        </th>
+                        <td>
+                            <select id="AddzdjsXueYuan" name="XueYuan" style="width:120px"></select> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="AddzdjsXingMing">姓名：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddzdjsXingMing" name="XingMing" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="AddzdjsZhuanYe">专业：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddzdjsZhuanYe" name="ZhuanYe" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <th>
+                            <label for="AddzdjsShenFenZhengHao">身份证号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddzdjsShenFenZhengHao" name="ShenFenZhengHao" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="DialogzdjsOkbtn" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#Addzdjs').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!--------------------------编辑指导教师信息的弹出层---------------------------->
+        <div id="Editzdjs" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+            <form id="ffAdd" method="post" novalidate="novalidate">
+                <table class="view">
+                    <tr>
+                        <th>
+                            <label for="EditzdjsZhiCheng">职称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditzdjsZhiCheng" name="ZhiCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="EditzdjsXueYuan">所属学院：</label>
+                        </th>
+                        <td>
+                            <select id="EditzdjsXueYuan" name="XueYuan" style="width:120px"></select> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="EditzdjsXingMing">姓名：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditzdjsXingMing" name="XingMing" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="EditzdjsZhuanYe">专业：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditzdjsZhuanYe" name="ZhuanYe" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <th>
+                            <label for="EditzdjsShenFenZhengHao">身份证号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditzdjsShenFenZhengHao" name="ShenFenZhengHao" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="Dialogzdjseditbtn" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#Editzdjs').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        
+
+        <!--------------------------添加企业导师信息的弹出层---------------------------->
+        <div id="Addqyds" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+            <form id="ffAddqyds" method="post" novalidate="novalidate">
+                <table class="view">
+                    <tr>
+                        <th>
+                            <label for="AddqydsZhiCheng">职称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddqydsZhiCheng" name="ZhiCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="AddqydsXueYuan">所属学院：</label>
+                        </th>
+                        <td>
+                            <select id="AddqydsXueYuan" name="XueYuan" style="width:120px"></select> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="AddqydsXingMing">姓名：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddqydsXingMing" name="XingMing" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="AddqydsZhuanYe">专业：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddqydsZhuanYe" name="ZhuanYe" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <th>
+                            <label for="AddqydsShenFenZhengHao">身份证号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddqydsShenFenZhengHao" name="ShenFenZhengHao" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="Addqydsokbtn" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#Addqyds').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        <!--------------------------修改企业导师信息的弹出层---------------------------->
+        <div id="Editqyds" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+            <form id="ffEditqyds" method="post" novalidate="novalidate">
+                <table class="view">
+                    <tr>
+                        <th>
+                            <label for="EditqydsZhiCheng">职称：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditqydsZhiCheng" name="ZhiCheng" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="EditqydsXueYuan">所属学院：</label>
+                        </th>
+                        <td>
+                            <select id="EditqydsXueYuan" name="XueYuan" style="width:120px"></select> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="EditqydsXingMing">姓名：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditqydsXingMing" name="XingMing" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="EditqydsZhuanYe">专业：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditqydsZhuanYe" name="ZhuanYe" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <th>
+                            <label for="EditqydsShenFenZhengHao">身份证号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditqydsShenFenZhengHao" name="ShenFenZhengHao" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="Editqydsokbtn" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#Editqyds').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        
+
+        <!----------------------------添加学生信息的弹出层------------------------------>
+        <div id="Addxs" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+            <form id="ffAddxs" method="post" novalidate="novalidate">
+                <table class="view">
+                    <tr>
+                        <th>
+                            <label for="AddxsXueYuan_Id">所属学院：</label>
+                        </th>
+                        <td>
+                            <select id="AddxsXueYuan_Id" name="XueYuan_Id" style="width:120px"></select> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        
+                        <th>
+                            <label for="AddxsXueHao">学号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddxsXueHao" name="XueHao" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="AddxsXingMing">姓名：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddxsXingMing" name="XingMing" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="AddxsZhuanYe">专业：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddxsZhuanYe" name="ZhuanYe" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="AddxsXingBie">性别：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddxsXingBie" name="XingBie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    
+                        <th>
+                            <label for="AddxsShouJi">手机号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="AddxsShouJi" name="ShouJi" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    
+                    <tr>
+                        <th>
+                            <label for="AddxsWeiCi">位次：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="AddxsWeiCi" name="WeiCi" />
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="DialogxsOkbtn" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#Addxs').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <!----------------------------修改学生信息的弹出层------------------------------>
+        <div id="Editxs" class="easyui-dialog" style="width:580px;height:250px;padding:10px 20px"
+             closed="true" resizable="true" modal="true" data-options="iconCls: 'icon-add',buttons: '#dlg-buttons'">
+            <form id="ffEditxs" method="post" novalidate="novalidate">
+                <table class="view">
+                    <tr>
+                        <th>
+                            <label for="EditxsXueYuan_Id">所属学院：</label>
+                        </th>
+                        <td>
+                            <select id="EditxsXueYuan_Id" name="XueYuan" style="width:120px"></select> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        
+                        <th>
+                            <label for="EditxsXueHao">学号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditxsXueHao" name="XueHao" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="EditxsXingMing">姓名：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditxsXingMing" name="XingMing" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                        <th>
+                            <label for="EditxsZhuanYe">专业：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditxsZhuanYe" name="ZhuanYe" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="EditxsXingBie">性别：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditxsXingBie" name="XingBie" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                        <th>
+                            <label for="EditxsShouJi">手机号：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-layout" type="text" id="EditxsShouJi" name="ShouJi" /> <!-- data-options="required:true,validType:'length[1,50]'" -->
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="EditxsWeiCi">位次：</label>
+                        </th>
+                        <td>
+                            <input class="easyui-validatebox" type="text" id="EditxsWeiCi" name="WeiCi" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4" style="text-align:right; padding-top:10px">
+                            <a href="javascript:void(0)" class="easyui-linkbutton" id="Dialogxseditbtn" iconcls="icon-ok">确定</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript: $('#Editxs').dialog('close')">关闭</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+
+    </body>
+</html>

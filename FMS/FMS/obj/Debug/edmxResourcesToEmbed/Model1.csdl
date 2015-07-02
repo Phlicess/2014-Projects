@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WJModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="WJEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GuanLiYuans" EntityType="WJModel.GuanLiYuan" />
+    <EntitySet Name="QunZus" EntityType="WJModel.QunZu" />
+    <EntitySet Name="RenWus" EntityType="WJModel.RenWu" />
+    <EntitySet Name="WenJians" EntityType="WJModel.WenJian" />
+    <EntitySet Name="YongHus" EntityType="WJModel.YongHu" />
+    <EntitySet Name="YongHu_RenWu" EntityType="WJModel.YongHu_RenWu" />
+    <AssociationSet Name="FK_QunZu_Manager" Association="WJModel.FK_QunZu_Manager">
+      <End Role="YongHu" EntitySet="YongHus" />
+      <End Role="QunZu" EntitySet="QunZus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RENWU_MID" Association="WJModel.FK_RENWU_MID">
+      <End Role="RenWu" EntitySet="RenWus" />
+      <End Role="YongHu_RenWu" EntitySet="YongHu_RenWu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RENWU_WENJIAN" Association="WJModel.FK_RENWU_WENJIAN">
+      <End Role="RenWu" EntitySet="RenWus" />
+      <End Role="WenJian" EntitySet="WenJians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_YONGHU_RENWU" Association="WJModel.FK_YONGHU_RENWU">
+      <End Role="YongHu" EntitySet="YongHus" />
+      <End Role="RenWu" EntitySet="RenWus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RENWU_YONGHU" Association="WJModel.FK_RENWU_YONGHU">
+      <End Role="YongHu" EntitySet="YongHus" />
+      <End Role="WenJian" EntitySet="WenJians" />
+    </AssociationSet>
+    <AssociationSet Name="FK_YONGHU_MID" Association="WJModel.FK_YONGHU_MID">
+      <End Role="YongHu" EntitySet="YongHus" />
+      <End Role="YongHu_RenWu" EntitySet="YongHu_RenWu" />
+    </AssociationSet>
+    <AssociationSet Name="YongHu_QunZu" Association="WJModel.YongHu_QunZu">
+      <End Role="QunZu" EntitySet="QunZus" />
+      <End Role="YongHu" EntitySet="YongHus" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="GuanLiYuan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="QunZu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YongHu_ID" Type="Int32" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GroupExplain" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PublicGroup" Type="Boolean" />
+    <NavigationProperty Name="YongHu" Relationship="WJModel.FK_QunZu_Manager" FromRole="QunZu" ToRole="YongHu" />
+    <NavigationProperty Name="YongHus" Relationship="WJModel.YongHu_QunZu" FromRole="QunZu" ToRole="YongHu" />
+  </EntityType>
+  <EntityType Name="RenWu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YongHu_ID" Type="Int32" />
+    <Property Name="TaskName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" />
+    <Property Name="CloseTime" Type="DateTime" Precision="3" />
+    <Property Name="Publisher" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="Boolean" />
+    <Property Name="FilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TaskDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="YongHu_RenWu" Relationship="WJModel.FK_RENWU_MID" FromRole="RenWu" ToRole="YongHu_RenWu" />
+    <NavigationProperty Name="WenJians" Relationship="WJModel.FK_RENWU_WENJIAN" FromRole="RenWu" ToRole="WenJian" />
+    <NavigationProperty Name="YongHu" Relationship="WJModel.FK_YONGHU_RENWU" FromRole="RenWu" ToRole="YongHu" />
+  </EntityType>
+  <EntityType Name="WenJian">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YongHu_ID" Type="Int32" />
+    <Property Name="RenWu_ID" Type="Int32" />
+    <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" />
+    <Property Name="Uploader" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FilePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RenWu" Relationship="WJModel.FK_RENWU_WENJIAN" FromRole="WenJian" ToRole="RenWu" />
+    <NavigationProperty Name="YongHu" Relationship="WJModel.FK_RENWU_YONGHU" FromRole="WenJian" ToRole="YongHu" />
+  </EntityType>
+  <EntityType Name="YongHu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Boolean" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NickName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="QunZus" Relationship="WJModel.FK_QunZu_Manager" FromRole="YongHu" ToRole="QunZu" />
+    <NavigationProperty Name="RenWus" Relationship="WJModel.FK_YONGHU_RENWU" FromRole="YongHu" ToRole="RenWu" />
+    <NavigationProperty Name="WenJians" Relationship="WJModel.FK_RENWU_YONGHU" FromRole="YongHu" ToRole="WenJian" />
+    <NavigationProperty Name="YongHu_RenWu" Relationship="WJModel.FK_YONGHU_MID" FromRole="YongHu" ToRole="YongHu_RenWu" />
+    <NavigationProperty Name="QunZus1" Relationship="WJModel.YongHu_QunZu" FromRole="YongHu" ToRole="QunZu" />
+  </EntityType>
+  <EntityType Name="YongHu_RenWu">
+    <Key>
+      <PropertyRef Name="YongHu_ID" />
+      <PropertyRef Name="RenWu_ID" />
+    </Key>
+    <Property Name="YongHu_ID" Type="Int32" Nullable="false" />
+    <Property Name="RenWu_ID" Type="Int32" Nullable="false" />
+    <Property Name="ReadOrNo" Type="Boolean" />
+    <Property Name="FinishOrNo" Type="Boolean" />
+    <Property Name="GUID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RenWu" Relationship="WJModel.FK_RENWU_MID" FromRole="YongHu_RenWu" ToRole="RenWu" />
+    <NavigationProperty Name="YongHu" Relationship="WJModel.FK_YONGHU_MID" FromRole="YongHu_RenWu" ToRole="YongHu" />
+  </EntityType>
+  <Association Name="FK_QunZu_Manager">
+    <End Type="WJModel.YongHu" Role="YongHu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WJModel.QunZu" Role="QunZu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YongHu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QunZu">
+        <PropertyRef Name="YongHu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RENWU_MID">
+    <End Type="WJModel.RenWu" Role="RenWu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WJModel.YongHu_RenWu" Role="YongHu_RenWu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RenWu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="YongHu_RenWu">
+        <PropertyRef Name="RenWu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RENWU_WENJIAN">
+    <End Type="WJModel.RenWu" Role="RenWu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WJModel.WenJian" Role="WenJian" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RenWu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WenJian">
+        <PropertyRef Name="RenWu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_YONGHU_RENWU">
+    <End Type="WJModel.YongHu" Role="YongHu" Multiplicity="0..1" />
+    <End Type="WJModel.RenWu" Role="RenWu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YongHu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RenWu">
+        <PropertyRef Name="YongHu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RENWU_YONGHU">
+    <End Type="WJModel.YongHu" Role="YongHu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WJModel.WenJian" Role="WenJian" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YongHu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WenJian">
+        <PropertyRef Name="YongHu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_YONGHU_MID">
+    <End Type="WJModel.YongHu" Role="YongHu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WJModel.YongHu_RenWu" Role="YongHu_RenWu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YongHu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="YongHu_RenWu">
+        <PropertyRef Name="YongHu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="YongHu_QunZu">
+    <End Type="WJModel.QunZu" Role="QunZu" Multiplicity="*" />
+    <End Type="WJModel.YongHu" Role="YongHu" Multiplicity="*" />
+  </Association>
+</Schema>

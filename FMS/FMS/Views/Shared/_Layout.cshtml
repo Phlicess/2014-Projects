@@ -1,0 +1,132 @@
+﻿@using Microsoft.Ajax.Utilities
+
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+        <title>@ViewBag.Title-轻型云办公系统</title>
+        <link href="~/favicon.png" rel="shortcut icon" type="image/x-icon" />
+               
+        <link rel="stylesheet" type="text/css" href="~/Content/Uploaddify/uploadify.css">
+        <meta name="viewport" content="width=device-width" />
+        
+        <script src="~/Scripts/jquery-ui-1.11/jquery-1.11.1.min.js"></script>
+        <script src="~/Scripts/jquery-ui-1.11/jquery-1.11.1.js"></script>
+        <script src="~/Scripts/jquery-ui-1.11/jquery-ui.js"></script>
+        <link href="~/Scripts/jquery-ui-1.11/jquery-ui.css" rel="stylesheet" />
+        <link href="~/Scripts/jquery-ui-1.11/jquery-ui.theme.css" rel="stylesheet" />
+        
+
+        <script src="~/Scripts/DataGrid.js"></script>
+        @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")*@
+        <script src="~/Content/Uploaddify/jquery.uploadify.js"></script>
+        <script type="text/javascript" src="~/MD 5/md5.js"></script>
+
+        @Styles.Render("~/Content/style.css")
+        @Scripts.Render("~/bundles/modernizr")
+        <style>
+            .active {
+                background-color: #252525;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            ////左侧菜单栏效果
+            $(function () {
+                var url = window.location.href;
+                var id = url.split('/');
+                id = id[id.length - 1];
+                if (id.indexOf("#") != -1) {
+                    id = id.substring(0, id.length - 1);
+                }
+                $("ul li").removeClass("active");  //首先移除全部的active
+                $("#" + id).addClass("active");    //选中的添加acrive
+            })
+
+        </script>
+        <header> 
+            <div class="head">
+                <div class="top">
+                    <div class="top_logo">
+                        <a href="@Url.Action("Index","Welcome")">
+                            <img src="@Url.Content("~/Images/logo_top01.png")" height="100" />
+                        </a>
+                    </div>
+                </div>
+                <div class="date_time">
+                    <div class="head_bottom">
+                        <div class="helloUser" style="width: 200px; float: left;">
+                            <p style="font-weight: bolder; display: block; font-size: 15px; line-height: 40px; margin: 0; text-align: center; color: aliceblue; padding: 0;"><a href="@Url.Action("Index","Welcome")" style="color: #ffffff; text-decoration: none;">@Session["Name"] </a> 你好！</p>
+                        </div>
+                        <div style="width: 150px; float: left; height: 40px;">
+                            <p style="color: #ffffff; height: 40px; font-weight: bolder; font-size: 20px; display: block; line-height: 40px; margin: 0; text-align: center; ">@ViewBag.Title >></p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </header>
+        <div id="body" class="main">
+            <div class="menu">
+                @{
+                    if (@Session["User"] == "Admin")
+                    {
+                        <ul>
+                            <li id="Welcome" style="background-color: #303030;"><a class="pic" href="~/Welcome/"><img src="~/Images/home.png"></a>@Html.ActionLink("菜单", "Index", "Welcome")</li>
+                            <li id="ManagerPublisher"><a class="pic" href="/ManagerPublosher/"><img src="~/Images/managerpublisher.png"></a>@Html.ActionLink("发布者", "Index", "ManagerPublisher")</li>
+                            <li id="ManagerReceiver"><a class="pic" href="/ManagerReceiver/"><img src="~/Images/managerreceiver.png"></a>@Html.ActionLink("接收者", "Index", "ManagerReceiver")</li>
+                            <li id="DefultGroup"><a class="pic" href="/DefultGroup/"><img src="~/Images/defultgroup.png"></a>@Html.ActionLink("默认群组", "Index", "DefultGroup")</li>
+                            <li id="AdminInformation"><a class="pic" href="/AdminInformation/"><img src="~/Images/personinformation.png"></a>@Html.ActionLink("个人资料", "Index", "AdminInformation")</li>
+                            <li style="position: absolute; left: 0; bottom: 15px; border-top: #999 1px solid; "><a class="pic" href="~/Home/"><img src="~/Images/exit.png"></a>@Html.ActionLink("退出登录", "Index", "Home")</li>
+                        </ul>
+                    }
+                    else if (@Session["User"] == "Publisher")
+                    {
+                        <ul>
+                            <li id="Welcome" style="background-color: #303030;"><a class="pic" href="~/Welcome/"><img src="~/Images/home.png"></a>@Html.ActionLink("菜单", "Index", "Welcome")</li>
+                            <li id="NewTask"><a class="pic" href="~/NewTask/"><img src="~/Images/newtask.png"></a>@Html.ActionLink("新建任务", "Index", "NewTask")</li>
+                            <li id="GoingTask"><a class="pic" href="~/GoingTask/"><img src="~/Images/GoingTask.png"></a>@Html.ActionLink("进行任务", "Index", "GoingTask")</li>
+                            <li id="HistoryTask"><a class="pic" href="~/HistoryTask/"><img src="~/Images/HistoryTask.png"></a>@Html.ActionLink("历史任务", "Index", "HistoryTask")</li>
+                            <li id="GroupManager"><a class="pic" href="~/GroupManager/"><img src="~/Images/GroupManager.png"></a>@Html.ActionLink("群组管理", "Index", "GroupManager")</li>
+                            <li id="DraftBox"><a class="pic" href="~/DraftBox/"><img src="~/Images/DraftBox.png"></a>@Html.ActionLink("草稿箱", "Index", "DraftBox")</li>
+                            <li id="PublisherInformation"><a class="pic" href="~/PublisherInformation/"><img src="~/Images/personinformation.png"></a>@Html.ActionLink("个人资料", "Index", "PublisherInformation")</li>
+                            <li style="position: absolute; left: 0; bottom: 15px; border-top: #999 1px solid; "><a class="pic" href="~/Home/"><img src="~/Images/exit.png"></a>@Html.ActionLink("退出登录", "Index", "Home")</li>
+                        </ul>
+                    }
+                    else if (@Session["User"] == "Receiver")
+                    {
+                        <ul>
+                            <li id="Welcome" style="background-color: #303030;"><a class="pic" href="~/Welcome/"><img src="~/Images/home.png"></a>@Html.ActionLink("菜单", "Index", "Welcome")</li>
+                            <li id="Backlog"><a class="pic" href="~/Backlog/"><img src="~/Images/Backlog.png"></a>@Html.ActionLink("待办事项", "Index", "Backlog")</li>
+                            <li id="HistoryMatters"><a class="pic" href="~/HistoryMatters/"><img src="~/Images/HistoryTask.png"></a>@Html.ActionLink("历史事项", "Index", "HistoryMatters")</li>
+                            <li id="MemberList"><a class="pic" href="~/MemberList/"><img src="~/Images/MemberList.png"></a>@Html.ActionLink("通讯录", "Index", "MemberList")</li>
+                            <li id="ReceiverInformation"><a class="pic" href="~/ReceiverInformation/"><img src="~/Images/personinformation.png"></a>@Html.ActionLink("个人资料", "Index", "ReceiverInformation")</li>
+                            <li style="position: absolute; left: 0; bottom: 15px; border-top: #999 1px solid;"><a class="pic" href="~/Home/"><img src="~/Images/exit.png"></a>@Html.ActionLink("退出登录", "Index", "Home")</li>
+                        </ul>
+                    }
+                }
+            </div>
+            @RenderSection("featured", required: false)
+            <div class="content">
+                <section>
+                    @RenderBody()
+                </section>
+            </div>
+            
+        </div>
+        <footer style="height: 45px;">
+            <div class="foot">
+                <div>
+                    <p style="color: #fffff0; margin-left: 450px;"> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &copy; @DateTime.Now.Year - 轻型云办公系统 &nbsp; &nbsp;&nbsp;copyright&nbsp;·&nbsp;
+                        <a href="http://cs.lcu.edu.cn" target="bank" style="color: #fffff0; font-weight: bolder;">聊城大学计算机学院</a></p>
+                </div>
+            </div>
+        </footer>
+
+        @*@Styles.Render("~/Content/themes/base/css")*@
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

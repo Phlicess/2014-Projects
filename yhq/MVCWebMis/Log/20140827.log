@@ -1,0 +1,481 @@
+[2014-08-27 16:53:50]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 16:53:51]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 16:53:51]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 16:53:51]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 17:27:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 17:27:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 17:27:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 17:27:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 17:27:17]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:16]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:17]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:17]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:30:19]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 21:35:45]    convert:True
+
+[2014-08-27 21:35:45]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 21:35:46]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 21:36:32]    convert:True
+
+[2014-08-27 21:36:32]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 21:36:32]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 21:38:05]    convert:True
+
+[2014-08-27 21:38:05]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 21:38:05]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:24:05]    convert:True
+
+[2014-08-27 22:24:05]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:24:05]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:26:12]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:12]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:13]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:13]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:13]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:13]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:13]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-27 22:26:14]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_Charset(String value)
+   在 System.Web.HttpResponseWrapper.set_Charset(String value)
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 35
+
+[2014-08-27 22:26:30]    convert:True
+
+[2014-08-27 22:26:30]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:26:31]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:31:23]    convert:True
+
+[2014-08-27 22:31:24]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:31:24]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:31:52]    convert:True
+
+[2014-08-27 22:31:52]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:31:52]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:32:09]    convert:True
+
+[2014-08-27 22:32:09]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:32:09]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:32:50]    convert:True
+
+[2014-08-27 22:32:50]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:32:50]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:33:27]    convert:True
+
+[2014-08-27 22:33:27]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:33:27]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:34:57]    convert:True
+
+[2014-08-27 22:34:57]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:34:57]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:36:30]    convert:True
+
+[2014-08-27 22:36:31]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:36:31]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:36:41]    convert:True
+
+[2014-08-27 22:36:41]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:36:41]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:37:39]    convert:True
+
+[2014-08-27 22:37:39]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:37:39]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:45:39]    convert:True
+
+[2014-08-27 22:45:39]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:45:39]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:52:42]    convert:True
+
+[2014-08-27 22:52:42]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:52:42]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 22:54:38]    convert:True
+
+[2014-08-27 22:54:38]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 22:54:38]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 23:07:03]    convert:True
+
+[2014-08-27 23:07:09]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 23:07:54]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 23:08:53]    convert:True
+
+[2014-08-27 23:09:29]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 23:23:32]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+
+[2014-08-27 23:26:24]    convert:True
+
+[2014-08-27 23:26:24]    已经删除了上传的临时文件doc和pdf
+
+[2014-08-27 23:26:24]    System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.PrivateFindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 728
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 714
+   在 WHC.Framework.ControlUtil.BaseBLL`1.FindByID(Object key) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 327
+   在 WHC.MVCWebMis.Controllers.FuJianController.Upload(HttpPostedFileBase fileData, String guid, String folder, String fujianid) 位置 e:\yhq\MVCWebMis\Controllers\FuJianController.cs:行号 103
+

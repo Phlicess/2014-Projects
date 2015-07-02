@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "个人资料";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        ReFormData();   //返回表单数据
+
+        ShowEditPassword(); //修改密码信息的弹出框
+        InformationOkBtn();  //修改个人信息的确定按钮函数
+        ResetInformation();  //重置个人信息按钮
+    });
+
+    //返回表单数据
+    function ReFormData() {
+        $.post("@Url.Action("Find", "PublisherInformation")", function (data) {
+            //alert(data);
+            var reData = eval('('+data+')');
+            
+            $("#NickName").val(reData.NickName);
+            $("#Name").val(reData.Name);
+            $("#Phone").val(reData.Phone);
+            $("#Email").val(reData.Email);
+            $("#Position").val(reData.Position);
+        });
+    }
+
+    //修改个人信息确定按钮
+    function InformationOkBtn() {
+        $("#InformationEdit").click(function () {
+            var postData = {
+                NickName: $("#NickName").val(),
+                Name: $("#Name").val(),
+                Phone: $("#Phone").val(),
+                Email: $("#Email").val(),
+                Position: $("#Position").val(),
+            };
+
+            $.post("@Url.Action("EditInformation", "PublisherInformation")", postData, function (data) {
+                if (data == "true") {
+                    alert("已经修改成功了！");
+                } else {
+                    alert("个人信息哪能为空？");
+                }
+            });
+        });
+    }
+
+    //修改密码弹出框
+    function ShowEditPassword() {
+        $("#ShowEditPassword").dialog({
+            title: '查看事项',
+            width: 600,
+            height: 420,
+            //position: [540, 138],
+            autoOpen: false,
+            modal: true,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+
+        $("#EditPassword").click(function () {
+            $("#DialogNickName").val("@Session["NickName"]");
+            $("#ShowEditPassword").dialog("open");
+        });
+
+        $("#DialogClose").click(function () {
+            $("#ShowEditPassword").dialog("close");
+        });
+
+        //修改密码弹出框的确定按钮
+        $("#DialogEditOkBtn").click(function() {
+            if ($("#DialogOldPassword").val() == "") {
+                var OldPassword = $("#DialogOldPassword").val();
+            } else {
+                var OldPassword = hex_md5($("#DialogOldPassword").val());
+            }
+            if ($("#DialogNewPassword").val() == "") {
+                var NewPassword = $("#DialogNewPassword").val();
+            } else {
+                var NewPassword = hex_md5($("#DialogNewPassword").val());
+            }
+            //var newPassword = "123";
+            $.post("@Url.Action("EidtPassword", "PublisherInformation")?OldPassword=" + OldPassword, "&NewPassword=" + NewPassword, function (data) {
+                alert(data);
+                $("#DialogOldPassword").val(null);
+                $("#DialogNewPassword").val(null);
+                $("#ShowEditPassword").dialog("close");
+            });
+        });
+    }
+
+    //重置个人信息按钮
+    function ResetInformation() {
+        $("#reset").click(function () {
+            ReFormData();
+        });
+    }
+
+
+
+
+</script>
+
+
+
+<div style="background-image: url(@Url.Content("~/Images/Information.png")); width: 320px; height: 470px; float: left;">
+    <div style="width: 270px; height: 370px; margin: 60px 0 0 40px; float: left;">
+        <table cellspacing=15 cellpadding=0 style="border-bottom: #a9a9a9 1px solid;">
+            <tr>
+                <th colspan="6" style="text-align: center; color: #8b0000; font-size: 16px;">修改信息？</th>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <label name="NickName">用户名：</label>
+                    <input id="NickName" name="NickName" type="text" size="15" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <label name="Name">姓&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+                    <input id="Name" name="Name" type="text" size="15" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <label name="Phone">手机号：</label>
+                    <input id="Phone" name="Phone" type="text" size="15" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <label name="Email">邮&nbsp;&nbsp;&nbsp;&nbsp;箱：</label>
+                    <input id="Email" name="Email" type="text" size="15" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <label name="Position">部&nbsp;&nbsp;&nbsp;&nbsp;门：</label>
+                    <input id="Position" name="Position" type="text" size="15" />
+                </td>
+            </tr>
+            <tr style="height:55px;">
+                <td colspan="5">
+                    <input id="InformationEdit" type="button" value="确定" style="width: 60px;" />
+                </td>
+                <td>
+                    <input id="reset" type="button" value="重置" style="width: 60px; margin-left: 60px;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <button id="EditPassword" style="width: 200px;">修改密码？</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=55" style="border: solid 1px #a9a9a9; margin-left: 50px;" width="355" height="464" frameborder="1" marginwidth="0" marginheight="0"></iframe>
+
+
+
+
+
+
+
+
+
+
+<!------------------------------------修改密码弹出框----------------------------------------->
+
+<div id="ShowEditPassword">
+    <div id="EditForm" style="width: 300px; float: left; margin-top: 30px;">
+        <table cellspacing="15">
+            <tr>
+                <td>
+                    <label name="DialogNickName">用户名：</label>
+                    <input id="DialogNickName" name="DialogNickName" size="15" type="text" disabled />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label name="DialogOldPassword">旧密码：</label>
+                    <input id="DialogOldPassword" name="DialogOldPassword" size="15" type="password" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label name="DialogNewPassword">新密码：</label>
+                    <input id="DialogNewPassword" name="DialogNewPassword" size="15" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="DialogEditOkBtn" name="DialogEditOkBtn" value="确定" style="width: 228px;" type="button" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input id="DialogClose" name="DialogClose" value="关闭对话框" type="button" style="width: 120px; height: 40px; margin-top: 80px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="float: left; width: 250px; height: 350px; background-color: #000000;">
+        <img src="~/Images/Snick.jpg" width="250" height="350" />
+    </div>
+</div>

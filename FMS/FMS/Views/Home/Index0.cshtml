@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "登陆页面";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@section featured {}
+<section>
+    <script type="text/javascript">
+        $(function () {
+            Login();
+
+        });
+        function Login() {
+            //$('#btnOk').unbind('click');
+            $("#btnOk").click(function () {
+                var postData = {
+                    NickName: $("#NickName").val(),
+                    Password: $("#Password").val()
+                };
+                $.post("@Url.Action("Login", "Home")", postData, function (reData) {
+                    if (reData == 'Admin') {
+                        window.location.href = '/Welcome/Index';
+                    } else if (reData == "Publisher") {
+                        window.location.href = '/Welcome/Index';
+                    } else if (reData == "Receiver") {
+                        window.location.href = '/Welcome/Index';
+                    } else if (reData == "false") {
+                        alert("看看你的用户名对了么!  你妹的!");
+                    } else if (reData == "PasswordError") {
+                        alert("密码记错了？ 重新输一遍试试吧！");
+                    }
+                });
+                //}));
+            });
+            //按下回车按钮触发登录事件
+            $("body").unbind("keydown").bind('keydown', (function (event) {
+                if (event.keyCode == 13) {
+                    $("#btnOk").click();
+                }
+            })
+            );
+
+        }
+
+    </script>
+
+
+    <form name="LoginForm" method="post">
+        <table style="margin: 150px 0 300px 380px;">
+            <tr>
+                <td>登录帐号:<input type="text" maxlength="50" name="NickName" id="NickName"></td>
+            </tr>
+            <tr>
+                <td>登录密码:<input type="password" maxlength="20" name="Password" id="Password" style="ime-mode: disabled "></td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="javascript:void(0)" id="btnOk" onclick="Login()">登陆</a>
+                    <a href="javascript:void(0)" onclick="Reset()">重置</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    </section>
+

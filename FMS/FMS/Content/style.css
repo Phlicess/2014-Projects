@@ -1,0 +1,172 @@
+﻿html {
+    height:100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ffffff;
+    /*border-top: solid 10px #000;*/
+    height: 100%;
+    color: #333;
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+}
+
+.head {
+    width: 100%; height: 140px;
+    background-color: #3D3D3D;
+}
+
+.head .top {
+    width: 100%;height: 100px;
+}
+
+.head .top .top_logo {
+    width: auto;height: 100px;
+    margin-left: 15px;
+}
+
+.head .top .top_logo a {
+    width: auto; height: 0;
+    display: block;
+}
+
+.head .head_bottom {
+    width: 100%; height: 40px;
+    background-color: #252525;
+    /*border-top: #000000 1px solid;
+    border-bottom: #000000 1px solid;*/
+}
+
+.head .head_bottom .helloUser {
+    width: 200px; height: 40px;
+    background-color: #252525;
+    /*border-left: #000000 1px solid;
+    border-right: #000000 1px solid;*/
+}
+
+.main {
+    width: 100%; height: 75%;
+    background-color: #999;
+    /*margin-top: 30px;*/
+}
+
+.foot {
+    width: 100%;
+    float: left;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #252525;
+}
+
+
+
+/*这里是左侧菜单的样式*/
+.menu {
+    width: 200px; height: 100%;
+    background-color: #3D3D3D;
+    float: left;
+
+    /*border-left: #000000 1px solid;
+    border-right: #000000 1px solid;
+    border-bottom: #000000 1px solid;*/
+}
+
+.menu ul {
+    width: 200px; height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu ul li {
+    width: 200px; height: 40px;
+}
+
+.menu ul li .pic {
+    width: 60px; display: block;
+    height: 40px;
+}
+
+.menu ul li a {
+    width: 140px;
+    float: left;
+    display: block;
+    line-height: 40px;
+    text-align: left;
+    /*text-align: center;*/
+    /*padding: 0 0 0 10px;*/
+    color: #ffffff;
+    /*border-bottom: #333333 1px solid;*/
+    font-size: 16px;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.menu ul li:hover {
+    background-color: #303030;
+    color: #ffffff;
+    /*border: #333333 1px solid;*/
+}
+
+
+/*这里是右侧子页面的样式*/
+
+.content {
+    width: 82%;
+    float: left;
+    margin-left: 6px;
+    margin-top: 6px;
+    
+    /*background-color: #e2e2e2;*/
+}
+
+/*这里是右侧子页面toolbar的样式*/
+.content .toolbar {
+    width: 100%; height: 30px;
+    background-color: #5C5C5C;   
+}
+
+.toolbar ul {
+    width: 100%; height: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toolbar ul li {
+    width: 100px; height: 30px;
+    float: left;
+}
+
+.toolbar ul li a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 30px;
+    font-weight: bolder;
+    text-align: center;
+    /*border: #e2e2e2 1px solid;*/
+}
+
+.toolbar ul li a:hover {
+    display: block;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+
+/*这里是右侧子页面DataGrid的样式*/
+
+.content #DataGrid table tbody th {
+    background-color: #a7a6a6;
+    color: #ffffff;
+}
+
+.content #DataGrid table td {
+    border-bottom: 1px #333333 dashed;
+}

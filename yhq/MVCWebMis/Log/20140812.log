@@ -1,0 +1,315 @@
+[2014-08-12 10:48:28]    System.IndexOutOfRangeException: XueYuan_Id
+   在 System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   在 System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   在 WHC.Framework.Commons.SmartDataReader.GetInt32(String column, Int32 defaultIfNull) 位置 e:\yhq\WHC.MVCWebMis.Core\Commons\SmartDataReader.cs:行号 72
+   在 WHC.Framework.Commons.SmartDataReader.GetInt32(String column) 位置 e:\yhq\WHC.MVCWebMis.Core\Commons\SmartDataReader.cs:行号 64
+   在 WHC.MVCWebMis.DALSQL.ZhiDaoJiaoShi.DataReaderToEntity(IDataReader dataReader) 位置 e:\yhq\WHC.MVCWebMis.Core\DAL\DALSQL\ZhiDaoJiaoShi.cs:行号 47
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.GetList(String sql, IDbDataParameter[] paramList) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 926
+   在 WHC.Framework.ControlUtil.BaseBLL`1.GetList(String sql) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 127
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.GetDictJson() 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 731
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-12 10:48:30]    System.IndexOutOfRangeException: XueYuan_Id
+   在 System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   在 System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   在 WHC.Framework.Commons.SmartDataReader.GetInt32(String column, Int32 defaultIfNull) 位置 e:\yhq\WHC.MVCWebMis.Core\Commons\SmartDataReader.cs:行号 72
+   在 WHC.Framework.Commons.SmartDataReader.GetInt32(String column) 位置 e:\yhq\WHC.MVCWebMis.Core\Commons\SmartDataReader.cs:行号 64
+   在 WHC.MVCWebMis.DALSQL.ZhiDaoJiaoShi.DataReaderToEntity(IDataReader dataReader) 位置 e:\yhq\WHC.MVCWebMis.Core\DAL\DALSQL\ZhiDaoJiaoShi.cs:行号 47
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.GetList(String sql, IDbDataParameter[] paramList) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 926
+   在 WHC.Framework.ControlUtil.BaseBLL`1.GetList(String sql) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 127
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.GetDictJson() 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 731
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-12 10:48:31]    System.IndexOutOfRangeException: XueYuan_Id
+   在 System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   在 System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   在 WHC.Framework.Commons.SmartDataReader.GetInt32(String column, Int32 defaultIfNull) 位置 e:\yhq\WHC.MVCWebMis.Core\Commons\SmartDataReader.cs:行号 72
+   在 WHC.Framework.Commons.SmartDataReader.GetInt32(String column) 位置 e:\yhq\WHC.MVCWebMis.Core\Commons\SmartDataReader.cs:行号 64
+   在 WHC.MVCWebMis.DALSQL.ZhiDaoJiaoShi.DataReaderToEntity(IDataReader dataReader) 位置 e:\yhq\WHC.MVCWebMis.Core\DAL\DALSQL\ZhiDaoJiaoShi.cs:行号 47
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.GetList(String sql, IDbDataParameter[] paramList) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 926
+   在 WHC.Framework.ControlUtil.BaseBLL`1.GetList(String sql) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 127
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.GetDictJson() 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 731
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-12 14:51:46]    System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK__ZhiDaoJia__XueYu__7E37BEF6"冲突。该冲突发生于数据库"YHQ"，表"dbo.XueYuan", column 'ID'。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, String targetTable, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 254
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 193
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 546
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 532
+   在 WHC.Framework.ControlUtil.BaseBLL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 145
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.Insert(T info) 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 82
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+ClientConnectionId:8507b04d-f43e-4c24-9fec-8b64afe5ff04
+
+[2014-08-12 14:57:09]    System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK__ZhiDaoJia__XueYu__7E37BEF6"冲突。该冲突发生于数据库"YHQ"，表"dbo.XueYuan", column 'ID'。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, String targetTable, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 254
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 193
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 546
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 532
+   在 WHC.Framework.ControlUtil.BaseBLL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 145
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.Insert(T info) 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 82
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+ClientConnectionId:8507b04d-f43e-4c24-9fec-8b64afe5ff04
+
+[2014-08-12 15:37:55]    System.Data.SqlClient.SqlException (0x80131904): 将截断字符串或二进制数据。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, String targetTable, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 254
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 193
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 546
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 532
+   在 WHC.Framework.ControlUtil.BaseBLL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 145
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.Insert(T info) 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 82
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+ClientConnectionId:7c956f91-c752-4b68-ab78-19f54729c9ce
+
+[2014-08-12 15:38:04]    System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK__ZhiDaoJia__XueYu__7E37BEF6"冲突。该冲突发生于数据库"YHQ"，表"dbo.XueYuan", column 'ID'。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, String targetTable, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 254
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 193
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 546
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 532
+   在 WHC.Framework.ControlUtil.BaseBLL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 145
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.Insert(T info) 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 82
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+ClientConnectionId:7c956f91-c752-4b68-ab78-19f54729c9ce
+
+[2014-08-12 16:42:06]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+
+[2014-08-12 16:44:13]    System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK__ZhiDaoJia__XueYu__7E37BEF6"冲突。该冲突发生于数据库"YHQ"，表"dbo.XueYuan", column 'ID'。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, String targetTable, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 254
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 193
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 546
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 532
+   在 WHC.Framework.ControlUtil.BaseBLL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 145
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.Insert(T info) 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 82
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+ClientConnectionId:c285f3fd-388d-4980-a276-a642aa9a3974
+
+[2014-08-12 16:44:22]    System.Data.SqlClient.SqlException (0x80131904): INSERT 语句与 FOREIGN KEY 约束"FK__ZhiDaoJia__XueYu__7E37BEF6"冲突。该冲突发生于数据库"YHQ"，表"dbo.XueYuan", column 'ID'。
+语句已终止。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   在 Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, String targetTable, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 254
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(Hashtable recordField, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 193
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj, DbTransaction trans) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 546
+   在 WHC.Framework.ControlUtil.AbstractBaseDAL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\AbstractBaseDAL.cs:行号 532
+   在 WHC.Framework.ControlUtil.BaseBLL`1.Insert(T obj) 位置 e:\yhq\WHC.MVCWebMis.Core\ControlUtil\Framework\BaseBLL.cs:行号 145
+   在 WHC.MVCWebMis.Controllers.BusinessController`2.Insert(T info) 位置 e:\yhq\MVCWebMis\Controllers\BusinessController.cs:行号 82
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+ClientConnectionId:c285f3fd-388d-4980-a276-a642aa9a3974
+
+[2014-08-12 23:27:26]    System.Web.HttpException (0x80004005): 服务器无法在发送 HTTP 标头之后设置内容类型。
+   在 System.Web.HttpResponse.set_ContentType(String value)
+   在 System.Web.HttpResponseWrapper.set_ContentType(String value)
+   在 System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+

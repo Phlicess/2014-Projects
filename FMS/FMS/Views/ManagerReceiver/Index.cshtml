@@ -1,0 +1,601 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+@using Webdiyer.WebControls.Mvc
+
+@model PagedList<FMS.YongHu>
+@*@model IEnumerable<FMS.RenWu>*@
+@{
+    ViewBag.Title = "管理接收者";
+}
+ 
+<script type="text/javascript">
+    $(function () {
+        CheckAll(); //数据表格的全选函数
+        ShowNewBus();  //查看详细事项按钮
+    
+        //UploadFile();  //上传文件按钮（在查看详细事项弹出框里面）
+        Delete();  //删除事项按钮
+        CheckedTr();  //实现点击table里的某一个tr 选中此行
+        NewPublisher();//新建按钮的dialog toolbar
+        SubmintPulisher();//新建对话框的确认按钮的相应事项
+        closedialog();//对话框的取消按钮
+        EdittPulisher();//修改发布者信息
+        GetDefaultGroup();//获得默认群组
+        deleteg();//删除dialog
+     
+
+    });
+    
+    //验证insert邮箱格式
+    var state = true;
+    function regIsEmail() {
+        var fData = $("#ReceiverEmail").val();
+        var reg = new RegExp("^[0-9a-zA-Z]+@@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$");
+        if (!reg.test(fData)) {
+            document.getElementById("ReceiverEmail").style.cssText = "border: red 1px solid;";
+            state = reg.test(fData);
+        } else {
+            document.getElementById("ReceiverEmail").style.cssText = null;
+            state = reg.test(fData);
+        }
+    }
+  
+    var insert_state = false;//验证昵称是否已经存在
+    // insert  昵称是否存在的验证
+    function regIs_Nick() {
+        var data = $("#ReceiverNickName").val();
+
+        $.post("@Url.Action("FindbyNickName", "ManagerPublisher")?nickName=" + data, function (info) {
+            if (info == "False") {
+                document.getElementById("ReceiverNickName").style.cssText = null;
+                insert_state = true;
+            };
+            if (info == "True") {
+                document.getElementById("ReceiverNickName").style.cssText = "border: red 1px solid;";
+                insert_state = false;
+            };
+
+        });
+
+    }
+
+
+    var edit_state = false;//验证用户名是否已经存在
+    //edit 验证昵称是否存在
+    function edit_regIs_Nick() {
+        var postdata = {
+            ID: $("#BussinessId").val(),
+            NickName:$("#BussinessNickName").val()
+           
+        };
+        
+        $.post("@Url.Action("Revise_FindbyNickName", "ManagerPublisher")", postdata, function (info) {
+            if (info == "False") {
+                document.getElementById("BussinessNickName").style.cssText = null;
+                edit_state = true;
+            };
+            if (info == "True") {
+                document.getElementById("BussinessNickName").style.cssText = "border: red 1px solid;";
+                edit_state = false;
+            };
+        });
+    }
+
+    //验证insert邮箱格式
+    var Insert_Email_state = true;
+    function regIsEmail() {
+        var fData = $("#ReceiverEmail").val();
+        var reg = new RegExp("^[0-9a-zA-Z]+@@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$");
+        if (!reg.test(fData)) {
+            document.getElementById("ReceiverEmail").style.cssText = "border: red 1px solid;";
+            Insert_Email_state = reg.test(fData);
+            alert(reg.test(fData));
+        } else {
+            document.getElementById("ReceiverEmail").style.cssText = null;
+            Insert_Email_state = reg.test(fData);
+            alert(reg.test(fData));
+        }
+    }
+
+    //验证revise 邮箱格式
+    var edit_Email_state = false;
+    function edit_regIsEmail() {
+        var fData = $("#BussinessEmai").val();
+        var reg = new RegExp("^[0-9a-zA-Z]+@@[0-9a-zA-Z\-]+[\.]{1}[0-9a-zA-Z\-]+[\.]?[0-9a-zA-Z\-]+$");
+        if (!reg.test(fData)) {
+            document.getElementById("BussinessEmai").style.cssText = "border: red 1px solid;";
+            edit_Email_state = reg.test(fData);
+        } else {
+            document.getElementById("BussinessEmai").style.cssText = null;
+            edit_Email_state = reg.test(fData);
+        }
+    }
+
+    //数据表格的全选函数
+    function CheckAll() {
+        $("#CheckAll").click(function () {
+            if ($(this).is(":checked")) {
+                $("#SingleCheck input").prop("checked", true); //全选事件
+            } else {
+                $("#SingleCheck input").prop("checked", false); //取消全选
+            }
+        });
+    }
+
+    //实现点击行tr 选中此行的checkbox
+    function CheckedTr() {
+        $("#TableData tr #td").bind('click', function () {
+            //$(this).bind('click', function() {
+            if ($(this).parent("tr").find(":checkbox").prop("checked")) {
+                $(this).parent("tr").find(":checkbox").attr("checked", false);
+            } else {
+                $(this).parent("tr").find(":checkbox").attr("checked", true);
+            }
+            //});
+        });
+    }
+
+
+    //新建任务发布者 toolbar
+    function NewPublisher() {
+        $("#NewPublisher").dialog({
+            title: '新建发布者',
+            width: 600,
+            height: 400,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+        //$("#NewPublisher").dialog("open");
+        $("#NewPub").click(function () {
+            $("#NewPublisher").dialog("open");
+
+        });
+    }
+
+    //获取默认群组
+    function GetDefaultGroup() {
+        var postData = null;  
+        $.post("@Url.Action("FindGroup", "ManagerReceiver")", postData, function (reData) {
+            var data = eval(reData);
+           
+            for (var s in data) {
+                jQuery("#addDefaultGroup").append("<option value=" +data[s].ID+">" + data[s].GroupName + "</option>");
+                s++;
+            }
+            for (var t in data) {
+                jQuery("#ReceiverDefaultGroup").append("<option value=" + data[t].ID + ">" + data[t].GroupName + "</option>");
+                 t++;
+            }
+            
+        });
+
+    }
+    //ToolBar 修改事项
+    function ShowNewBus() {
+        $("#ShowNewBus").dialog({
+            title: '修改事项',
+            width: 600,
+            height: 400,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+
+        $("#ShowNewBusBtn").click(function () {
+            var postData = new Array();
+            var i = 0;
+
+            $("#TableData :checkbox:checked").each(function () {
+                i++;
+                if (i < 2) {
+                    var tablerow = $(this).parent("td").parent("tr");
+                    postData[0] = tablerow.find("td").eq(1).text();
+                    postData[1] = tablerow.find("td").eq(2).text();
+                    postData[2] = tablerow.find("td").eq(3).text();
+                    postData[3] = tablerow.find("td").eq(4).text();
+                    postData[4] = tablerow.find("td").eq(5).text();
+                    postData[5] = tablerow.find("td").eq(6).text();
+                };
+
+            });
+
+            if (postData[0] != null) {  //判断用户是否选择了一行数据 如果选择多行只会显示第一行
+                if (i < 2) {                    
+                    $("#BussinessNickName").val(postData[1].trim());
+                    $("#BussinessName").val(postData[2].trim());
+                    $("#BussinessPhone").val(postData[3].trim());
+                    $("#BussinessEmai").val(postData[4].trim());
+                    $("#BussinessPositon").val(postData[5].trim());
+                    $("#BussinessId").val(postData[0].trim());
+                    $("#ShowNewBus").dialog("open");
+                }
+                if (i == 2) {
+                    alert("只选择一个事项好不？");
+                };
+                //} else {
+                //    alert("afdadfasf");
+                //};
+            } else {
+                alert("先选择一个事项好不？");
+            }
+
+        });
+
+    }
+
+
+    //删除  toolbar
+    function deleteg() {
+        $("#deleteReceiver").dialog({
+            title: '删除',
+            width: 240,
+            height: 160,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+        $("#delete").click(function () {
+            var i = 0;
+            //$("#NewPublisher").dialog("open");
+            $("#TableData :checkbox:checked").each(function () {
+                i++;
+            });
+            if (i == 0) {
+                alert("删除之前先选择一个事项好不的？？");
+            } else {
+                $("#deleteReceiver").dialog("open");
+            }
+        });
+    }
+
+
+    /***************insert 接受者*************************/
+
+    function SubmintPulisher() {
+        $("#submitPulisher").click(function () {
+            
+            var hash = hex_md5($("#ReceiverPassword").val());
+
+                var postdata = {
+                    ID: null,
+                    Name: $("#ReceiverName").val(),
+                    Password: hash,
+                    Email: $("#ReceiverEmail").val(),
+                    Position: $("#ReceiverPositon").val(),
+                    Phone: $("#ReceiverPhone").val(),
+                    QunZu_ID: $("#ReceiverDefaultGroup").val(),
+                    NickName:$("#ReceiverNickName").val(),
+                    State: false
+                };
+                if (Insert_Email_state && insert_state) {
+                    $.post("@Url.Action("Insert", "ManagerPublisher")", postdata, function(reData) {
+                        if (reData != true) {
+                            $("#NewPublisher").dialog("close");
+                            setTimeout("alert('添加成功')", 1000);
+                            
+
+                            //刷新页面
+                            location.reload();
+                        } else {
+                            alert("请输入数据");
+                        }
+                        ;
+                    });
+                }
+                                        
+            });
+        
+
+    }
+
+/***************修改 接受者*************************/
+
+    function EdittPulisher() {
+        $("#editsubmit").click(function () {
+            
+            var hash = hex_md5($("#BussinessPassword").val());
+            
+                    var postdata = {
+                        ID: $("#BussinessId").val(),
+                        Name: $("#BussinessName").val(),
+                        Password: hash,
+                        Email: $("#BussinessEmail").val(),
+                        Position: $("#BussinessPositon").val(),
+                        Phone: $("#BussinessPhone").val(),
+                        QunZu_ID: $("#addDefaultGroup").val(),
+                        State: true
+                    };
+                    if (edit_state && edit_Email_state) {
+                        $.post("@Url.Action("RevisePubInfo", "ManagerReceiver")", postdata, function(reData) {
+                            if (reData != true) {
+                                $("#ShowNewBus").dialog("close");
+                                setTimeout("alert('修改成功')", 1000);
+                                
+
+                                //刷新页面
+                                location.reload();
+                            } else {
+                                alert("请输入数据");
+                            }
+                            ;
+                        });
+                    }
+                });
+                  
+    }
+    
+
+    //数据表格checkbox选择行 返回第一列ID的值
+    //删除按钮
+    function Delete() {
+        $("#btn_delete").unbind();
+        $("#btn_delete").click(function () {
+            var postData = {};
+            var i = 0;
+            $("#TableData :checkbox:checked").each(function () {
+                var tablerow = $(this).parent("td").parent("tr");
+                postData["[" + i + "]"] = tablerow.find("td").eq(1).text().trim();
+                i++;
+            });
+           
+            $.ajax({
+                url: "@Url.Action("Delete", "ManagerReceiver")",
+                //data: { "postData": postData },
+                data: postData,
+                dataType: "json",
+                type: "POST",
+                //traditional: true,
+                success: function (reData) {
+                    if (reData == true) {
+                        //刷新页面
+                        location.reload();
+                    } else {
+                        alert("删除失败");
+                    };
+                }
+            });
+          
+        });
+    }
+
+    /*************** 关闭 按钮*************************/
+
+    function closedialog() {
+        $("#close").click(function () {
+            $("#NewPublisher").dialog("close");
+        });
+
+        $("#editclose").click(function () {
+            $("#ShowNewBus").dialog("close");
+        });
+        
+        $("#DeleteReceiverClose").click(function () {
+            $("#deleteGroup").dialog("close");
+        });
+    }
+</script>
+
+
+<div class="toolbar">
+    <ul>
+        <li><a href="#" id="NewPub">新建接受者</a></li>
+        <li><a href="#" id="ShowNewBusBtn">编辑</a></li>
+        <li><a href="#" id="delete">删除</a></li>
+    </ul>
+</div>
+
+<div id="DataGrid" style="width: 100%; height: 420px; background-color: #ffffff;">
+    <style type="text/css">
+        .mvcPager a {
+            text-decoration: none;
+        }
+
+        .mvcPager {
+            background-color: #696969;
+            border-bottom: 1px #000000 solid;
+            font-size: 12px;
+            color: #ffffff;
+            padding-left: 10px;
+            font-weight: bolder;
+        }
+
+            .mvcPager input[type=text] {
+                width: 24px;
+                border: #ffffff 1px solid;
+            }
+
+            .mvcPager .gotoPage {
+                float: right;
+            }
+    </style>
+
+
+    <table id="DataGrid" cellspacing="0" style="width: 100%">
+        <tr>
+            <th width="30px">
+                <input name="chkAll" type="checkbox" value="checkbox" id="CheckAll" />
+            </th>
+            <th style="width: 30px;">
+                序号
+            </th>
+            <th style="width: 200px;">
+                昵称
+            </th>
+            <th style="width: 200px;">
+                姓名
+            </th>
+            <th style="width: 200px;">
+                电话
+            </th>
+            <th style="width: 200px;">
+                邮箱
+            </th>
+            <th style="width: 200px;">
+                职务
+            </th>
+        </tr>
+        <tbody id="TableData">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="30px" style="text-align: center;" id="SingleCheck">
+                        <input id="@Html.DisplayFor(modelItem => item.ID)" type="checkbox" value="checkbox" />
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.NickName)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.Position)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @Html.AjaxPager(Model, new PagerOptions
+    {
+        CssClass = "mvcPager",
+        PageIndexParameterName = "id",
+        FirstPageText = "首页",
+        LastPageText = "末页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        ShowMorePagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        ShowPageIndexBox = true,
+        PageIndexBoxWrapperFormatString = " {0}     页     "
+    }, new AjaxOptions() { UpdateTargetId = "dvOrders" })
+</div>
+
+
+<!--------------修改信息的弹出对话框--------------->
+<div id="ShowNewBus">
+
+    <div id="formData">
+        <table style="border: #696969 1px solid">
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="BussinessName">姓名：&nbsp;</label>
+                    <input id="BussinessName" name="BussinessName" />
+                </td>
+                <td>
+                    <label name="BussinessNickName">昵称：&nbsp;</label>
+                    <input id="BussinessNickName" name="BussinessNickName" onchange="edit_regIs_Nick()" />
+                </td>
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="BussinessPassword">密码：&nbsp;</label>
+                    <input id="BussinessPassword" name="BussinessPassword" />
+                </td>
+                <td>
+                    <label name="BussinessEmai">邮箱：&nbsp;</label>
+                    <input id="BussinessEmai" name="BussinessEmai" onchange="edit_regIsEmail()" />
+                </td>
+                
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="BussinessPhone">电话：&nbsp;</label>
+                    <input id="BussinessPhone" name="BussinessPhone" />
+                </td>
+            
+                <td>
+                    <label name="BussinessPositon">职务：&nbsp;</label>
+                    <input id="BussinessPositon" name="BussinessPositon" />
+                </td>
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="addDefaultGroup">群组：&nbsp;</label>
+                    <select id="addDefaultGroup" style="width: 205px"></select>
+                </td>
+                <td style="display: none">
+                    <label name="BussinessId">Id：&nbsp;</label>
+                    <input id="BussinessId" name="BussinessId" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="tool" style="position:absolute; right:50px; bottom:40px;">
+        <input id="editsubmit" value="确定" type="button" style="width: 100px; height: 40px" />
+        <input id="editclose" value="取消" type="button" style="width: 100px; height: 40px" />
+    </div>
+
+</div>
+
+<!--------------insert接受者的弹出对话框--------------->
+<div id="NewPublisher">
+    <div id="formPublisherData">
+        <table style="border: #696969 1px solid">
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="ReceiverName">姓名：&nbsp;</label>
+                    <input id="ReceiverName" name="ReceiverName" />
+                </td>
+                <td>
+                    <label name="ReceiverNickName">昵称：&nbsp;</label>
+                    <input id="ReceiverNickName" name="ReceiverNickName" onchange="regIs_Nick()" />
+                </td>
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="ReceiverPassword">密码：&nbsp;</label>
+                    <input id="ReceiverPassword" name="ReceiverName" />
+                </td>
+                <td>
+                    <label name="ReceiverPhone">电话：&nbsp;</label>
+                    <input id="ReceiverPhone" name="ReceiverName" />
+                </td>
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="ReceiverEmail">邮箱：&nbsp;</label>
+                    <input id="ReceiverEmail" name="ReceiverName" onchange="regIsEmail()" />
+                </td>
+                <td>
+                    <label name="ReceiverPositon">职务：&nbsp;</label>
+                    <input id="ReceiverPositon" name="ReceiverName" />
+                </td>               
+            </tr>
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="ReceiverGroup">群组：&nbsp;</label>
+                    <select id="ReceiverDefaultGroup" style="width: 205px"></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="tool" style="position:absolute; right:50px; bottom:40px;">   
+        <input type="button" id="submitPulisher" value="确定" style="width: 100px; height: 40px" />
+        <input type="button" id="close" value="取消" style="width: 100px;height: 40px" />     
+     </div>
+        
+</div>
+<!--------------删除 dilog-------------->
+<div id="deleteReceiver">
+    <p>删除 ?!</p>
+    
+    <input type="button" id="btn_delete" value="确定"/>
+    <input type="button" id="DeleteReceiverClose" value="取消"/>
+</div>
+

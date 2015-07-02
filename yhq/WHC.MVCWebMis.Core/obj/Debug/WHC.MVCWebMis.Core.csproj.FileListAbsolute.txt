@@ -1,0 +1,16 @@
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\WHC.MVCWebMis.Core.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\WHC.MVCWebMis.Core.pdb
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\EntLibContrib.Data.SQLite.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\MySql.Data.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\System.Data.SQLite.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Office.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Microsoft.Office.Interop.Excel.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Microsoft.Office.Interop.PowerPoint.dll
+E:\yhq\WHC.MVCWebMis.Core\bin\Debug\Microsoft.Office.Interop.Word.dll
+E:\yhq\WHC.MVCWebMis.Core\obj\Debug\WHC.MVCWebMis.Core.csprojResolveAssemblyReference.cache
+E:\yhq\WHC.MVCWebMis.Core\obj\Debug\WHC.MVCWebMis.Core.csproj.ResolveComReference.cache
+E:\yhq\WHC.MVCWebMis.Core\obj\Debug\WHC.MVCWebMis.Core.dll
+E:\yhq\WHC.MVCWebMis.Core\obj\Debug\WHC.MVCWebMis.Core.pdb

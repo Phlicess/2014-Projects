@@ -1,0 +1,651 @@
+﻿@{
+    ViewBag.Title = "管理默认群组";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+@using Webdiyer.WebControls.Mvc
+
+@model PagedList<FMS.QunZu>
+@*@model IEnumerable<FMS.RenWu>*@
+<script type="text/javascript" src="/Scripts/convertochar.js"></script>
+<script type="text/javascript">
+    $(function () {
+        
+        CheckAll(); //数据表格的全选函数
+        
+        //UploadFile();  //上传文件按钮（在查看详细事项弹出框里面）
+        Delete();  //删除事项按钮
+        CheckedTr();  //实现点击table里的某一个tr 选中此行
+        NewPublisher();//新建按钮的dialog toolbar
+        SubmintPulisher();//新建对话框的确认按钮的相应事项
+        closedialog();//对话框的取消按钮
+        EdittPulisher();//修改发布者信息
+        ShowParticularGroup();//修改群组详细信息 
+        insert_groupSearch();// 新建群组内的查询
+        groupSearch();//群组管理内的查询
+        deleteg();//删除
+      
+    });
+    //实现insert点击数据在两张表之间交换
+    function insert_LeftSelect() {
+        var NewOption = new Option();
+        var curOpt = insert_AllMemery.selectedIndex;
+        NewOption.text = insert_AllMemery[curOpt].text;
+        NewOption.value = insert_AllMemery[curOpt].value;
+        NewOption.title = insert_AllMemery[curOpt].title;
+        //列表框add()方法,可以将option对象放置到select标记中
+        insert_CheckMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        insert_AllMemery.remove(curOpt);
+    }
+    //实现insert点击数据在两张表之间交换
+    function insert_RightSelect() {
+        var NewOption = new Option();
+        var curOpt = insert_CheckMemery.selectedIndex;
+        NewOption.text = insert_CheckMemery[curOpt].text;
+        NewOption.value = insert_CheckMemery[curOpt].value;
+        NewOption.title = insert_CheckMemery[curOpt].title;
+        //列表框add()方法,可以将option对象放置到select标记中
+        insert_AllMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        insert_CheckMemery.remove(curOpt);
+    }
+
+
+    //实现edit点击数据在两张表之间交换
+    function LeftSelect() {
+        var NewOption = new Option();
+        var curOpt = AllMemery.selectedIndex;
+        NewOption.text = AllMemery[curOpt].text;
+        NewOption.value = AllMemery[curOpt].value;
+        NewOption.title = AllMemery[curOpt].title;
+        //列表框add()方法,可以将option对象放置到select标记中
+        CheckMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        AllMemery.remove(curOpt);
+    }
+    //实现edit点击数据在两张表之间交换
+    function RightSelect() {
+        var NewOption = new Option();
+        var curOpt = CheckMemery.selectedIndex;
+        NewOption.text = CheckMemery[curOpt].text;
+        NewOption.value = CheckMemery[curOpt].value;
+        NewOption.title = CheckMemery[curOpt].title;
+        //列表框add()方法,可以将option对象放置到select标记中
+        AllMemery.add(NewOption);
+
+        ////////////////////////
+        //列表框remove()方法，可以将option对象的某一项删除
+        CheckMemery.remove(curOpt);
+    }
+
+      
+
+
+
+    //数据表格checkbox选择行 返回第一列ID的值
+    //删除按钮
+    function Delete() {
+        $("#btn_delete").click(function () {
+            var postData = {};
+            var i = 0;
+            $("#TableData :checkbox:checked").each(function () {
+                var tablerow = $(this).parent("td").parent("tr");
+                //    _list["selectedIDs[" + i + "]"] = checkedRow[i].ID;
+                //  postData["[" + i + "]"] =tablerow.find("td").eq(1).text().trim();
+                postData["[" + i + "]"] = tablerow.find("td").eq(1).text().trim();
+                i++;
+            });          
+                $.post("@Url.Action("Delete", "DefultGroup")", postData, function (redata) {
+                    if (redata != true) {
+                        //刷新页面
+                        location.reload();
+                    } else {
+                        alert("Delete Fail !");
+                    };
+                });             
+           
+        });
+    }
+
+
+    //数据表格的全选函数
+    function CheckAll() {
+        $("#CheckAll").click(function () {
+            if ($(this).is(":checked")) {
+                $("#SingleCheck input").prop("checked", true); //全选事件
+            } else {
+                $("#SingleCheck input").prop("checked", false); //取消全选
+            }
+        });
+    }
+
+
+    //新建群组  toolbar
+    function NewPublisher() {
+        $("#NewPublisher").dialog({
+            title: '新建发布者',
+            width: 600,
+            height: 400,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+        //$("#NewPublisher").dialog("open");
+        
+        $.post("@Url.Action("GetAllReceiver", "DefultGroup")?qunzuId=" + 61, function (redata) {
+               
+                    
+            var data = eval(redata);                       
+            for (var s in data) {                        
+                jQuery("#insert_AllMemery").append("<option value=" + data[s].ID + ">" + data[s].Name + "&nbsp;" + data[s].Email + "</option>");
+                s++;
+            }
+        });
+
+        $("#NewPub").click(function () {
+            $("#NewPublisher").dialog("open");
+
+        });
+    }
+
+   
+    
+
+
+    // 修改群组详细信息 ToolBar
+    function ShowParticularGroup() {
+        $("#ShowParticularGroup").dialog({
+            title: '修改群组',
+            width: 600,
+            height: 400,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+         
+        });
+   //  alert(convertToPinyinLower("你好啊"));
+        $("#ShowParticularGroupBtn").click(function () {
+            var postData = new Array();
+            var i = 0;
+           
+            $("#TableData :checkbox:checked").each(function () {
+                i++;
+                if (i < 2) {
+                    var tablerow = $(this).parent("td").parent("tr");
+                    postData[0] = tablerow.find("td").eq(1).text();
+                    postData[1] = tablerow.find("td").eq(2).text();
+                    postData[2] = tablerow.find("td").eq(3).text();
+                };
+
+            });
+           
+            if (postData[0] != null) {  //判断用户是否选择了一行数据 如果选择多行只会显示第一行
+                if (i < 2) {
+                   
+                    $("#EditParticularGroupId").val(postData[0].trim());
+                    $("#EditGroupName").val(postData[1].trim());
+                    $("#EditGroupExplain").val(postData[2].trim());
+                    $("#EditGroupId").val(postData[0].trim());
+
+
+                    $("#AllMemery option").remove();
+                    var postdata = parseInt(postData[0].trim());
+                    
+
+                   
+                    $.post("@Url.Action("LeftReciever", "DefultGroup")?qunzuId=" + postdata, function (redata) {
+               
+                    
+                        var data = eval(redata);                       
+                        for (var s in data) {                        
+                            jQuery("#AllMemery").append("<option value=" + data[s].ID + ">" + data[s].Name + "&nbsp;" + data[s].Email + "</option>");
+                            s++;
+                        }
+                    });
+                    
+                    $.post("@Url.Action("RightReciver", "DefultGroup")?qunzuId=" + postdata, function (redata) {
+                       
+                        $("#CheckMemery option").remove();
+                        var data = eval(redata);
+                        for (var s in data) {
+                            jQuery("#CheckMemery").append("<option value=" + data[s].ID + ">" + data[s].Name + "&nbsp;" + data[s].Email + "</option>");
+                            s++;
+                        }
+                    });
+                    
+                    $("#ShowParticularGroup").dialog("open");
+                }
+                if (i >= 2) {
+                    alert("只选择一个事项好不？");
+                };
+            } else {
+                alert("先选择一个事项好不？");
+            }
+
+        });
+
+    }
+
+    //删除  toolbar
+    function deleteg() {
+
+        $("#deleteGroup").dialog({
+            title: '删除',
+            width: 240,
+            height: 160,
+            autoOpen: false,
+            show: { effect: "scale", duration: 300 },
+            hide: { effect: "explode", duration: 300 },
+        });
+
+        
+        $("#delete").click(function () {
+            
+            var i = 0;
+            //$("#NewPublisher").dialog("open");
+            $("#TableData :checkbox:checked").each(function () {           
+                i++;
+            });
+            if (i == 0) {
+                alert("删除之前先选择一个事项好不的？？");
+            } else {
+                $("#deleteGroup").dialog("open");
+            }
+
+
+
+           
+        });
+    }
+
+
+    /***************新建群组*************************/
+    function SubmintPulisher() {
+        $("#NewGroup").click(function () {
+            
+            var postdata = {
+                ID: null,
+                GroupName: $("#GroupName").val(),
+                GroupExplain: $("#GroupExplain").val(),
+                PublicGroup: true
+            };
+            
+            $.post("@Url.Action("Insert_getId", "DefultGroup")", postdata, function (reData) {
+                if (reData != null) {
+                    
+                    var values = $("#insert_CheckMemery>option").map(function () { return $(this).val(); });
+                    var str = values.get().join();
+                    var temp = str.split(",");
+
+                    var postData = {};
+                    postData["[" + 0 + "]"] = reData;
+                    var i = 1;
+                    for (var item in temp) {
+                        postData["[" + i + "]"] = temp[item];
+                        i++;
+                    }
+                    
+                    $.post("@Url.Action("ReviseGroupMember", "DefultGroup")", postData, function (redata) {
+                        if (redata != true) {
+                            $("#NewPublisher").dialog("close");
+                            setTimeout(alert("添加成功"), 1000);
+                            location.reload();
+                        }     
+                    });                   
+
+                } else {
+                    alert("请输入数据");
+                };
+            });          
+        });
+    }
+ 
+
+    /***************修改群组 按钮*************************/
+    function EdittPulisher() {
+        $("#EditParticularGroup").click(function () {
+            var postdata = {
+                ID: $("#EditGroupId").val(),
+                GroupName: $("#EditGroupName").val(),
+                GroupExplain: $("#EditGroupExplain").val()
+            };
+          
+            //get value of CheckMemery
+            var values = $("#CheckMemery>option").map(function () { return $(this).val(); });         
+            var str = values.get().join();
+            var temp = str.split(",");
+            
+            var postData = {};         
+            postData["[" + 0 + "]"] = $("#EditParticularGroupId").val();
+            var i = 1;
+            for (var item in temp) {
+                postData["[" + i + "]"] = temp[item];
+                i++;                
+            }
+            // alert(postData);
+            
+            $.post("@Url.Action("ReviseGroup", "DefultGroup")",postdata, function (reData) {
+                if (reData == "true") {
+                    
+                } 
+            });
+            
+            $.post("@Url.Action("ReviseGroupMember", "DefultGroup")", postData, function (reData) {
+                if (reData != true) {
+                    $("#ShowParticularGroup").dialog("close");
+                    setTimeout(alert('修改数据成功'), 1000);
+                    location.reload();
+                   
+                    //刷新页面                   
+
+                } else {
+                    alert("请输入数据");
+                };
+            });          
+           });
+    }
+    /***************关闭按钮*************************/
+
+    function closedialog() {
+        $("#close").click(function () {
+            $("#NewPublisher").dialog("close");
+        });
+
+        $("#editclose").click(function () {
+            $("#ShowNewBus").dialog("close");
+        });
+
+        $("#EditParticularGroupClose").click(function() {
+            $("#ShowParticularGroup").dialog("close");
+        });
+
+        $("#DeleteGroupClose").click(function() {
+            $("#deleteGroup").dialog("close");
+        });
+    }
+    
+    /**************群组 insert search **********************/
+   
+ 
+    function insert_groupSearch() {
+        $("#insert_search").keyup(function () {
+            $("#insert_AllMemery option").each(function () {
+                var option = $(this);               
+                option.eq(0).removeClass("css");
+
+            });
+
+            var pinyin = ConvertPinyin($("#insert_search").val().split(/\s+/)[0]).toLocaleLowerCase();
+
+
+
+            if ($("#insert_search").val() != "") {  //去除 backspace的重复
+                $("#insert_AllMemery option").each(function () {
+                    var option = $(this);
+                    var value = ConvertPinyin(option.text());
+                    var lowerCaseChar = value.toLocaleLowerCase();//转换为小写
+                    //  var upperCaseChar = value.toLocaleUpperCase();//转换为大写
+                    if (lowerCaseChar.indexOf(pinyin) >= 0) {
+                        option.prependTo('#insert_AllMemery');
+                        option.eq(0).addClass("css");
+                    }
+                });
+            }
+
+
+
+        });
+    }
+
+
+    /**************群组 edit search **********************/
+  
+    function groupSearch() {
+        $("#edit_search").keyup(function () {
+            // alert($("#search").val());
+            
+            $("#AllMemery option").each(function () {
+                var option = $(this);
+                    option.eq(0).removeClass("css");
+               
+            });
+            //汉字转化为拼音
+            var pinyin = ConvertPinyin($("#edit_search").val().split(/\s+/)[0]).toLocaleLowerCase();
+            
+           
+       
+            if ($("#edit_search").val() != "") {  //去除 backspace的重复
+                    $("#AllMemery option").each(function () {
+                        var option = $(this);
+                        var value = ConvertPinyin(option.text());
+                        var lowerCaseChar = value.toLocaleLowerCase();//转换为小写
+                        //  var upperCaseChar = value.toLocaleUpperCase();//转换为大写
+                        if (lowerCaseChar.indexOf(pinyin) >= 0) {
+                            option.prependTo('#AllMemery');
+                            option.eq(0).addClass("css");
+                            //option.css("background-color", "#D6D6FF");
+                        }
+                    });
+                }
+                
+        
+
+        });
+    }
+
+
+</script>
+
+<style type="text/css">
+    .css {
+        background-color:#D6D6FF;
+    }
+</style>
+<div class="toolbar">
+    <ul>
+        <li><a href="#" id="NewPub">新建群组</a></li>      
+        <li><a href="#" id="ShowParticularGroupBtn">修改群组信息</a></li>
+        <li><a href="#" id="delete">删除</a></li>
+    </ul>
+</div>
+
+
+<div id="DataGrid" style="width: 100%; height: 420px; background-color: #ffffff;">
+    <style type="text/css">
+        .mvcPager a {
+            text-decoration: none;
+        }
+
+        .mvcPager {
+            background-color: #696969;
+            border-bottom: 1px #000000 solid;
+            font-size: 12px;
+            color: #ffffff;
+            padding-left: 10px;
+            font-weight: bolder;
+        }
+
+        .mvcPager input[type=text] {
+            width: 24px;
+            border: #ffffff 1px solid;
+        }
+
+        .mvcPager .gotoPage {
+            float: right;
+        }
+    </style>
+
+
+    <table id="DataGrid" cellspacing="0" style="width: 100%">
+        <tr>
+            <th width="30px">
+                <input name="chkAll" type="checkbox" value="checkbox" id="CheckAll" />
+            </th>
+            <th style="width: 30px;">
+                序号
+            </th>
+            <th style="width: 200px;">
+                群组名
+            </th>
+            <th style="width: 200px;">
+                群组简介
+            </th>
+        </tr>
+        <tbody id="TableData">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="30px" style="text-align: center;" id="SingleCheck">
+                        <input id="@Html.DisplayFor(modelItem => item.ID)" type="checkbox" value="checkbox" />
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.GroupName)
+                    </td>
+                    <td style="text-align: center;" id="td">
+                        @Html.DisplayFor(modelItem => item.GroupExplain)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @Html.AjaxPager(Model, new PagerOptions
+    {
+        CssClass = "mvcPager",
+        PageIndexParameterName = "id",
+        FirstPageText = "首页",
+        LastPageText = "末页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        ShowMorePagerItems = true,
+        AlwaysShowFirstLastPageNumber = true,
+        ShowPageIndexBox = true,
+        PageIndexBoxWrapperFormatString = " {0}     页     "
+    }, new AjaxOptions() { UpdateTargetId = "dvOrders" })
+</div>
+
+
+
+<!--------------新建群组 dialog--------------->
+<div id="NewPublisher" >
+    <div id="formPublisherData" style="float: left; width: 100%; border: #696969 1px solid;">
+        <table >
+            <tr style="border: #696969 1px solid">
+                <td>
+                    <label name="GroupName">群组名：&nbsp;&nbsp;&nbsp;</label>
+                    <input type="text" id="GroupName" name="GroupName" maxlength="10" />
+                </td>
+                <td>
+                    <label name="GroupExplain">群组简介：</label>
+                    <input type="text" id="GroupExplain" name="GroupExplain" maxlength="100" />
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    
+    <div style="width: 100%; height: 30px; float: left;">
+        <h4 style="width: 100%; height: 25px; display: block; float: left; margin: 5px 0 0 0;">添加群组成员:</h4>
+    </div>
+
+    <div id="formData" style="border: #696969 1px solid; float: left; width: 100%; height: 60%;">
+        <div style=" margin: 5px 0 0 5px;">
+            <label>
+                <input type="text" id="insert_search" name="smsy" onblur="if(this.value == '')this.value='请输入关键字查询';" onclick="if(this.value == '请输入关键字查询')this.value='';" value="请输入关键字查询">
+            </label>
+        </div>
+        <div id="allReceiver" style="width: 50%; height: 80%; float: left; margin-top: 5px;">
+            <select onclick="insert_LeftSelect()" style="border: #cccccc 1px solid; overflow-y: auto; overflow-x: hidden; height: 100%; width: 95%" id="insert_AllMemery" size="9" multiple></select>
+        </div>
+
+        <div id="checkReceiver" style="width: 50%; height: 80%; float: left; margin-top: 5px;">
+            <select style="border: #cccccc 1px solid; height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;" onclick="insert_RightSelect()" id="insert_CheckMemery" size="9" overflow:hidden multiple></select>
+        </div>
+        <div style="float: left; display: none;">
+            <label name="EditParticularGroupId">Id：&nbsp;</label>
+            <input id="EditParticularGroupId" name="EditParticularGroupId" />
+        </div>
+    </div>
+
+    <div class="tool" style="float: left; margin: 10px 0 0 0px;">
+        <input id="NewGroup" type="button" value="确定" style="width: 100px; height: 40px;" />
+        <input id="close" type="button" value="关闭" style="width: 100px; height: 40px; margin-left: 10px;" />
+    </div>
+
+</div>
+
+
+<!--------------修改群组信息 dilog-------------->
+<div id="ShowParticularGroup">
+    
+    <div id="formData">
+        <div style=" border: #696969 1px solid;width: 100%">
+            <table>
+                <tr>
+                    <td>
+                        <label name="EditGroupName">群组名：</label>
+                        <input id="EditGroupName" name="EditGroupName" />
+                    </td>
+                    <td>
+                        <label name="EditGroupExplain">群组简介：</label>
+                        <input id="EditGroupExplain" name="EditGroupExplain" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="display: none">
+            <label name="EditGroupId">Id：&nbsp;</label>
+            <input id="EditGroupId" name="EditGroupId" />
+        </div>
+        <div style="width: 100%; height: 30px; float: left;">
+            <h4 style="width: 100%; height: 25px; display: block; float: left; margin: 5px 0 0 0;">添加群组成员:</h4>
+        </div>
+        <div id="formData" style="border:#696969 1px solid;float: left;width:100%;">
+            <div style=" margin: 5px 0 0 5px;">
+                <label>
+                    <input type="text" id="edit_search" name="smsy" onblur="if(this.value == '')this.value='请输入关键字查询';" onclick="if(this.value == '请输入关键字查询')this.value='';" value="请输入关键字查询">
+                </label>
+            </div>
+            <div id="allReceiver" style="width: 48%; height: 185px; float: left; margin: 5px 0 0 5px;">
+                <select onclick="LeftSelect()" style="border: #cccccc 1px solid; overflow-y: auto; overflow-x: hidden; height: 180px; width: 100%; " id="AllMemery" size="9" multiple></select>
+            </div>
+
+            <div id="checkReceiver" style="width: 48%; height: 60%; float: right; margin: 5px 5px 0 5px;">
+                <select style="border: #cccccc 1px solid; width: 95%; height: 180px; width: 100%; overflow-y: auto; overflow-x: hidden; " onclick="RightSelect()" id="CheckMemery" size="9" overflow:hidden multiple></select>
+            </div>
+
+            <div style="display: none">
+                <label name="EditParticularGroupId">Id：&nbsp;</label>
+                <input id="EditParticularGroupId" name="EditParticularGroupId" />
+            </div>
+        </div>
+
+        <div >
+            <input id="EditParticularGroup" type="button" value="确定" style="width:100px;height: 40px;margin: 5px 0 0 0" />
+            <input id="EditParticularGroupClose" type="button" value="取消" style="width:100px;height: 40px" />
+        </div>
+    </div>
+</div>
+
+
+<!--------------删除群组 dilog-------------->
+<div id="deleteGroup">
+    <p>删除 ?!</p>
+    <ul>
+        <li style="margin: 0 5px 0 0"><a href="#" id="btn_delete">确定</a><a href="#" id="DeleteGroupClose"> 取消</a></li>
+           
+    </ul>  
+</div>
