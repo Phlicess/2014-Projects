@@ -1,0 +1,19 @@
+﻿<Window x:Class="SCZY.OtherWindows.WanningWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        ResizeMode="NoResize"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" Template="{DynamicResource DialogWinTemplate}"
+        Title="提示" ShowInTaskbar="False" Width="306" Height="150">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Name="TipBlock" FontSize="15" Foreground="Tomato" HorizontalAlignment="Center" VerticalAlignment="Center" Text="你确定继续吗？" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="NextButton" Width="50" Height="25" Margin="0 0 15 5" Content="继续" Click="NextButton_OnClick"/>
+            <Button Name="GiveUpButton" Width="50" Height="25" Margin="0 0 15 5" Content="放弃" Click="GiveUpButton_OnClick" />
+        </StackPanel>
+    </Grid>
+</Window>

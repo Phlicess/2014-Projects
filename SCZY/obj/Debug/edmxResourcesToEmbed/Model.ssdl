@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SCZYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChanPin_GongYingShang">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+      <PropertyRef Name="Provider_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Provider_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Price" Type="float" />
+  </EntityType>
+  <EntityType Name="ChanPin_ShengChanChuKu">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+      <PropertyRef Name="ProduceOutStock_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ProduceOutStock_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChanPin_ShengChanRuKu">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+      <PropertyRef Name="ProduceInStock_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ProduceInStock_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consumer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+    <Property Name="Tel" Type="varchar" MaxLength="20" />
+    <Property Name="State" Type="bit" />
+  </EntityType>
+  <EntityType Name="InStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Provider_ID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="ProviderName" Type="varchar" MaxLength="20" />
+    <Property Name="InStockDate" Type="datetime" />
+    <Property Name="InStockState" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="InStockDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_ID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="InStock_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Weight" Type="float" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_ID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Consumer_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ConsumerName" Type="varchar" MaxLength="10" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="TakeDate" Type="datetime" />
+    <Property Name="DeliveryDate" Type="datetime" />
+    <Property Name="Dispatch" Type="varchar" MaxLength="10" />
+    <Property Name="Urgent" Type="bit" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Paid" Type="float" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+    <Property Name="OrderState" Type="varchar" MaxLength="6" />
+    <Property Name="AggregateAmount" Type="float" />
+  </EntityType>
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Product_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Count" Type="float" />
+    <Property Name="Unit" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderMoneyDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Paid" Type="float" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PaidDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InStock_ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Paid" Type="float" />
+    <Property Name="Remark" Type="float" />
+  </EntityType>
+  <EntityType Name="ProduceInStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ProduceOutStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="20" />
+    <Property Name="Texture" Type="varchar" MaxLength="10" />
+    <Property Name="GramWeight" Type="real" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Length" Type="float" />
+    <Property Name="Reservation" Type="float" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+    <Property Name="Level" Type="varchar" MaxLength="10" />
+    <Property Name="State" Type="bit" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+    <Property Name="Tel" Type="varchar" MaxLength="20" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="bit" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PassWord" Type="varchar" MaxLength="65" />
+    <Property Name="Role" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Remark" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CHANPIN__CHANPIN_G_PRODUCT">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ChanPin_GongYingShang" Type="Self.ChanPin_GongYingShang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_GongYingShang">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHANPIN__CHANPIN_G_PROVIDER">
+    <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+    <End Role="ChanPin_GongYingShang" Type="Self.ChanPin_GongYingShang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_GongYingShang">
+        <PropertyRef Name="Provider_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHANPIN__CHANPIN_S_PRODUCEI">
+    <End Role="ProduceInStock" Type="Self.ProduceInStock" Multiplicity="1" />
+    <End Role="ChanPin_ShengChanRuKu" Type="Self.ChanPin_ShengChanRuKu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProduceInStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_ShengChanRuKu">
+        <PropertyRef Name="ProduceInStock_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHANPIN__CHANPIN_S_PRODUCEO">
+    <End Role="ProduceOutStock" Type="Self.ProduceOutStock" Multiplicity="1" />
+    <End Role="ChanPin_ShengChanChuKu" Type="Self.ChanPin_ShengChanChuKu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProduceOutStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_ShengChanChuKu">
+        <PropertyRef Name="ProduceOutStock_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHANPIN__CHANPIN_S_PRODUCT">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ChanPin_ShengChanRuKu" Type="Self.ChanPin_ShengChanRuKu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_ShengChanRuKu">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHANPIN__CHANPIN1__PRODUCT">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ChanPin_ShengChanChuKu" Type="Self.ChanPin_ShengChanChuKu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_ShengChanChuKu">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSTOCK_RUKU__GON_PROVIDER">
+    <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+    <End Role="InStock" Type="Self.InStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InStock">
+        <PropertyRef Name="Provider_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSTOCKD_RUKU_RUKU_INSTOCK">
+    <End Role="InStock" Type="Self.InStock" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InStockDetails" Type="Self.InStockDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InStockDetails">
+        <PropertyRef Name="InStock_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSTOCKD_RUKUMINGX_PRODUCT">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="InStockDetails" Type="Self.InStockDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InStockDetails">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER_CONSUMER">
+    <End Role="Consumer" Type="Self.Consumer" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consumer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Consumer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER_YONGHUDIN_USER">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERDET_DINGDAN_C_PRODUCT">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERDET_DINGDAN_D_ORDER">
+    <End Role="Order" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERMON_ORDERMONE_ORDER">
+    <End Role="Order" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="OrderMoneyDetails" Type="Self.OrderMoneyDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderMoneyDetails">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PAIDDETA_RUKU_FUKU_INSTOCK">
+    <End Role="InStock" Type="Self.InStock" Multiplicity="1" />
+    <End Role="PaidDetails" Type="Self.PaidDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PaidDetails">
+        <PropertyRef Name="InStock_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SCZYModelStoreContainer">
+    <EntitySet Name="ChanPin_GongYingShang" EntityType="Self.ChanPin_GongYingShang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChanPin_ShengChanChuKu" EntityType="Self.ChanPin_ShengChanChuKu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChanPin_ShengChanRuKu" EntityType="Self.ChanPin_ShengChanRuKu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consumer" EntityType="Self.Consumer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InStock" EntityType="Self.InStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InStockDetails" EntityType="Self.InStockDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderMoneyDetails" EntityType="Self.OrderMoneyDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaidDetails" EntityType="Self.PaidDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProduceInStock" EntityType="Self.ProduceInStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProduceOutStock" EntityType="Self.ProduceOutStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_G_PRODUCT" Association="Self.FK_CHANPIN__CHANPIN_G_PRODUCT">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ChanPin_GongYingShang" EntitySet="ChanPin_GongYingShang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_G_PROVIDER" Association="Self.FK_CHANPIN__CHANPIN_G_PROVIDER">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="ChanPin_GongYingShang" EntitySet="ChanPin_GongYingShang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_S_PRODUCEI" Association="Self.FK_CHANPIN__CHANPIN_S_PRODUCEI">
+      <End Role="ProduceInStock" EntitySet="ProduceInStock" />
+      <End Role="ChanPin_ShengChanRuKu" EntitySet="ChanPin_ShengChanRuKu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_S_PRODUCEO" Association="Self.FK_CHANPIN__CHANPIN_S_PRODUCEO">
+      <End Role="ProduceOutStock" EntitySet="ProduceOutStock" />
+      <End Role="ChanPin_ShengChanChuKu" EntitySet="ChanPin_ShengChanChuKu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_S_PRODUCT" Association="Self.FK_CHANPIN__CHANPIN_S_PRODUCT">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ChanPin_ShengChanRuKu" EntitySet="ChanPin_ShengChanRuKu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHANPIN__CHANPIN1__PRODUCT" Association="Self.FK_CHANPIN__CHANPIN1__PRODUCT">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ChanPin_ShengChanChuKu" EntitySet="ChanPin_ShengChanChuKu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSTOCK_RUKU__GON_PROVIDER" Association="Self.FK_INSTOCK_RUKU__GON_PROVIDER">
+      <End Role="Provider" EntitySet="Provider" />
+      <End Role="InStock" EntitySet="InStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSTOCKD_RUKU_RUKU_INSTOCK" Association="Self.FK_INSTOCKD_RUKU_RUKU_INSTOCK">
+      <End Role="InStock" EntitySet="InStock" />
+      <End Role="InStockDetails" EntitySet="InStockDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSTOCKD_RUKUMINGX_PRODUCT" Association="Self.FK_INSTOCKD_RUKUMINGX_PRODUCT">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="InStockDetails" EntitySet="InStockDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_CONSUMER" Association="Self.FK_ORDER_CONSUMER">
+      <End Role="Consumer" EntitySet="Consumer" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_YONGHUDIN_USER" Association="Self.FK_ORDER_YONGHUDIN_USER">
+      <End Role="User" EntitySet="User" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERDET_DINGDAN_C_PRODUCT" Association="Self.FK_ORDERDET_DINGDAN_C_PRODUCT">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERDET_DINGDAN_D_ORDER" Association="Self.FK_ORDERDET_DINGDAN_D_ORDER">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERMON_ORDERMONE_ORDER" Association="Self.FK_ORDERMON_ORDERMONE_ORDER">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderMoneyDetails" EntitySet="OrderMoneyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PAIDDETA_RUKU_FUKU_INSTOCK" Association="Self.FK_PAIDDETA_RUKU_FUKU_INSTOCK">
+      <End Role="InStock" EntitySet="InStock" />
+      <End Role="PaidDetails" EntitySet="PaidDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

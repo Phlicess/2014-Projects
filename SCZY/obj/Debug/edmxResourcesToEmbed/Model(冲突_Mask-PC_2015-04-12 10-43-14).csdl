@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SCZYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SCZYEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChanPin_GongYingShang" EntityType="SCZYModel.ChanPin_GongYingShang" />
+    <EntitySet Name="Consumers" EntityType="SCZYModel.Consumer" />
+    <EntitySet Name="InStocks" EntityType="SCZYModel.InStock" />
+    <EntitySet Name="InStockDetails" EntityType="SCZYModel.InStockDetail" />
+    <EntitySet Name="Orders" EntityType="SCZYModel.Order" />
+    <EntitySet Name="OrderDetails" EntityType="SCZYModel.OrderDetail" />
+    <EntitySet Name="OrderMoneyDetails" EntityType="SCZYModel.OrderMoneyDetail" />
+    <EntitySet Name="PaidDetails" EntityType="SCZYModel.PaidDetail" />
+    <EntitySet Name="ProduceInStocks" EntityType="SCZYModel.ProduceInStock" />
+    <EntitySet Name="ProduceOutStocks" EntityType="SCZYModel.ProduceOutStock" />
+    <EntitySet Name="Products" EntityType="SCZYModel.Product" />
+    <EntitySet Name="Providers" EntityType="SCZYModel.Provider" />
+    <EntitySet Name="Users" EntityType="SCZYModel.User" />
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_G_PRODUCT" Association="SCZYModel.FK_CHANPIN__CHANPIN_G_PRODUCT">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ChanPin_GongYingShang" EntitySet="ChanPin_GongYingShang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHANPIN__CHANPIN_G_PROVIDER" Association="SCZYModel.FK_CHANPIN__CHANPIN_G_PROVIDER">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="ChanPin_GongYingShang" EntitySet="ChanPin_GongYingShang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_CONSUMER" Association="SCZYModel.FK_ORDER_CONSUMER">
+      <End Role="Consumer" EntitySet="Consumers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSTOCK_RUKU__GON_PROVIDER" Association="SCZYModel.FK_INSTOCK_RUKU__GON_PROVIDER">
+      <End Role="Provider" EntitySet="Providers" />
+      <End Role="InStock" EntitySet="InStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSTOCKD_RUKU_RUKU_INSTOCK" Association="SCZYModel.FK_INSTOCKD_RUKU_RUKU_INSTOCK">
+      <End Role="InStock" EntitySet="InStocks" />
+      <End Role="InStockDetail" EntitySet="InStockDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PAIDDETA_RUKU_FUKU_INSTOCK" Association="SCZYModel.FK_PAIDDETA_RUKU_FUKU_INSTOCK">
+      <End Role="InStock" EntitySet="InStocks" />
+      <End Role="PaidDetail" EntitySet="PaidDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INSTOCKD_RUKUMINGX_PRODUCT" Association="SCZYModel.FK_INSTOCKD_RUKUMINGX_PRODUCT">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="InStockDetail" EntitySet="InStockDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDER_YONGHUDIN_USER" Association="SCZYModel.FK_ORDER_YONGHUDIN_USER">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERDET_DINGDAN_D_ORDER" Association="SCZYModel.FK_ORDERDET_DINGDAN_D_ORDER">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERMON_ORDERMONE_ORDER" Association="SCZYModel.FK_ORDERMON_ORDERMONE_ORDER">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderMoneyDetail" EntitySet="OrderMoneyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERDET_DINGDAN_C_PRODUCT" Association="SCZYModel.FK_ORDERDET_DINGDAN_C_PRODUCT">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="ChanPin_ShengChanChuKu" Association="SCZYModel.ChanPin_ShengChanChuKu">
+      <End Role="ProduceOutStock" EntitySet="ProduceOutStocks" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ChanPin_ShengChanRuKu" Association="SCZYModel.ChanPin_ShengChanRuKu">
+      <End Role="ProduceInStock" EntitySet="ProduceInStocks" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ChanPin_GongYingShang">
+    <Key>
+      <PropertyRef Name="Product_ID" />
+      <PropertyRef Name="Provider_ID" />
+    </Key>
+    <Property Name="Product_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Provider_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Price" Type="Double" />
+    <NavigationProperty Name="Product" Relationship="SCZYModel.FK_CHANPIN__CHANPIN_G_PRODUCT" FromRole="ChanPin_GongYingShang" ToRole="Product" />
+    <NavigationProperty Name="Provider" Relationship="SCZYModel.FK_CHANPIN__CHANPIN_G_PROVIDER" FromRole="ChanPin_GongYingShang" ToRole="Provider" />
+  </EntityType>
+  <EntityType Name="Consumer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="SCZYModel.FK_ORDER_CONSUMER" FromRole="Consumer" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="InStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Provider_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="ProviderName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="InStockDate" Type="DateTime" Precision="3" />
+    <Property Name="InStockState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Provider" Relationship="SCZYModel.FK_INSTOCK_RUKU__GON_PROVIDER" FromRole="InStock" ToRole="Provider" />
+    <NavigationProperty Name="InStockDetails" Relationship="SCZYModel.FK_INSTOCKD_RUKU_RUKU_INSTOCK" FromRole="InStock" ToRole="InStockDetail" />
+    <NavigationProperty Name="PaidDetails" Relationship="SCZYModel.FK_PAIDDETA_RUKU_FUKU_INSTOCK" FromRole="InStock" ToRole="PaidDetail" />
+  </EntityType>
+  <EntityType Name="InStockDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="InStock_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Weight" Type="Double" />
+    <NavigationProperty Name="InStock" Relationship="SCZYModel.FK_INSTOCKD_RUKU_RUKU_INSTOCK" FromRole="InStockDetail" ToRole="InStock" />
+    <NavigationProperty Name="Product" Relationship="SCZYModel.FK_INSTOCKD_RUKUMINGX_PRODUCT" FromRole="InStockDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_ID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Consumer_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="ConsumerName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="TakeDate" Type="DateTime" Precision="3" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="Dispatch" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Urgent" Type="Boolean" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Paid" Type="Double" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OrderState" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="AggregateAmount" Type="Double" />
+    <NavigationProperty Name="Consumer" Relationship="SCZYModel.FK_ORDER_CONSUMER" FromRole="Order" ToRole="Consumer" />
+    <NavigationProperty Name="User" Relationship="SCZYModel.FK_ORDER_YONGHUDIN_USER" FromRole="Order" ToRole="User" />
+    <NavigationProperty Name="OrderDetails" Relationship="SCZYModel.FK_ORDERDET_DINGDAN_D_ORDER" FromRole="Order" ToRole="OrderDetail" />
+    <NavigationProperty Name="OrderMoneyDetails" Relationship="SCZYModel.FK_ORDERMON_ORDERMONE_ORDER" FromRole="Order" ToRole="OrderMoneyDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Product_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Count" Type="Double" />
+    <Property Name="Unit" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Order" Relationship="SCZYModel.FK_ORDERDET_DINGDAN_D_ORDER" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="SCZYModel.FK_ORDERDET_DINGDAN_C_PRODUCT" FromRole="OrderDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="OrderMoneyDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Paid" Type="Double" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Order" Relationship="SCZYModel.FK_ORDERMON_ORDERMONE_ORDER" FromRole="OrderMoneyDetail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="PaidDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InStock_ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Paid" Type="Double" />
+    <Property Name="Remark" Type="Double" />
+    <NavigationProperty Name="InStock" Relationship="SCZYModel.FK_PAIDDETA_RUKU_FUKU_INSTOCK" FromRole="PaidDetail" ToRole="InStock" />
+  </EntityType>
+  <EntityType Name="ProduceInStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="SCZYModel.ChanPin_ShengChanRuKu" FromRole="ProduceInStock" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="ProduceOutStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="SCZYModel.ChanPin_ShengChanChuKu" FromRole="ProduceOutStock" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Texture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="GramWeight" Type="Single" />
+    <Property Name="Width" Type="Double" />
+    <Property Name="Length" Type="Double" />
+    <Property Name="Reservation" Type="Double" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Level" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ChanPin_GongYingShang" Relationship="SCZYModel.FK_CHANPIN__CHANPIN_G_PRODUCT" FromRole="Product" ToRole="ChanPin_GongYingShang" />
+    <NavigationProperty Name="InStockDetails" Relationship="SCZYModel.FK_INSTOCKD_RUKUMINGX_PRODUCT" FromRole="Product" ToRole="InStockDetail" />
+    <NavigationProperty Name="OrderDetails" Relationship="SCZYModel.FK_ORDERDET_DINGDAN_C_PRODUCT" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="ProduceOutStocks" Relationship="SCZYModel.ChanPin_ShengChanChuKu" FromRole="Product" ToRole="ProduceOutStock" />
+    <NavigationProperty Name="ProduceInStocks" Relationship="SCZYModel.ChanPin_ShengChanRuKu" FromRole="Product" ToRole="ProduceInStock" />
+  </EntityType>
+  <EntityType Name="Provider">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ChanPin_GongYingShang" Relationship="SCZYModel.FK_CHANPIN__CHANPIN_G_PROVIDER" FromRole="Provider" ToRole="ChanPin_GongYingShang" />
+    <NavigationProperty Name="InStocks" Relationship="SCZYModel.FK_INSTOCK_RUKU__GON_PROVIDER" FromRole="Provider" ToRole="InStock" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PassWord" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="SCZYModel.FK_ORDER_YONGHUDIN_USER" FromRole="User" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_CHANPIN__CHANPIN_G_PRODUCT">
+    <End Type="SCZYModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="SCZYModel.ChanPin_GongYingShang" Role="ChanPin_GongYingShang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_GongYingShang">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHANPIN__CHANPIN_G_PROVIDER">
+    <End Type="SCZYModel.Provider" Role="Provider" Multiplicity="1" />
+    <End Type="SCZYModel.ChanPin_GongYingShang" Role="ChanPin_GongYingShang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChanPin_GongYingShang">
+        <PropertyRef Name="Provider_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER_CONSUMER">
+    <End Type="SCZYModel.Consumer" Role="Consumer" Multiplicity="1" />
+    <End Type="SCZYModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consumer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="Consumer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSTOCK_RUKU__GON_PROVIDER">
+    <End Type="SCZYModel.Provider" Role="Provider" Multiplicity="0..1" />
+    <End Type="SCZYModel.InStock" Role="InStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provider">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InStock">
+        <PropertyRef Name="Provider_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSTOCKD_RUKU_RUKU_INSTOCK">
+    <End Type="SCZYModel.InStock" Role="InStock" Multiplicity="1" />
+    <End Type="SCZYModel.InStockDetail" Role="InStockDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InStockDetail">
+        <PropertyRef Name="InStock_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PAIDDETA_RUKU_FUKU_INSTOCK">
+    <End Type="SCZYModel.InStock" Role="InStock" Multiplicity="1" />
+    <End Type="SCZYModel.PaidDetail" Role="PaidDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InStock">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PaidDetail">
+        <PropertyRef Name="InStock_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INSTOCKD_RUKUMINGX_PRODUCT">
+    <End Type="SCZYModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="SCZYModel.InStockDetail" Role="InStockDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InStockDetail">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDER_YONGHUDIN_USER">
+    <End Type="SCZYModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="SCZYModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERDET_DINGDAN_D_ORDER">
+    <End Type="SCZYModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="SCZYModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERMON_ORDERMONE_ORDER">
+    <End Type="SCZYModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="SCZYModel.OrderMoneyDetail" Role="OrderMoneyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderMoneyDetail">
+        <PropertyRef Name="Order_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERDET_DINGDAN_C_PRODUCT">
+    <End Type="SCZYModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="SCZYModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChanPin_ShengChanChuKu">
+    <End Type="SCZYModel.ProduceOutStock" Role="ProduceOutStock" Multiplicity="*" />
+    <End Type="SCZYModel.Product" Role="Product" Multiplicity="*" />
+  </Association>
+  <Association Name="ChanPin_ShengChanRuKu">
+    <End Type="SCZYModel.ProduceInStock" Role="ProduceInStock" Multiplicity="*" />
+    <End Type="SCZYModel.Product" Role="Product" Multiplicity="*" />
+  </Association>
+</Schema>

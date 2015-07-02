@@ -1,0 +1,493 @@
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\SCZY.exe.config
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\SCZY.exe
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\SCZY.pdb
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\EntityFramework.dll
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\EntityFramework.xml
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\吴桐\Desktop\SCZY\SCZY\bin\Debug\zh-Hans\EntityFramework.resources.dll
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\MainWindow.baml
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\MainWindow.g.cs
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\App.g.cs
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY_MarkupCompile.cache
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY.g.resources
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY.Properties.Resources.resources
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY.csproj.GenerateResource.Cache
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY.exe
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY.pdb
+C:\Users\吴桐\Desktop\SCZY\SCZY\obj\Debug\SCZY.csprojResolveAssemblyReference.cache
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\SCZY.exe.config
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\SCZY.exe
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\SCZY.pdb
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\DSoft.RDLC.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\EntityFramework.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\EntityFramework.SqlServer.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\GemBox.Document.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\Microsoft.SqlServer.Types.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\EntityFramework.xml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\EntityFramework.SqlServer.xml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\GemBox.Document.xml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\AccountantInfoPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\FinanceManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\OrderPricingPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\InStockPricingPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\AdminInfoPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\UserDialog\EditUser.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\ClerkInfoPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\Loading.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\Login.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\MainWindow.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\Welcome.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\OtherWindows\WanningWindow.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Style\MainPageStyle.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Style\MainWinStyle.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\App.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\AccountantInfoPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\FinanceManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\OrderPricingPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\InStockPricingPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\AdminInfoPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ConsumerManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProductManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProviderManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\UserDialog\EditUser.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\UserManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\ClerkInfoPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\Loading.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\Login.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\MainWindow.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\NewInStockPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\NewOrderPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\StockManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Home\Welcome.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\OtherWindows\WanningWindow.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\App.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY_Content.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY_MarkupCompile.cache
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY_MarkupCompile.lref
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ConsumerManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProductManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\ProviderManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Admin\UserManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\NewInStockPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\NewOrderPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\OrderManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Clerk\StockManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY.g.resources
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\RdlCompile.cache
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\RdlCompile.compiled
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY.exe
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY.pdb
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\SCZY.csprojResolveAssemblyReference.cache
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\MessageBox.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\BenifitManagePage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\MessageBox.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\InStockPricedPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\OrderPricedPage.g.cs
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\BenifitManagePage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\InStockPricedPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\Accountant\OrderPricedPage.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\OtherWindows\DataGridPager.baml
+E:\Users\吴桐\Desktop\2014 12 11桌面备份\SCZY\SCZY\obj\Debug\OtherWindows\DataGridPager.g.cs
+C:\Users\永夜\Desktop\SCZY\bin\Debug\SCZY.exe.config
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY.exe
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY.pdb
+C:\Users\永夜\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\SCZY.exe
+C:\Users\永夜\Desktop\SCZY\bin\Debug\SCZY.pdb
+C:\Users\永夜\Desktop\SCZY\bin\Debug\DSoft.RDLC.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\EntityFramework.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\GemBox.Document.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\Users\永夜\Desktop\SCZY\bin\Debug\EntityFramework.xml
+C:\Users\永夜\Desktop\SCZY\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\永夜\Desktop\SCZY\bin\Debug\GemBox.Document.xml
+C:\Users\永夜\Desktop\SCZY\bin\Debug\zh-Hans\EntityFramework.resources.dll
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY.csprojResolveAssemblyReference.cache
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\AccountantInfoPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\MessageBox.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\AdminInfoPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\UserDialog\EditUser.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\ClerkInfoPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\Loading.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\Login.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\MainWindow.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\Welcome.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\OtherWindows\DataGridPager.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\OtherWindows\WanningWindow.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Style\MainPageStyle.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Style\MainWinStyle.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\App.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\AccountantInfoPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\BenifitManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\MessageBox.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\FinanceManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\InStockPricedPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\InStockPricingPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\OrderPricedPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\OrderPricingPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\AdminInfoPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ConsumerManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProductManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProviderManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\UserDialog\EditUser.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\UserManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\ClerkInfoPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\Loading.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\Login.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\MainWindow.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\NewInStockPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\NewOrderPage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\StockManagePage.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Home\Welcome.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\OtherWindows\DataGridPager.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\OtherWindows\WanningWindow.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\App.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY_Content.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY_MarkupCompile.cache
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY_MarkupCompile.lref
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\BenifitManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\FinanceManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\InStockPricedPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\InStockPricingPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\OrderPricedPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Accountant\OrderPricingPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ConsumerManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProductManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\ProviderManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Admin\UserManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\NewInStockPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\NewOrderPage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\OrderManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\Clerk\StockManagePage.baml
+C:\Users\永夜\Desktop\SCZY\obj\Debug\SCZY.g.resources
+C:\Users\永夜\Desktop\SCZY\obj\Debug\RdlCompile.cache
+C:\Users\永夜\Desktop\SCZY\obj\Debug\RdlCompile.compiled
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\SCZY.exe.config
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\SCZY.exe
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\SCZY.pdb
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\SCZY.exe
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\SCZY.pdb
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\DSoft.RDLC.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\EntityFramework.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\EntityFramework.SqlServer.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\GemBox.Document.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\Microsoft.SqlServer.Types.dll
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\EntityFramework.xml
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\EntityFramework.SqlServer.xml
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\GemBox.Document.xml
+E:\Users\吴桐\Desktop\SCZY\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\AccountantInfoPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\MessageBox.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\AdminInfoPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\UserDialog\EditUser.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\ClerkInfoPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\Loading.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\Login.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\MainWindow.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\Welcome.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\OtherWindows\DataGridPager.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\OtherWindows\WanningWindow.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Style\MainPageStyle.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Style\MainWinStyle.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\App.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\AccountantInfoPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\BenifitManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\MessageBox.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\FinanceManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\InStockPricedPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\InStockPricingPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\OrderPricedPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\OrderPricingPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\AdminInfoPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ConsumerManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProviderManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\UserDialog\EditUser.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\UserManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\ClerkInfoPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\Loading.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\Login.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\MainWindow.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\NewInStockPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\NewOrderPage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\StockManagePage.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Home\Welcome.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\OtherWindows\DataGridPager.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\OtherWindows\WanningWindow.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\App.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\SCZY_Content.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\SCZY_MarkupCompile.cache
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\SCZY_MarkupCompile.lref
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\BenifitManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\FinanceManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\InStockPricedPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\InStockPricingPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\OrderPricedPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Accountant\OrderPricingPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ConsumerManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProviderManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\UserManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\NewInStockPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\NewOrderPage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\OrderManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Clerk\StockManagePage.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\SCZY.g.resources
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\RdlCompile.cache
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\RdlCompile.compiled
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\AddProduct_Provider.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\EditProduct_Provider.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\Product_Provider.baml
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\AddProduct_Provider.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\EditProduct_Provider.g.cs
+E:\Users\吴桐\Desktop\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\Product_Provider.g.cs
+H:\KuaiPan\2015项目\SCZY\bin\Debug\SCZY.exe.config
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY.exe
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY.pdb
+H:\KuaiPan\2015项目\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\SCZY.exe
+H:\KuaiPan\2015项目\SCZY\bin\Debug\SCZY.pdb
+H:\KuaiPan\2015项目\SCZY\bin\Debug\DSoft.RDLC.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\EntityFramework.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\EntityFramework.SqlServer.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\GemBox.Document.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\Microsoft.SqlServer.Types.dll
+H:\KuaiPan\2015项目\SCZY\bin\Debug\EntityFramework.xml
+H:\KuaiPan\2015项目\SCZY\bin\Debug\EntityFramework.SqlServer.xml
+H:\KuaiPan\2015项目\SCZY\bin\Debug\GemBox.Document.xml
+H:\KuaiPan\2015项目\SCZY\bin\Debug\zh-Hans\EntityFramework.resources.dll
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY.csprojResolveAssemblyReference.cache
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\AccountantInfoPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\MessageBox.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\AdminInfoPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\AddProduct_Provider.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\EditProduct_Provider.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\Product_Provider.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\UserDialog\EditUser.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\ClerkInfoPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\Loading.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\Login.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\MainWindow.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\Welcome.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\OtherWindows\DataGridPager.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\OtherWindows\WanningWindow.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Style\MainPageStyle.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Style\MainWinStyle.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\App.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\AccountantInfoPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\BenifitManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryProductDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\DebtMemoryRecordDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\FixPriceDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\InStockFixPriceDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\MessageBox.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\ProductOfBefitDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\Dialog\RepaymentDialog.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\FinanceManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\InStockPricedPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\InStockPricingPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\OrderPricedPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\OrderPricingPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\AdminInfoPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ConsumerDialog\EditConsumer.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ConsumerManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\AddProduct_Provider.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\EditProduct_Provider.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductDialog\EditProduct_Provider\Product_Provider.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProviderDialog\EditProvider.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProviderManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\UserDialog\EditUser.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\UserManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\ClerkInfoPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\EditInStock.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\AddInStock_Product.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\EditInStock_Product.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\InStockDialog\InStock_Product\InStock_Product.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\AddOrder_Product.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\EditOrder.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\EditOrder_Produce.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderDialog\Order_Product\Order_Product.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\Loading.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\Login.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\MainWindow.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\NewInStockPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\NewOrderPage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\StockManagePage.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Home\Welcome.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\OtherWindows\DataGridPager.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\OtherWindows\WanningWindow.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\App.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY_Content.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\GeneratedInternalTypeHelper.g.cs
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY_MarkupCompile.cache
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY_MarkupCompile.lref
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\BenifitManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\FinanceManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\InStockPricedPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\InStockPricingPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\OrderPricedPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Accountant\OrderPricingPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ConsumerManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProductManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\ProviderManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Admin\UserManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\NewInStockPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\NewOrderPage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\OrderManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\Clerk\StockManagePage.baml
+H:\KuaiPan\2015项目\SCZY\obj\Debug\SCZY.g.resources
+H:\KuaiPan\2015项目\SCZY\obj\Debug\RdlCompile.cache
+H:\KuaiPan\2015项目\SCZY\obj\Debug\RdlCompile.compiled

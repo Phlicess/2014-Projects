@@ -1,0 +1,56 @@
+﻿<Window x:Class="SCZY.Admin.UserDialog.EditUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Name="EditUserWindow" ResizeMode="NoResize"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        WindowStartupLocation="CenterOwner" Template="{DynamicResource DialogWinTemplate}"
+        Title="修改用户信息" ShowInTaskbar="False" Width="566" Height="226">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#555"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid" Grid.Row="1" Background="white" Margin="5 5 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#c7c7c7" BorderThickness="1" Margin="5 5 5 -5">
+            <StackPanel Orientation="Vertical" Margin="0 5 0 5">
+                <StackPanel Orientation="Horizontal" Height="35">
+                    <TextBlock Name="TextName" Style="{StaticResource TextBlockStyle}" Margin="25 0 0 0">用户姓名:</TextBlock>
+                    <TextBox Name="Name" Style="{StaticResource TextBoxStyle}" MaxLength="18"></TextBox>
+                    <TextBlock Name="TextUserName" Style="{StaticResource TextBlockStyle}" Margin="50 0 0 0">登录名:</TextBlock>
+                    <TextBox Name="UserName" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="35">
+                    <TextBlock Name="TextPassword" Style="{StaticResource TextBlockStyle}" Margin="25 0 0 0">登录密码:</TextBlock>
+                    <PasswordBox Name="PassWord" Width="140" Height="25" />
+                    <TextBlock Name="TextPhone" Style="{StaticResource TextBlockStyle}" Margin="50 0 0 0">手机号:</TextBlock>
+                    <TextBox Name="Phone" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="35">
+                    <TextBlock Name="TextRole" Style="{StaticResource TextBlockStyle}" Margin="25 0 0 0">角色:</TextBlock>
+                    <ComboBox Name="Role" Width="140" Height="25"/>
+                    <TextBlock x:Name="TextRemark" Style="{StaticResource TextBlockStyle}" Margin="50 0 0 0">备注:</TextBlock>
+                    <TextBox Name="Remark" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Border>
+        <StackPanel Name="BtnStackPanel" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button Name="SaveButton" Width="60" Height="25" Margin="0 0 20 0" Click="SaveButton_OnClick">保存</Button>
+            <Button Name="CancelButton" Width="60" Height="25" Margin="0 0 20 0" Click="CloseWindowClick">取消</Button>
+        </StackPanel>
+    </Grid>
+</Window>

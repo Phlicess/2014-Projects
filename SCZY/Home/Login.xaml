@@ -1,0 +1,141 @@
+﻿<Window x:Class="SCZY.Home.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="请登录" Height="330" Width="450"  Icon="../Logo.ico"
+        WindowStyle="None" AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" Background="Transparent"
+        >
+    <Window.Style>
+        <Style>
+            <Setter Property="Window.Opacity" Value="0.97" />
+            <Style.Triggers>
+                <Trigger Property="Window.IsMouseOver" Value="True">
+                    <Setter Property="Window.Opacity" Value="1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Style/MainWinStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Border CornerRadius="5 5 0 0" Margin="5" Background="#02c4fc"> 
+            <Border.Effect>
+                <DropShadowEffect RenderingBias="Quality" BlurRadius="8" ShadowDepth="0" Opacity="0.3" />
+            </Border.Effect>
+
+            <!--<Style TargetType="Image">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="Source" Value="../Images/MinWin_Mo.png" />
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Width="430" MouseLeftButtonDown="LoginDrag" Background="#02c4fc">
+            <TextBlock Width="360"></TextBlock>
+            <TextBlock Width="36" Height="30" PreviewMouseLeftButtonDown="MinWin_Click">
+                <Image x:Name="MinWin" Width="36" Source="../Images/MinWin.png" RenderTransformOrigin="0.5 0.5">
+                    <Image.Style>
+                        <Style x:Name="Style" TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.Setters>
+                                        <Setter Property="Source" Value="../Images/MinWin_Mo.png" />
+                                    </Trigger.Setters>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Image x:Name="MinWin_Mo" Width="36" Source="../Images/MinWin_Mo.png"  Margin="-43 0 0 0">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Opacity" Value="0"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.Setters>
+                                        <Setter Property="Opacity" Value="1"></Setter>
+                                    </Trigger.Setters>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </TextBlock>
+            <TextBlock Width="36" Height="30" PreviewMouseLeftButtonDown="CloseWin_Click">
+                <Image x:Name="CloseWin" Width="36" Source="../Images/CloseWin.png">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.Setters>
+                                        <Setter Property="Source" Value="../Images/CloseWin_Mo.png"></Setter>
+                                    </Trigger.Setters>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Image x:Name="CloseWin_Mo" Width="36" Source="../Images/CloseWin_Mo.png" Margin="-43 0 0 0">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Opacity" Value="0"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.Setters>
+                                        <Setter Property="Opacity" Value="1"></Setter>
+                                    </Trigger.Setters>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </TextBlock>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Background="#ebebeb">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Image Source="../Images/Logo.png" Grid.Row="0" Width="440" Height="160" />
+            <!--<MediaElement Name="LoadingGif" Source="loading.gif" LoadedBehavior="Play" Stretch="Fill" Opacity="0" Height="180" Width="280" MediaEnded="MediaEnded"/>-->
+            <Image Name="LoadingImage" Source="../Images/Loading.png" Margin="0 100 0 0" RenderTransformOrigin="0.5,0.5" Grid.Row="0" Width="50" Height="50" Visibility="Collapsed" />
+                
+            <StackPanel Name="UserNamePanel" Orientation="Horizontal" Grid.Row="1" Margin="70 10 0 0">
+                <TextBlock Width="60" VerticalAlignment="Center" FontSize="15" Margin="32 0 0 0">用户名：</TextBlock>
+                <TextBox Name="UserName" Width="160" FontSize="15" VerticalAlignment="Center" Focusable="True" KeyDown="ChangeFocus">
+                </TextBox>
+                <Image Name="UserNameImage" Width="25" Height="25" Source="../Images/error.png" Opacity="0"></Image>
+            </StackPanel>
+            <StackPanel Name="PasswoPanel" Orientation="Horizontal" Grid.Row="2" Margin="70 0 0 0">
+                    <TextBlock Width="60" VerticalAlignment="Center" FontSize="15" Margin="32 0 0 0">密码：</TextBlock>
+                    <PasswordBox Name="Password" Width="160" FontSize="15" VerticalAlignment="Center" KeyDown="BindingEnter" ></PasswordBox>
+                    <Image Name="PasswordImage" Width="25" Height="25" Source="../Images/error.png" Opacity="0"></Image>
+            </StackPanel>
+                    <Button Name="Commit" Grid.Row="3" FontSize="15" Foreground="#fff" FontWeight="Medium" Width="230" Height="25" Click="LoginCommit"
+                    BorderBrush="Transparent" Template="{StaticResource MenuBtnCT}">
+            </Button>
+            <TextBlock Name="CopyRight" FontSize="12" HorizontalAlignment="Center" Grid.Row="4">版权所有@<Hyperlink NavigateUri="http://www.valueteam.sinaapp.com" Click="BindingCopyRight">ValueTeam</Hyperlink>工作室</TextBlock>
+        </Grid>
+    </Grid>
+    </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f062a40a81324eabb87b2bd52f1a4d8d" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="SCZYModel.ChanPin_GongYingShang" Width="1.5" PointX="5.25" PointY="6.25" />
+        <EntityTypeShape EntityType="SCZYModel.Consumer" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="SCZYModel.InStock" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="SCZYModel.InStockDetail" Width="1.5" PointX="5.25" PointY="9" />
+        <EntityTypeShape EntityType="SCZYModel.Order" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="SCZYModel.OrderDetail" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="SCZYModel.OrderMoneyDetail" Width="1.5" PointX="5.25" PointY="12.375" />
+        <EntityTypeShape EntityType="SCZYModel.PaidDetail" Width="1.5" PointX="5.25" PointY="17.125" />
+        <EntityTypeShape EntityType="SCZYModel.ProduceInStock" Width="1.5" PointX="0.75" PointY="3.25" />
+        <EntityTypeShape EntityType="SCZYModel.ProduceOutStock" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="SCZYModel.Product" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="SCZYModel.Provider" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="SCZYModel.User" Width="1.5" PointX="0.75" PointY="13.875" />
+        <AssociationConnector Association="SCZYModel.FK_CHANPIN__CHANPIN_G_PRODUCT" />
+        <AssociationConnector Association="SCZYModel.FK_CHANPIN__CHANPIN_G_PROVIDER" />
+        <AssociationConnector Association="SCZYModel.FK_ORDER_CONSUMER" />
+        <AssociationConnector Association="SCZYModel.FK_INSTOCK_RUKU__GON_PROVIDER" />
+        <AssociationConnector Association="SCZYModel.FK_INSTOCKD_RUKU_RUKU_INSTOCK" />
+        <AssociationConnector Association="SCZYModel.FK_PAIDDETA_RUKU_FUKU_INSTOCK" />
+        <AssociationConnector Association="SCZYModel.FK_INSTOCKD_RUKUMINGX_PRODUCT" />
+        <AssociationConnector Association="SCZYModel.FK_ORDER_YONGHUDIN_USER" />
+        <AssociationConnector Association="SCZYModel.FK_ORDERDET_DINGDAN_D_ORDER" />
+        <AssociationConnector Association="SCZYModel.FK_ORDERMON_ORDERMONE_ORDER" />
+        <AssociationConnector Association="SCZYModel.FK_ORDERDET_DINGDAN_C_PRODUCT" />
+        <AssociationConnector Association="SCZYModel.ChanPin_ShengChanChuKu" />
+        <AssociationConnector Association="SCZYModel.ChanPin_ShengChanRuKu" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

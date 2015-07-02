@@ -1,0 +1,791 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C16EB6CB-476F-4663-8735-940FAAB3F459}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SCZY</RootNamespace>
+    <AssemblyName>SCZY</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>SCZY.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DSoft.RDLC">
+      <HintPath>packages\RDLCPrinter.1.2.0\lib\net45\DSoft.RDLC.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GemBox.Document">
+      <HintPath>packages\GemBox.Document.23.3.30.1186\lib\net30\GemBox.Document.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\..\..\新建文件夹 (2)\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\..\..\新建文件夹 (2)\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder">
+      <HintPath>..\..\..\新建文件夹 (2)\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Accountant\AccountantInfoPage.xaml.cs">
+      <DependentUpon>AccountantInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\BenifitManagePage.xaml.cs">
+      <DependentUpon>BenifitManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\DebtMemoryDialog.xaml.cs">
+      <DependentUpon>DebtMemoryDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\DebtMemoryProductDialog.xaml.cs">
+      <DependentUpon>DebtMemoryProductDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\DebtMemoryRecordDialog.xaml.cs">
+      <DependentUpon>DebtMemoryRecordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\FixPriceDialog.xaml.cs">
+      <DependentUpon>FixPriceDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\InStockFixPriceDialog.xaml.cs">
+      <DependentUpon>InStockFixPriceDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\ProductOfBefitDialog.xaml.cs">
+      <DependentUpon>ProductOfBefitDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\Dialog\RepaymentDialog.xaml.cs">
+      <DependentUpon>RepaymentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\FinanceManagePage.xaml.cs">
+      <DependentUpon>FinanceManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\InStockPricedPage.xaml.cs">
+      <DependentUpon>InStockPricedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\InStockPricingPage.xaml.cs">
+      <DependentUpon>InStockPricingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\OrderPricedPage.xaml.cs">
+      <DependentUpon>OrderPricedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Accountant\OrderPricingPage.xaml.cs">
+      <DependentUpon>OrderPricingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminInfoPage.xaml.cs">
+      <DependentUpon>AdminInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ConsumerDialog\EditConsumer.xaml.cs">
+      <DependentUpon>EditConsumer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ConsumerManagePage.xaml.cs">
+      <DependentUpon>ConsumerManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProductDialog\EditProduct.xaml.cs">
+      <DependentUpon>EditProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProductDialog\EditProduct_Provider\AddProduct_Provider.xaml.cs">
+      <DependentUpon>AddProduct_Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProductDialog\EditProduct_Provider\EditProduct_Provider.xaml.cs">
+      <DependentUpon>EditProduct_Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProductDialog\EditProduct_Provider\Product_Provider.xaml.cs">
+      <DependentUpon>Product_Provider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProductManagePage.xaml.cs">
+      <DependentUpon>ProductManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProviderDialog\EditProvider.xaml.cs">
+      <DependentUpon>EditProvider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProviderManagePage.xaml.cs">
+      <DependentUpon>ProviderManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserDialog\EditUser.xaml.cs">
+      <DependentUpon>EditUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserManagePage.xaml.cs">
+      <DependentUpon>UserManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\ChanPin_GongYingShang.cs" />
+    <Compile Include="BLL\ChanPin_ShengChanChuKu.cs" />
+    <Compile Include="BLL\ChanPin_ShengChanRuKu.cs" />
+    <Compile Include="BLL\InStock.cs" />
+    <Compile Include="BLL\InStockDetails.cs" />
+    <Compile Include="BLL\Order.cs" />
+    <Compile Include="BLL\OrderMoneyDetails.cs" />
+    <Compile Include="BLL\PaidDetails.cs" />
+    <Compile Include="BLL\ProduceInStock.cs" />
+    <Compile Include="BLL\ProduceOutStock.cs" />
+    <Compile Include="BLL\Product.cs" />
+    <Compile Include="BLL\Provider.cs" />
+    <Compile Include="BLL\User.cs" />
+    <Compile Include="ChanPin_GongYingShang.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\ClerkInfoPage.xaml.cs">
+      <DependentUpon>ClerkInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\InStockDialog\EditInStock.xaml.cs">
+      <DependentUpon>EditInStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\InStockDialog\InStock_Product\AddInStock_Product.xaml.cs">
+      <DependentUpon>AddInStock_Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\InStockDialog\InStock_Product\EditInStock_Product.xaml.cs">
+      <DependentUpon>EditInStock_Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\InStockDialog\InStock_Product\InStock_Product.xaml.cs">
+      <DependentUpon>InStock_Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\OrderDialog\Order_Product\AddOrder_Product.xaml.cs">
+      <DependentUpon>AddOrder_Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\OrderDialog\EditOrder.xaml.cs">
+      <DependentUpon>EditOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\OrderDialog\Order_Product\EditOrder_Produce.xaml.cs">
+      <DependentUpon>EditOrder_Produce.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\OrderDialog\Order_Product\Order_Product.xaml.cs">
+      <DependentUpon>Order_Product.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Comments\ArgumentValidation.cs" />
+    <Compile Include="Comments\LogTextHelper.cs" />
+    <Compile Include="Comments\Reflect.cs" />
+    <Compile Include="Common\BenefitDialogViewProduct.cs" />
+    <Compile Include="Common\DataChange.cs" />
+    <Compile Include="Common\DateConverter.cs" />
+    <Compile Include="Common\DictionaryClass.cs" />
+    <Compile Include="Common\GetOrderAmount.cs" />
+    <Compile Include="Common\GetParentControl.cs" />
+    <Compile Include="Common\LikeSeacher.cs" />
+    <Compile Include="Common\MD5Hash.cs" />
+    <Compile Include="Common\Printer.cs" />
+    <Compile Include="Common\UserInfo.cs" />
+    <Compile Include="Common\ViewBenefit.cs" />
+    <Compile Include="Common\ViewInStock.cs" />
+    <Compile Include="Common\ViewOrder.cs" />
+    <Compile Include="Common\ViewProduct.cs" />
+    <Compile Include="Common\ViewProvider.cs" />
+    <Compile Include="Consumer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DALSQL\DALChanPin_GongYingShang.cs" />
+    <Compile Include="DAL\DALSQL\DALChanPin_ShengChanChuKu.cs" />
+    <Compile Include="DAL\DALSQL\DALChanPin_ShengChanRuKu.cs" />
+    <Compile Include="DAL\DALSQL\DALInStock.cs" />
+    <Compile Include="DAL\DALSQL\DALInStockDetails.cs" />
+    <Compile Include="DAL\DALSQL\DALOrder.cs" />
+    <Compile Include="DAL\DALSQL\DALOrderMoneyDetails.cs" />
+    <Compile Include="DAL\DALSQL\DALPaidDetails.cs" />
+    <Compile Include="DAL\DALSQL\DALProduceInStock.cs" />
+    <Compile Include="DAL\DALSQL\DALProduceOutStock.cs" />
+    <Compile Include="DAL\DALSQL\DALProduct.cs" />
+    <Compile Include="DAL\DALSQL\DALProvider.cs" />
+    <Compile Include="DAL\DALSQL\DALUser.cs" />
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ChanPin_GongYingShangInfo.cs" />
+    <Compile Include="Entity\ChanPin_ShengChanChuKuInfo.cs" />
+    <Compile Include="Entity\ChanPin_ShengChanRuKuInfo.cs" />
+    <Compile Include="Entity\InStockDetailsInfo.cs" />
+    <Compile Include="Entity\InStockInfo.cs" />
+    <Compile Include="Entity\OrderDetailInfo.cs" />
+    <Compile Include="Entity\OrderInfo.cs" />
+    <Compile Include="Entity\OrderMoneyDetailsInfo.cs" />
+    <Compile Include="Entity\PaidDetailsInfo.cs" />
+    <Compile Include="Entity\ProduceInStockInfo.cs" />
+    <Compile Include="Entity\ProduceOutStockInfo.cs" />
+    <Compile Include="Entity\ProductInfo.cs" />
+    <Compile Include="Entity\ProviderInfo.cs" />
+    <Compile Include="Entity\UserInfo.cs" />
+    <Compile Include="FramWork\AbstractBaseDAL.cs" />
+    <Compile Include="FramWork\BaseBLL.cs" />
+    <Compile Include="FramWork\BaseDALSQL.cs" />
+    <Compile Include="FramWork\BaseEntity.cs" />
+    <Compile Include="FramWork\BllFactory.cs" />
+    <Compile Include="FramWork\IBaseDAL.cs" />
+    <Compile Include="Home\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Home\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Home\Welcome.xaml.cs">
+      <DependentUpon>Welcome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IDAL\IChanPin_GongYingShang.cs" />
+    <Compile Include="IDAL\IChanPin_ShengChanChuKu.cs" />
+    <Compile Include="IDAL\IChanPin_ShengChanRuKu.cs" />
+    <Compile Include="IDAL\IInStock.cs" />
+    <Compile Include="IDAL\IInStockDetails.cs" />
+    <Compile Include="IDAL\IOrder.cs" />
+    <Compile Include="IDAL\IOrderDetails.cs" />
+    <Compile Include="IDAL\IOrderMoneyDetails.cs" />
+    <Compile Include="IDAL\IPaidDetails.cs" />
+    <Compile Include="IDAL\IProduceInStock.cs" />
+    <Compile Include="IDAL\IProduceoutStock.cs" />
+    <Compile Include="IDAL\IProduct.cs" />
+    <Compile Include="IDAL\IProvider.cs" />
+    <Compile Include="IDAL\IUser.cs" />
+    <Compile Include="InStock.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InStockDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\NewInStockPage.xaml.cs">
+      <DependentUpon>NewInStockPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderMoneyDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\NewOrderPage.xaml.cs">
+      <DependentUpon>NewOrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\OrderManagePage.xaml.cs">
+      <DependentUpon>OrderManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherWindows\DataGridPager.xaml.cs">
+      <DependentUpon>DataGridPager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherWindows\WanningWindow.xaml.cs">
+      <DependentUpon>WanningWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PaidDetail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProduceInStock.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProduceOutStock.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Provider.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clerk\StockManagePage.xaml.cs">
+      <DependentUpon>StockManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Page Include="Accountant\AccountantInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\BenifitManagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\DebtMemoryDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\DebtMemoryProductDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\DebtMemoryRecordDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\FixPriceDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\InStockFixPriceDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\MessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\ProductOfBefitDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\Dialog\RepaymentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\FinanceManagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\InStockPricedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\InStockPricingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\OrderPricedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Accountant\OrderPricingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Admin\AdminInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ConsumerDialog\EditConsumer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ConsumerManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProductDialog\EditProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProductDialog\EditProduct_Provider\AddProduct_Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProductDialog\EditProduct_Provider\EditProduct_Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProductDialog\EditProduct_Provider\Product_Provider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProductManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProviderDialog\EditProvider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ProviderManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\UserDialog\EditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\UserManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\ClerkInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\InStockDialog\EditInStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\InStockDialog\InStock_Product\AddInStock_Product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\InStockDialog\InStock_Product\EditInStock_Product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\InStockDialog\InStock_Product\InStock_Product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\OrderDialog\Order_Product\AddOrder_Product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\OrderDialog\EditOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\OrderDialog\Order_Product\EditOrder_Produce.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\OrderDialog\Order_Product\Order_Product.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Home\Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Home\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Home\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Home\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Clerk\NewInStockPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\NewOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\OrderManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Clerk\StockManagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Home\Welcome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherWindows\DataGridPager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherWindows\WanningWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\MainPageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\MainWinStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EntityDeploy Include="Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </None>
+    <None Include="Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
+    <None Include="Properties\DataSources\Consumer.datasource" />
+    <None Include="Properties\DataSources\DataSet1.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OrderDataTableDataTable.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OrderDataTableRow.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OrderDataTableRowChangeEvent.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OrderDataTableRowChangeEventHandler.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OutDataTableDataTable.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OutDataTableRow.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OutDataTableRowChangeEvent.datasource" />
+    <None Include="Properties\DataSources\DataSet1.OutDataTableRowChangeEventHandler.datasource" />
+    <None Include="Properties\DataSources\DataSet1.ProductDataTableDataTable.datasource" />
+    <None Include="Properties\DataSources\DataSet1.ProductDataTableRow.datasource" />
+    <None Include="Properties\DataSources\DataSet1.ProductDataTableRowChangeEvent.datasource" />
+    <None Include="Properties\DataSources\DataSet1.ProductDataTableRowChangeEventHandler.datasource" />
+    <None Include="Properties\DataSources\InStock.datasource" />
+    <None Include="Properties\DataSources\InStockDetail.datasource" />
+    <None Include="Properties\DataSources\MainWindow.datasource" />
+    <None Include="Properties\DataSources\NewInStockPage.datasource" />
+    <None Include="Properties\DataSources\NewOrderPage.datasource" />
+    <None Include="Properties\DataSources\Order.datasource" />
+    <None Include="Properties\DataSources\OrderDetail.datasource" />
+    <None Include="Properties\DataSources\OrderManagePage.datasource" />
+    <None Include="Properties\DataSources\OrderMoneyDetail.datasource" />
+    <None Include="Properties\DataSources\PaidDetail.datasource" />
+    <None Include="Properties\DataSources\ProduceInStock.datasource" />
+    <None Include="Properties\DataSources\ProduceOutStock.datasource" />
+    <None Include="Properties\DataSources\Product.datasource" />
+    <None Include="Properties\DataSources\Provider.datasource" />
+    <None Include="Properties\DataSources\SCZYEntities.datasource" />
+    <None Include="Properties\DataSources\StockManagePage.datasource" />
+    <None Include="Properties\DataSources\User.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseWin.png" />
+    <Resource Include="Images\MinWin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseWin_Mo.png" />
+    <Resource Include="Images\MinWin_Mo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Welcome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main_Min.png" />
+    <Resource Include="Images\Main_Min_Mo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main_Close.png" />
+    <Resource Include="Images\Main_Close_Mo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu.png" />
+    <Resource Include="Images\NewOrder.png" />
+    <Resource Include="Images\NewStock.png" />
+    <Resource Include="Images\OrderManage.png" />
+    <Resource Include="Images\StockManage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Main_Max.png" />
+    <Resource Include="Images\Main_Max_Mo.png" />
+    <Resource Include="Images\Main_Resize.png" />
+    <Resource Include="Images\Main_Resize_Mo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MiniTip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MainLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ToolBarNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dialog_Close.png" />
+    <Resource Include="Images\Dialog_Close_Mo.png" />
+    <Resource Include="Images\a_Information.png" />
+    <Resource Include="Images\ProductManage.png" />
+    <Resource Include="Images\ProviderManage.png" />
+    <Resource Include="Images\ConsumerManage.png" />
+    <Resource Include="Images\UserManage.png" />
+    <Resource Include="Images\Seacher.png" />
+    <Resource Include="Images\Seacher_Mo.png" />
+    <Resource Include="Images\Reset.png" />
+    <Resource Include="Images\Reset_Mo.png" />
+    <Resource Include="Images\OrderPrice.jpg" />
+    <Resource Include="Images\InStockPrice.png" />
+    <Resource Include="Images\PriceInStock.png" />
+    <Resource Include="Images\PriceOrder.png" />
+    <Resource Include="Images\BenifitManage.png" />
+    <Resource Include="Images\OrderPrice.png" />
+    <Resource Include="Images\PriceManage.png" />
+    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlServerTypes\x64\" />
+    <Folder Include="SqlServerTypes\x86\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OutReport2.rdlc" />
+    <EmbeddedResource Include="Report1.rdlc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
